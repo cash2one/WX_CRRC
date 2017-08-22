@@ -1,0 +1,17 @@
+<view class="container">
+  <checkbox-group bindchange="checkboxChange">
+  <label class="checkbox" wx:for="{{items}}" wx:key="unique">
+    <view class="checkbox-item">
+      <view class="item-desc">
+        <view class="title">{{item.title}}       
+          <text class="default-text" wx:if="{{index == 0}}">(默认勾选)</text>
+        </view>
+        <view class="desc">{{item.desc}}</view>
+      </view>
+      <checkbox value="{{item.value}}" checked="{{item.checked}}" color="#C70019" disabled="{{item.disabled}}" />
+    </view>
+  </label>
+</checkbox-group>
+<button bindtap="toReset" class="btn">下一步</button>
+<!-- <text bindtap="getHelp" class="help-text">帮助手册</text> -->
+</view>

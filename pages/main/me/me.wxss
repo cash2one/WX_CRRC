@@ -1,0 +1,56 @@
+/* pages/me/me.wxss */
+.logout{
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 30rpx;
+}
+.icon-logout{
+  width: 50rpx;
+  height: 50rpx;
+}
+.text-logout{
+  color: #848484;
+}
+.header{
+  text-align: center;
+  border-bottom: 20rpx solid #EEEEEE;
+}
+.logo{
+  width: 180rpx;
+  height: 180rpx;
+  border-radius: 90rpx;
+  border: 1px solid #EEEEEE;
+}
+.name{
+  margin: 15rpx 0;
+  font-size: 40rpx;
+}
+.dept{
+  font-size: 30rpx;
+  color: #848484;
+  margin-bottom: 40rpx;
+}
+.content{
+  display: flex;
+  flex-direction: column;
+}
+.item{
+  display: flex;
+  padding: 40rpx 30rpx;
+  border-bottom: 1px solid #DFDFDF;
+  align-items: center;
+}
+.item-icon{
+  width: 50rpx;
+  height: 50rpx;
+  margin-right: 30rpx;
+}
+.item-title{
+  flex: 1;
+}
+.item-subtitle{
+  color: #848484;
+  font-size: 30rpx;
+  margin-right: 20rpx;
+}

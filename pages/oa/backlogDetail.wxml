@@ -1,0 +1,63 @@
+<view class="container">
+  <!--顶部选项卡-开始-->
+  <view class="header">
+    <view class="switch-tab">
+      <block wx:for="{{switchTitle}}" wx:key="unique">
+        <view bindtap="changeItem" data-index="{{index}}" class="switch-item{{index == switchCurrent ? ' active' : ''}}">{{switchTitle[index]}}</view>
+      </block>
+    </view>
+    <view class="switch-label"></view>
+  </view>
+  <!--顶部选项卡-结束-->
+
+  <view class="content">
+    <view hidden="{{switchCurrent != 0}}" class="detail">
+      <!-- 内容-开始 -->
+      <block wx:for="{{contents}}" wx:key="unique">
+        <view class="d-item">
+          <text>{{contents[index].key}}</text>
+          <input disabled="true" value="{{contents[index].value}}" />
+        </view>
+      </block>
+      
+      <view hidden="{{!scrollContents.length}}" class="scroll-content">
+        <view class="scroll-title">提示：下方表单信息可向左滑动查看更多信息</view>
+        <scroll-view class="scroll-container" scroll-x="true">
+          <view class="scroll-wapper">
+            <block wx:for="{{scrollContents}}" wx:key="unique" wx:for-item="tableList">
+              <view class="scroll-item">
+              <block wx:for="{{tableList.subList}}" wx:key="unique">
+              <view class="d-item">
+                <text>{{tableList.subList[index].key}}</text>
+                <input disabled="true" value="{{tableList.subList[index].value}}" />
+                </view>
+                </block>
+              </view>
+            </block>
+          </view>
+        </scroll-view>
+      </view>
+
+
+      <!-- 内容-结束 -->
+      <!-- 附件列表-开始 -->
+      <view hidden="{{!fileList.length}}" class="d-item">
+        <text>附件</text>
+        <view class="f-item">
+          <block wx:for="{{fileList}}" wx:key="unique">
+            <view>{{fileList[index].fj_name}}</view>
+          </block>
+        </view>
+      </view>
+      <!-- 附件列表-结束 -->
+    </view>
+  </view>
+
+  <!--底部按钮-开始-->
+  <view class="footer">
+    <button class="approveBtn">发送</button>
+    <button class="rejectBtn">退回</button>
+    <button hidden="{{isCanDistribution == false}}" class="distributeBrn">分发</button>
+  </view>
+  <!--底部按钮-结束-->
+</view>

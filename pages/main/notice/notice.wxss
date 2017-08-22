@@ -1,0 +1,70 @@
+/* pages/notice/notice.wxss */
+.switch-container{
+  display: flex;
+  flex-direction: column;
+  /* position: fixed;
+  left: 0;
+  right: 0; */
+  
+  background-color: #FFFFFF;
+}
+.switch-tab{
+  display: flex;
+  height: 100rpx;
+  justify-content: center;
+}
+.switch-item{
+  width: 30%;
+  display: flex;
+  justify-content: center;
+  padding: 20rpx 0;
+}
+.switch-item.active{
+  color: #C70019;
+  border-bottom: 2px solid #C70019;
+}
+.switch-label{
+  background-color: #DFDFDF;
+  height: 20rpx;
+  width: 100%;
+}
+.list{
+  /* margin-top: 120rpx; */
+  display: flex;
+  flex-direction: column;
+}
+.list-item{
+  display: flex;
+  align-items: center;
+  padding: 20rpx;
+  border-bottom: 1px solid #EEEEEE;
+  height: 100rpx;
+}
+.item-title{
+  display: flex;
+  flex: 3;
+  font-size: 30rpx;
+}
+.item-date{
+  display: flex;
+  flex: 1;
+  justify-content: flex-end;
+  font-size: 20rpx;
+  color: #848484;
+}
+.prompt{
+  margin-top: 35%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.prompt image{
+  width: 200rpx;
+  height: 200rpx;
+}
+.prompt text{
+  margin-top: 30rpx;
+  color: #848484;
+  font-size: 35rpx;
+}

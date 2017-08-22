@@ -1,0 +1,33 @@
+<!--pages/contact/contact.wxml-->
+<view class="container">
+  <view class="s-container">
+    <view class="s-panel">
+      <icon type="search" class="s-icon" />
+      <input bindinput="getSearchValue" class="s-input" value="{{searchValue}}" placeholder="请输入姓名、工号或手机号" confirm-type="search" bindconfirm="toSearch" />
+      <icon bindtap="clearSearchValue" hidden="{{searchValue == ''}}" type="clear" />
+    </view>
+  </view>
+  <view hidden="{{isSearch == true}}" class="unit-list">
+    <block wx:for="{{unitList}}" wx:key="unique">
+      <navigator url="./detail?gid={{unitList[index].GID}}" hover-class="navigator-hover">
+        <view class="unit-item">{{unitList[index].GNAME}}</view>
+      </navigator>
+    </block>
+  </view>
+  <view hidden="{{isSearch == false}}" class="people-list">
+    <block wx:if="{{peopleList.length}}">
+      <block wx:for="{{peopleList}}" wx:key="unique">
+        <view catchtap="getInfo" data-info="{{peopleList[index]}}" class="people-item">
+          <view class="people">
+            <view class="name">{{peopleList[index].PNAME}}</view>
+            <view class="dept">{{peopleList[index].GNAME}}</view>
+          </view>
+          <view class="mobile">{{peopleList[index].PMOBILE}}</view>
+        </view>
+      </block>
+    </block>
+    <block wx:else>
+      <view class="people-item" style="padding: 40rpx 30rpx;">系统未查询到该人员信息</view>
+    </block>
+  </view>
+</view>

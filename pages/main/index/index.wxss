@@ -1,0 +1,94 @@
+/**index.wxss**/
+.swiper-container{
+  position: relative;
+}
+.swiper-container .swiper{
+  height: 300rpx;
+}
+.swiper-container .swiper .img{
+  width: 100%;
+  height: 100%;
+}
+.news-text{
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  opacity: 0.8;
+  display: flex;
+  justify-content: center;
+  background-color: #525252;
+  color: #FFFFFF;
+  font-size: 30rpx;
+  padding: 5rpx 0;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  outline: 0;
+}
+.swiper-container .dots{
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 60rpx;
+  display: flex;
+  justify-content: center;
+}
+.swiper-container .dots .dot{
+  margin: 0 8rpx;
+  width: 14rpx;
+  height: 14rpx;
+  background: #fff;
+  border-radius: 8rpx;
+  transition: all .6s;
+}
+.swiper-container .dots .dot.active{
+  width: 24rpx;
+  background-color: #C70019;
+}
+.app-banner{
+  background-color: #EEEEEE;
+  color: #515151;
+  font-size: 35rpx;
+  padding: 10rpx 30rpx;
+}
+.app-line{
+  display: flex;
+  flex-wrap: wrap;
+}
+.app-item{
+  position: relative;
+  height: 250rpx;
+  flex: 0 0 33%; 
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-bottom: 1rpx solid #DFDFDF;
+  border-right: none;
+}
+.app-item:nth-child(3n-1){
+  border-left: 1rpx solid #DFDFDF;
+  border-right: 1rpx solid #DFDFDF;
+}
+.app-text{
+  margin-top: 20rpx;
+  font-size: 30rpx;
+}
+.app-icon{
+  height: 80rpx;
+  width: 80rpx;
+}
+.app-badge{
+  position: absolute;
+  right: 0;
+  top: 20rpx;
+  width: 65rpx;
+  display: flex;
+  justify-content: center;
+  border-bottom-left-radius: 50rpx;
+  border-top-left-radius: 50rpx;
+  background-color: #C70019;
+  color: #FFFFFF;
+  font-size: 30rpx;
+}

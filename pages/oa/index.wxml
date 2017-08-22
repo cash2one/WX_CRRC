@@ -1,0 +1,72 @@
+<view class="container">
+  <view hidden="{{swiperCurrent != 0}}" class="list">
+    <block wx:for="{{backlogList}}" wx:key="unique">
+      <navigator url="./backlogDetail?bu_code={{backlogList[index].bu_code}}&fw_id={{backlogList[index].fw_id}}" hover-class="navigator-hover">
+      <view class="item">
+        <view class="m-panel">
+          <view class="title">{{backlogList[index].fw_flowname}}</view>
+          <view class="desc">{{backlogList[index].fw_title}}</view>
+        </view>
+        <view class="s-panel">
+          <view class="drafter">{{backlogList[index].ngr}}</view>
+          <view class="date">{{backlogList[index].arrival_time}}</view>
+        </view>
+        <image class="icon-arrow" src="images/arrow.png"></image>
+      </view>
+      </navigator>
+    </block>
+    <view bindtap="getNextBacklogList" class="more" hidden="{{backlogCount == 0 || backlogCount < 10}}">{{backlogMoreText}}</view>
+  </view>
+
+  <view hidden="{{swiperCurrent != 1}}" class="list">
+    <block wx:for="{{toreadList}}" wx:key="unique">
+      <view class="item">
+        <view class="m-panel">
+          <view class="title">{{toreadList[index].fw_flowname}}</view>
+          <view class="desc">{{toreadList[index].title}}</view>
+        </view>
+        <view class="s-panel">
+          <view class="date">{{toreadList[index].time}}</view>
+        </view>
+        <image class="icon-arrow" src="images/arrow.png"></image>
+      </view>
+    </block>
+    <view bindtap="getNextToReadedList" class="more" hidden="{{toreadCount == 0 || toreadCount < 10}}">{{toreadMoreText}}</view>
+  </view>
+
+  <view hidden="{{swiperCurrent != 2}}" class="list">
+    <block wx:for="{{readedList}}" wx:key="unique">
+      <view class="item">
+        <view class="m-panel">
+          <view class="title">{{readedList[index].fw_flowname}}</view>
+          <view class="desc">{{readedList[index].title}}</view>
+        </view>
+        <view class="s-panel">
+          <view class="date">{{readedList[index].time}}</view>
+        </view>
+        <image class="icon-arrow" src="images/arrow.png"></image>
+      </view>
+    </block>
+    <view bindtap="getNextReadedList" class="more" hidden="{{readedCount == 0 || readedCount < 10}}">{{readedMoreText}}</view>
+  </view>
+
+  <block wx:if="{{(swiperCurrent == 0 && backlogCount == 0) || (swiperCurrent == 1 && toreadCount == 0) || (swiperCurrent == 2 && readedCount== 0)}}">
+    <view class="prompt">
+      <image src="../../images/empty.png"></image>
+      <text>没有任务，放松一下</text>
+    </view>
+  </block>
+
+
+  <!--自定义TabBar -->
+  <view class="oa-tabbar">
+    <block wx:for="{{tabBar}}" wx:key="unique">
+      <view catchtap="changeItem" data-index="{{index}}" class="t-item">
+        <image class="t-icon" src="{{index == swiperCurrent ? tabBar[index].selectedIconPath : tabBar[index].iconPath}}"></image>
+        <view class="t-text{{index == swiperCurrent ? ' active' : ''}}">{{tabBar[index].text}}</view>
+        <view hidden="{{tabBar[index].badge == ''}}" class="t-badge">{{tabBar[index].badge}}</view>
+      </view>
+  </block>
+  </view>
+
+</view>

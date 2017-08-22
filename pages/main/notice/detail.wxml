@@ -1,0 +1,13 @@
+<!--detail.wxml-->
+<view class="container">
+  <text class="title">{{title}}</text>
+  <text wx:if="{{content != ''}}" class="content" space="true" decode="true">{{content}}</text>
+  <!-- <rich-text wx:if="{{newsContent != null}}" nodes="{{newsContent}}" /> -->
+  <block wx:if="{{files.length}}">
+    <view class="file_list">
+      <block wx:for="{{files}}" wx:key="unique">
+        <view bindtap="oaLogin" data-url="{{files[index].fj_url}}" class="filename">{{files[index].fj_name}}</view>
+      </block>
+    </view>
+  </block>
+</view>

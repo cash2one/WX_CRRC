@@ -1,0 +1,42 @@
+.checkbox{
+  display: flex;
+  flex-direction: column;
+}
+.checkbox-item{
+  display: flex;
+  align-items: center;
+  padding: 10rpx 30rpx;
+  border-bottom: 1px solid #EEEEEE;
+  height: 150rpx;
+}
+.item-desc{
+  flex: 1;
+  margin-right: 50rpx;
+}
+.default-text{
+  color: #C70019;
+  font-size: 30rpx;
+}
+.title{
+  font-size: 35rpx;
+}
+.desc{
+  color: #848484;
+  font-size: 30rpx;
+}
+.btn{
+  margin: 80rpx 30rpx; 
+  background-color: #C70019;
+  color: white;
+}
+.button-hover{
+  background-color: #BA0000;
+}
+.help-text{
+    width: 160rpx;
+    color: #848484;
+    font-size: 35rpx;
+    margin: 0 auto;
+    border-bottom: 1px solid #848484;
+    text-align: center;
+}

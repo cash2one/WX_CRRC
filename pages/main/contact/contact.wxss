@@ -1,0 +1,53 @@
+/* pages/contact/contact.wxss */
+.unit-list{
+  display: flex;
+  flex-direction: column;
+}
+.unit-item{
+  padding: 40rpx 30rpx;
+  border-bottom: 1px solid #EEEEEE;
+  font-size: 30rpx; 
+}
+.people-list{
+  display: flex;
+  flex-direction: column;
+}
+.people-item{
+  display: flex;
+  padding: 20rpx 30rpx;
+  border-bottom: 1px solid #EEEEEE;
+  font-size: 30rpx; 
+  align-items: center;
+}
+.people{
+  flex: 1;
+  margin-right: 30rpx;
+}
+.name{
+  font-size: 35rpx;
+}
+.dept{
+  color: #848484;
+}
+.mobile{
+  color: #C70019;
+}
+.s-container{
+  background-color: #EEEEEE;
+  align-items: center;
+}
+.s-panel{
+  display: flex;
+  flex: 1;
+  align-items: center;
+  background-color: white;
+  padding: 15rpx;
+  margin: 15rpx;
+  border-radius: 15rpx;
+}
+.s-icon{
+  margin-right: 15rpx;
+}
+.s-input{
+  flex: 1;
+}

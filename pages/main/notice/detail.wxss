@@ -1,0 +1,18 @@
+/* detail.wxss */
+.title{
+  text-align: center;
+  margin: 30rpx 100rpx;
+}
+.content{
+  padding: 0 30rpx;
+  margin-bottom: 50rpx;
+}
+.file_list{
+  border-top: 1px solid #848484;
+  color: #2088E7;
+  font-size: 30rpx;
+}
+.filename{
+  padding: 30rpx;
+  border-bottom: 1px solid #DFDFDF;
+}

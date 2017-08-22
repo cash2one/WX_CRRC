@@ -1,0 +1,31 @@
+<!--detail.wxml-->
+<view class="container">
+  <block wx:if="{{hasMgr == true && depts.length && peoples.length}}">
+    <view class="unit-list">
+      <view bindtap="getPersons" data-peoples="{{peoples}}" class="unit-item">部门领导</view>
+      <block wx:for="{{depts}}" wx:key="unique" >
+        <view bindtap="getDept" data-gid="{{depts[index].GID}}" class="unit-item">{{depts[index].GNAME}}</view>
+      </block>
+    </view>
+  </block>
+  <block wx:elif="{{hasMgr == false && depts.length && !peoples.length}}">
+    <view class="unit-list">
+      <block wx:for="{{depts}}" wx:key="unique" >
+        <view bindtap="getDept" data-gid="{{depts[index].GID}}" class="unit-item">{{depts[index].GNAME}}</view>
+      </block>
+    </view>
+  </block>
+  <block wx:elif="{{hasMgr == false && !depts.length && peoples.length}}">
+    <view class="people-list">
+      <block wx:for="{{peoples}}" wx:key="unique" >
+        <view catchtap="getInfo" data-info="{{peoples[index]}}" class="people-item">
+          <view class="people">
+            <view class="name">{{peoples[index].PNAME}}</view>
+            <view class="dept">{{peoples[index].GNAME}}</view>
+          </view>
+          <view class="mobile">{{peoples[index].PMOBILE}}</view>
+        </view>
+      </block>
+    </view>
+  </block>
+</view>

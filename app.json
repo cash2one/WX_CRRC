@@ -1,0 +1,57 @@
+{
+  "pages": [
+    "pages/main/login/login",
+    "pages/oa/index",
+    "pages/main/password/help",
+    "pages/main/index/index",
+    "pages/main/contact/contact",
+    "pages/main/contact/detail",
+    "pages/main/contact/info",
+    "pages/main/notice/notice",
+    "pages/main/notice/detail",
+    "pages/main/me/me",
+    "pages/main/password/password",
+    "pages/oa/backlogDetail"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#C70019",
+    "navigationBarTitleText": "中车株洲所",
+    "navigationBarTextStyle": "white"
+  },
+  "tabBar": {
+    "color": "#8A8A8A",
+    "selectedColor": "#C70019",
+    "borderStyle": "black",
+    "list": [
+      {
+        "iconPath": "images/home.png",
+        "selectedIconPath": "images/home-active.png",
+        "pagePath": "pages/main/index/index",
+        "text": "首页"
+      },
+      {
+        "iconPath": "images/contact.png",
+        "selectedIconPath": "images/contact-active.png",
+        "pagePath": "pages/main/contact/contact",
+        "text": "通讯录"
+      },
+      {
+        "iconPath": "images/notice.png",
+        "selectedIconPath": "images/notice-active.png",
+        "pagePath": "pages/main/notice/notice",
+        "text": "资讯"
+      },
+      {
+        "iconPath": "images/me.png",
+        "selectedIconPath": "images/me-active.png",
+        "pagePath": "pages/main/me/me",
+        "text": "我的"
+      }
+    ]
+  },
+  "networkTimeout": {
+    "request": 10000,
+    "downloadFile": 10000
+  }
+}

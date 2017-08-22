@@ -1,0 +1,32 @@
+<!--pages/me/me.wxml-->
+<view class="container">
+  <view catchtap="logout" class="logout">
+    <image class="icon-logout" src="../../../images/logout.png"></image>
+    <text class="text-logout">注销</text>
+  </view>
+  
+  <view class="header">
+    <image class="logo" src="../../../images/logo.png"></image>
+    <view class="name">{{myInfo.USER_NAME}}</view>
+    <view class="dept">{{myInfo.UNIT_NAME}}</view>
+  </view>
+  <view class="content">
+    <view class="item">
+      <image class="item-icon" src="../../../images/qr.png"></image>
+      <text class="item-title">小程序推广</text>
+      <image class="item-icon" src="../../../images/arrow.png"></image>
+    </view>
+    <navigator url="../password/help" hover-class="navigator-hover">
+    <view class="item">
+      <image class="item-icon" src="../../../images/pwd.png"></image>
+      <text class="item-title">域密码修改</text>
+      <image class="item-icon" src="../../../images/arrow.png"></image>
+    </view>
+    </navigator>
+    <view bindtap="test" class="item">
+      <image class="item-icon" src="../../../images/finger.png"></image>
+      <text class="item-title">指纹登录</text>
+      <switch bindchange="openFinger" color="#C70019"/>
+    </view>
+  </view>
+</view>
