@@ -45,7 +45,7 @@
         <text>附件</text>
         <view class="f-item">
           <block wx:for="{{fileList}}" wx:key="unique">
-            <view>{{fileList[index].fj_name}}</view>
+            <view bindtap="openFile" data-index="{{index}}">{{fileList[index].fj_name}}</view>
           </block>
         </view>
       </view>

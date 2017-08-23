@@ -43,7 +43,6 @@ Page({
     ]
   },
   onLoad: function (options) {
-    console.log(this.data.swiperCurrent + "--" + this.data.backlogCount)
     //console.log(getCurrentPages())
     user_code = wx.getStorageSync('userinfo').username
     this.getBadges()

@@ -8,6 +8,8 @@ var isCanOpinion = true
 var contents = []
 var scrollContents = []
 var temp = []
+var fw_id = ''
+var bu_code = ''
 Page({
   data: {
     switchTitle: [
@@ -23,8 +25,8 @@ Page({
   },
   onLoad: function (options) {
     user_code = wx.getStorageSync('userinfo').username
-    var fw_id = options.fw_id
-    var bu_code = options.bu_code
+    fw_id = options.fw_id
+    bu_code = options.bu_code
     this.getBacklogDetail(fw_id, bu_code)
   },
   onReady: function () {
@@ -37,6 +39,8 @@ Page({
   
   },
   onUnload: function () {
+    fw_id = []
+    bu_code = []
     contents = []
     scrollContents = []
     scollContents = []
@@ -240,5 +244,14 @@ Page({
         temp.push(obj)
         break
     }
+  },
+  openFile: function(e){
+    var that = this
+    var index = e.target.dataset.index
+    var fj_list = that.data.fileList
+    var fj_name = fj_list[index].fj_name
+    var fj_url = fj_list[index].fj_url
+    var docurl = oa.oaUrl + 'filedown?user_id=' + user_code + '&bu_code=' + bu_code + '&fw_id=' + fw_id + '&attachment_name=' + fj_name + '&file_name=' + fj_name;
+    docurl = encodeURI(docurl);
   }
 })
