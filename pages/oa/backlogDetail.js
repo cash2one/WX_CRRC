@@ -251,7 +251,47 @@ Page({
     var fj_list = that.data.fileList
     var fj_name = fj_list[index].fj_name
     var fj_url = fj_list[index].fj_url
-    var docurl = oa.oaUrl + 'filedown?user_id=' + user_code + '&bu_code=' + bu_code + '&fw_id=' + fw_id + '&attachment_name=' + fj_name + '&file_name=' + fj_name;
+    var fileType = fj_name.substring(fj_name.indexOf('.')+1, fj_name.length);
+    var docurl = app.oaUrl + 'filedown?user_id=' + user_code + '&bu_code=' + bu_code + '&fw_id=' + fw_id + '&attachment_name=' + fj_name + '&file_name=' + fj_name;
     docurl = encodeURI(docurl);
+    console.log(docurl)
+    if (fileType == 'jpg' || fileType == 'png' || fileType == 'bmp' || fileType == 'jpeg' || fileType == 'gif') {
+      wx.previewImage({
+        urls: [
+          docurl
+        ]
+      })
+    } else {
+      wx.showLoading({
+        title: '正在打开',
+        mask: true
+      })
+      wx.downloadFile({
+        url: docurl,
+        success: function (res) {
+          var filePath = res.tempFilePath
+          wx.openDocument({
+            filePath: filePath,
+            fileType: fileType,
+            success: function (res) {
+              wx.hideLoading()
+              console.log('打开文档成功')
+            },
+            fail: function (res) {
+              wx.showToast({
+                title: '无法打开该类型文件',
+                image: '../../../images/error.png'
+              })
+            }
+          })
+        },
+        fail: function (res) {
+          wx.showToast({
+            title: '打开失败',
+            image: '../../../images/error.png'
+          })
+        }
+      })
+    }
   }
 })
