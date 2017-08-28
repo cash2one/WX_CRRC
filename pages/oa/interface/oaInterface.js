@@ -141,9 +141,63 @@ function getBacklogDetail(user_id, fw_id, bu_code, callBack) {
     }
   })
 }
-module.exports.getBacklogCount = getBacklogCount
-module.exports.getToReadCount = getToReadCount
-module.exports.getBacklogList = getBacklogList
-module.exports.getToReadList = getToReadList
-module.exports.getReadedList = getReadedList
-module.exports.getBacklogDetail = getBacklogDetail
+//获取待办事项历史审批
+function getHistoryOpinion(user_id, fw_id, bu_code, callBack) {
+  wx.request({
+    method: 'GET',
+    url: oaUrl + 'oa_historyopinion',
+    data: {
+      user_id: user_id,
+      fw_id: fw_id,
+      bu_code: bu_code
+    },
+    header: {
+      'content-type': 'application/json'
+    },
+    success: function (res) {
+      var list = JSON.parse(res.data.list)
+      callBack(list)
+    },
+    fail: function (e) {
+      wx.showToast({
+        title: '网络异常',
+        image: 'images/error.png'
+      })
+    }
+  })
+}
+//获取审批环节信息
+function getApproveInfo(user_id, fw_id, bu_code, callBack) {
+  wx.request({
+    method: 'GET',
+    url: oaUrl + 'oa_manager_approveinfo',
+    data: {
+      user_id: user_id,
+      fw_id: fw_id,
+      bu_code: bu_code
+    },
+    header: {
+      'content-type': 'application/json'
+    },
+    success: function (res) {
+      var list = JSON.parse(res.data.list)
+      callBack(list)
+    },
+    fail: function (e) {
+      wx.showToast({
+        title: '网络异常',
+        image: 'images/error.png'
+      })
+    }
+  })
+}
+module.exports = {
+  getBacklogCount: getBacklogCount,
+  getToReadCount: getToReadCount,
+  getBacklogList: getBacklogList,
+  getToReadList: getToReadList,
+  getReadedList: getReadedList,
+  getBacklogDetail: getBacklogDetail,
+  getHistoryOpinion: getHistoryOpinion,
+  getApproveInfo: getApproveInfo
+}

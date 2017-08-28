@@ -3,8 +3,6 @@ var app = getApp()
 var oa = require('interface/oaInterface.js')
 //定义相关全局变量
 var user_code = ''
-var isCanApprove = true
-var isCanOpinion = true
 var contents = []
 var scrollContents = []
 var temp = []
@@ -17,17 +15,22 @@ Page({
       '审批进度'
     ],
     switchCurrent: 0,
-    isCanDistribution: false,
+    isCanApprove: '',
+    isCanOpinion: '',
+    isCanDistribution: '',
     contents: [],
     fileList: [],
     scrollLength: [],
-    scrollContents: []
+    scrollContents: [],
+    opinionContents: [],
+    currentUnit: []
   },
   onLoad: function (options) {
     user_code = wx.getStorageSync('userinfo').username
     fw_id = options.fw_id
     bu_code = options.bu_code
-    this.getBacklogDetail(fw_id, bu_code)
+    this.changeItem(0)
+    
   },
   onReady: function () {
   
@@ -43,10 +46,7 @@ Page({
     bu_code = []
     contents = []
     scrollContents = []
-    scollContents = []
     temp = []
-    isCanApprove = true
-    isCanOpinion = true
   },
   changeItem: function(e){
     if (typeof e == 'object') {
@@ -57,22 +57,45 @@ Page({
     this.setData({
       switchCurrent: index
     })
+    if(index == 0){
+      contents = []
+      scrollContents = []
+      this.getBacklogDetail()
+    }else{
+      this.getHistoryOpinion()
+    }
   },
-  getBacklogDetail: function (fw_id, bu_code){
+  getBacklogDetail: function (){
     var that = this
     oa.getBacklogDetail(user_code, fw_id, bu_code, function(data){
       //是否可以发送，1为可以发送；0为不能发送
       if (data.sphj_iscanapprove == '0'){
-        isCanApprove = false
+        that.setData({
+          isCanApprove: false
+        })
+      }else{
+        that.setData({
+          isCanApprove: true
+        })
       }
       //是否可以填写审批意见，1为可以填写；0为不能填写
       if (data.sphj_isopinion == '0'){
-        isCanOpinion = false
+        that.setData({
+          isCanOpinion: false
+        })
+      }else{
+        that.setData({
+          isCanOpinion: true
+        })
       }
       //是否可以进行分发，1为可以分发；0为不能分发
       if (data.sphj_isdistribution == '0') {
         that.setData({
           isCanDistribution: false
+        })
+      }else{
+        that.setData({
+          isCanDistribution: true
         })
       }
       //是否属于管理流程，0为管理流程；1为普通流程
@@ -84,6 +107,9 @@ Page({
         //当前环节
         if (app.isDefine(data.unitname)) {
           that.appendContent('text', 'unitname', '当前环节', data.unitname)
+          that.setData({
+            currentUnit: data.unitname
+          })
         }
         //拟稿人
         if (app.isDefine(data.drafter)) {
@@ -137,6 +163,9 @@ Page({
         //当前环节
         if (app.isDefine(data.unitName)) {
           that.appendContent('text', 'unitName', '当前环节', data.unitName)
+          that.setData({
+            currentUnit: data.unitName
+          })
         }
         //拟稿人
         if (app.isDefine(data.ngr)) {
@@ -226,6 +255,27 @@ Page({
         }
       }
     })
+  },
+  getHistoryOpinion: function(){
+    var that = this
+    oa.getHistoryOpinion(user_code, fw_id, bu_code, function (data) {
+      that.setData({
+        opinionContents: data.sp_list
+      })
+    })
+  },
+  approveBtn_click: function(){
+    if (this.data.isCanApprove){
+      wx.navigateTo({
+        url: './backlogApprove?fw_id=' + fw_id + '&bu_code=' + bu_code + "&isCanOpinion=" + this.data.isCanOpinion
+      })
+    }else{
+      wx.showToast({
+        title: '当前环节请在PC端处理',
+        image: 'images/error.png'
+      })
+      return
+    }
   },
   appendContent: function(contentType, id, key, value){
     switch (contentType){

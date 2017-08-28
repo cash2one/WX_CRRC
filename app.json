@@ -1,7 +1,8 @@
 {
   "pages": [
-    "pages/main/login/login",
+    "pages/oa/backlogApprove",
     "pages/oa/index",
+    "pages/main/login/login",
     "pages/main/password/help",
     "pages/main/index/index",
     "pages/main/contact/contact",
@@ -12,6 +13,7 @@
     "pages/main/me/me",
     "pages/main/password/password",
     "pages/oa/backlogDetail"
+    
   ],
   "window": {
     "backgroundTextStyle": "light",
