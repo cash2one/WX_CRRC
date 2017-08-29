@@ -1,7 +1,7 @@
 {
   "pages": [
-    "pages/oa/backlogApprove",
     "pages/oa/index",
+    "pages/oa/backlogApprove",
     "pages/main/login/login",
     "pages/main/password/help",
     "pages/main/index/index",

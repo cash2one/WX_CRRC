@@ -29,7 +29,7 @@
   width: 15%;
   padding: 20rpx;
   overflow: hidden;
-  margin: 18rpx;
+  margin: 15rpx;
 }
 .item-container{
   display: block;

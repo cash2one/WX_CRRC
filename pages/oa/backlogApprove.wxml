@@ -1,23 +1,23 @@
 <view class="container">
   <view class="oa-container">
     <view class="title">审批环节<text>*</text></view>
-    <picker bindchange="sphjChange" value="{{sphj_index}}" range="{{sphj_name}}">
+    <picker bindchange="sphjChange" value="{{sphj_index}}" range="{{sphj}}" range-key="name">
       <view class="picker">
-        <text>{{sphj_name[sphj_index]}}</text>
+        <text>{{sphj[sphj_index].name}}</text>
         <image src="images/arrow-down.png"></image>
       </view>
     </picker>
     <view class="title">审批方式<text>*</text></view>
-    <picker bindchange="spfsChange" value="{{spfs_index}}" range="{{spfs_name}}">
+    <picker bindchange="spfsChange" value="{{spfs_index}}" range="{{spfs}}" range-key="name">
       <view class="picker">
-        <text>{{spfs_name[spfs_index]}}</text>
+        <text>{{spfs[spfs_index].name}}</text>
         <image src="images/arrow-down.png"></image>
       </view>
     </picker>
     <view class="title">人员范围<text>*</text></view>
-    <picker bindchange="ryfwPickerChange" value="{{index}}" range="{{array}}">
+    <picker bindchange="ryfwChange" value="{{ryfw_index}}" range="{{ryfw}}" range-key="name">
       <view class="picker">
-        <text>{{array[index]}}</text>
+        <text>{{ryfw[ryfw_index].name}}</text>
         <image src="images/arrow-down.png"></image>
       </view>
     </picker>
@@ -56,6 +56,11 @@
           <image class="remove" src="images/icon-remove.png"></image>
           <image class="people" src="images/icon-user.png"></image>
           <text>张三</text>
+        </view>
+      </view>
+      <view hidden="{{hasDefault == true}}" class="person-item">
+        <view class="item-container">
+          <image class="people" src="images/icon-add-grey.png"></image>
         </view>
       </view>
     </view>
