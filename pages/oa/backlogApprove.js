@@ -3,7 +3,11 @@ var app = getApp()
 var oa = require('interface/oaInterface.js')
 //定义相关全局变量
 var user_code = ''
+var fw_id = ''
+var bu_code = ''
 var splist = []
+var ryfw_type = ''
+var ryfw_id = ''
 Page({
   data: {
     isCanOpinion: '',
@@ -13,50 +17,56 @@ Page({
     spfs: [],
     ryfw_index: 0,
     ryfw: [],
-    hasDefault: false
+    isDefault: false,
+    hasDefault: true,
+    person_list: []
   },
   onLoad: function (options) {
     user_code = wx.getStorageSync('userinfo').username
-    var fw_id = options.fw_id
-    var bu_code = options.bu_code
+    fw_id = options.fw_id
+    bu_code = options.bu_code
     this.setData({
       isCanOpinion: options.isCanOpinion
     })
     this.getApproveInfo(fw_id, bu_code)
   },
   onReady: function () {
-  
+
   },
   onShow: function () {
-  
+
   },
   onHide: function () {
-  
+
   },
   onUnload: function () {
+    fw_id = ''
+    bu_code = ''
     splist = []
+    ryfw_type = []
+    ryfw_id = ''
   },
-  getApproveInfo: function (fw_id, bu_code){
+  getApproveInfo: function (fw_id, bu_code) {
     var that = this
-    oa.getApproveInfo(user_code, fw_id, bu_code, function(data){
+    oa.getApproveInfo(user_code, fw_id, bu_code, function (data) {
       splist = data.sphj_list;
       var sphj = [];
-      if (splist.length > 1){
+      if (splist.length > 1) {
         sphj.push({ "id": "empty", "name": "请选择审批环节" })
         for (var i in splist) {
-          sphj.push({ "id": splist[i].sphj_id, "name": splist[i].sphj_name})
+          sphj.push({ "id": splist[i].sphj_id, "name": splist[i].sphj_name })
         }
         that.setData({
           sphj: sphj
         })
-      }else{
+      } else {
         sphj.push({ "id": splist[0].sphj_id, "name": splist[0].sphj_name })
         that.setData({
           sphj: sphj
         })
       }
       that.sphjChange(0)
-      
+
     })
   },
   sphjChange: function (e) {
@@ -66,11 +76,14 @@ Page({
       var index = e
     }
     var value = this.data.sphj[index].id
-    if (this.data.sphj_index != index){
+    if (this.data.sphj_index != index) {
       this.setData({
         spfs_index: 0,
-        ryfw_index: 0
+        ryfw_index: 0,
+        person_list: [],
+        hasDefault: true
       })
+      wx.removeStorageSync('person_list')
     }
     this.setData({
       sphj_index: index
@@ -86,22 +99,22 @@ Page({
     if (app.isDefine(spfsmcs)) {
       var spfs_list = spfsmcs.split(':')
       if (spfs_list.length > 1) {
-        spfs.push({"id": "empty", "name":"请选择审批方式"})
+        spfs.push({ "id": "empty", "name": "请选择审批方式" })
         for (var i in spfs_list) {
-          spfs.push({"id": spfs_list[i], "name": spfs_list[i]})
+          spfs.push({ "id": spfs_list[i], "name": spfs_list[i] })
         }
         this.setData({
           spfs: spfs
         })
-      }else{
-        spfs.push({"id": spfs_list[0], "name": spfs_list[0]})
+      } else {
+        spfs.push({ "id": spfs_list[0], "name": spfs_list[0] })
         this.setData({
           spfs: spfs
         })
       }
-    }else{
+    } else {
       this.setData({
-        spfs: [{"id": "empty", "name": "请选择审批方式"}]
+        spfs: [{ "id": "empty", "name": "请选择审批方式" }]
       })
     }
     //人员范围只有部门选项
@@ -109,15 +122,15 @@ Page({
       spbmids = spbmids.split(':')
       spbmmcs = spbmmcs.split(':')
       if (spbmids.length > 1) {
-        ryfw.push({"id":"empty", "name":"请选择审批方式", "type":"N"})
+        ryfw.push({ "id": "empty", "name": "请选择审批方式", "type": "N" })
         for (var i in spbmids) {
-          ryfw.push({"id":spbmids[i], "name":spbmmcs[i], "type":"D"})
+          ryfw.push({ "id": spbmids[i], "name": spbmmcs[i], "type": "D" })
         }
         this.setData({
           ryfw: ryfw
         })
-      }else{
-        ryfw.push({"id":spbmids[0], "name":spbmmcs[0], "type":"D"})
+      } else {
+        ryfw.push({ "id": spbmids[0], "name": spbmmcs[0], "type": "D" })
         this.setData({
           ryfw: ryfw
         })
@@ -213,7 +226,7 @@ Page({
     //人员范围全部为空
     if (!app.isDefine(spbmids) && !app.isDefine(spqzids) && !app.isDefine(spydyy)) {
       this.setData({
-        ryfw: [{"id": "empty", "name": "请选择人员范围", "type": "N"}]
+        ryfw: [{ "id": "empty", "name": "请选择人员范围", "type": "N" }]
       })
     }
   },
@@ -228,10 +241,17 @@ Page({
     } else {
       var index = e
     }
+    if (this.data.ryfw_index != index) {
+      this.setData({
+        person_list: []
+      })
+      wx.removeStorageSync('person_list')
+    }
     this.setData({
       ryfw_index: index
     })
-    var ryfw_type = this.data.ryfw[index].type
+    ryfw_type = this.data.ryfw[index].type
+    ryfw_id = this.data.ryfw[index].id
     if (ryfw_type == 'Y') {
       var sphj_id = this.data.sphj[this.data.sphj_index].id
       var spydyy = this.getValueByKey('sphj_id', sphj_id, 'sphj_person', splist)
@@ -249,7 +269,7 @@ Page({
         person_list.push(spydyy);
       }
       wx.setStorageSync("person_list", JSON.stringify(person_list))
-      this.addPerson('Y');
+      this.addPerson();
       this.setData({
         hasDefault: true
       })
@@ -258,14 +278,47 @@ Page({
         this.setData({
           hasDefault: false
         })
+      }else{
+        this.setData({
+          hasDefault: true
+        })
       }
     }
   },
-  addPerson: function (ryfw_type){
-    //TODO
+  addPerson: function () {
+    var person_content = ''
+    var name = ''
+    var plist = JSON.parse(wx.getStorageSync("person_list"))
+    for (var i in plist) {
+      var people = []
+      if (plist[i].indexOf("(") != -1) {
+        name = plist[i].substring(0, plist[i].indexOf("("));
+      }else{
+        name = plist[i]
+      }
+      people.push({ "name": name, "fullname": plist[i]})
+    }
+    this.setData({
+      hasDefault: false,
+      person_list: people
+    })
+    if (ryfw_type == 'Y') {
+      this.setData({
+        isDefault: true
+      })
+    } else {
+      this.setData({
+        isDefault: false
+      })
+    }
   },
-  getValueByKey: function (key, value, rekey, arr){
-    if(arr.length) {
+  addNewPerson: function(){
+    wx.navigateTo({
+      url: './peopleList?fw_id=' + fw_id + '&bu_code=' + bu_code + "&ryfw_id=" + ryfw_id + '&ryfw_type=' + ryfw_type
+    })
+  },
+  getValueByKey: function (key, value, rekey, arr) {
+    if (arr.length) {
       for (var i in arr) {
         if (arr[i][key] == value) {
           return arr[i][rekey];
@@ -273,7 +326,7 @@ Page({
           continue;
         }
       }
-    }else {
+    } else {
       return '-1';
     }
   }

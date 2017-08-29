@@ -23,43 +23,17 @@
     </picker>
     <view class="title">审批人员<text>*</text></view>
     <view class="person-container">
-      <view class="person-item">
-        <view class="item-container">
-          <image class="remove" src="images/icon-remove.png"></image>
-          <image class="people" src="images/icon-user.png"></image>
-          <text>张三</text>
+      <block wx:for="{{person_list}}" wx:key="unique">
+        <view class="person-item">
+          <view class="item-container">
+            <image hidden="{{isDefault == true}}" class="remove" src="images/icon-remove.png"></image>
+            <image class="people" src="images/icon-user.png"></image>
+          </view>
+          <view>{{person_list[index].name}}</view>
         </view>
-      </view>
-      <view class="person-item">
-        <view class="item-container">
-          <image class="remove" src="images/icon-remove.png"></image>
-          <image class="people" src="images/icon-user.png"></image>
-          <text>张三</text>
-        </view>
-      </view>
-      <view class="person-item">
-        <view class="item-container">
-          <image class="remove" src="images/icon-remove.png"></image>
-          <image class="people" src="images/icon-user.png"></image>
-          <text>张三</text>
-        </view>
-      </view>
-      <view class="person-item">
-        <view class="item-container">
-          <image class="remove" src="images/icon-remove.png"></image>
-          <image class="people" src="images/icon-user.png"></image>
-          <text>张三</text>
-        </view>
-      </view>
-      <view class="person-item">
-        <view class="item-container">
-          <image class="remove" src="images/icon-remove.png"></image>
-          <image class="people" src="images/icon-user.png"></image>
-          <text>张三</text>
-        </view>
-      </view>
+      </block>
       <view hidden="{{hasDefault == true}}" class="person-item">
-        <view class="item-container">
+        <view bindtap="addNewPerson" class="item-container">
           <image class="people" src="images/icon-add-grey.png"></image>
         </view>
       </view>
