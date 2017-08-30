@@ -1,2 +1,22 @@
-<!--peopleList.wxml-->
-<text>peopleList.wxml</text>
+<view class="container">
+  <view class="s-container">
+    <view class="s-panel">
+      <icon type="search" class="s-icon" />
+      <input bindinput="getSearchValue" class="s-input" value="{{searchValue}}" placeholder="请输入姓名、工号进行搜索" confirm-type="search" bindconfirm="toSearch" />
+      <icon bindtap="clearSearchValue" hidden="{{searchValue == ''}}" type="clear" />
+    </view>
+  </view>
+  <view class="people-list">
+    <checkbox-group bindchange="checkboxChange">
+      <label wx:for="{{spry_list}}" wx:key="unique">
+        <view class="people-item">
+        <view class="people-name">{{item.spry_name}}</view>
+        <checkbox class="checkbox" value="{{item.spry_name}}" checked="{{item.checked}}" color="#C70019" />
+        </view>
+      </label>
+    </checkbox-group>
+  </view>
+  <view class="btn">
+    <button bindtap="confirm">确定</button>
+  </view>
+</view>

@@ -191,6 +191,34 @@ function getApproveInfo(user_id, fw_id, bu_code, callBack) {
     }
   })
 }
+//获取审批人员列表
+function getApprovePeoples(user_id, fw_id, bu_code,  spfw_value, spfw_type, spfw_key, callBack) {
+  wx.request({
+    method: 'POST',
+    url: oaUrl + 'oa_manager_person_search',
+    data: {
+      user_id: user_id,
+      fw_id: fw_id,
+      bu_code: bu_code,
+      spfw_value: spfw_value,
+      spfw_type: spfw_type,
+      spfw_key: spfw_key
+    },
+    header: {
+      'content-type': 'application/x-www-form-urlencoded'
+    },
+    success: function (res) {
+      var list = JSON.parse(res.data.list)
+      callBack(list)
+    },
+    fail: function (e) {
+      wx.showToast({
+        title: '网络异常',
+        image: 'images/error.png'
+      })
+    }
+  })
+}
 module.exports = {
   getBacklogCount: getBacklogCount,
   getToReadCount: getToReadCount,
@@ -199,5 +227,6 @@ module.exports = {
   getReadedList: getReadedList,
   getBacklogDetail: getBacklogDetail,
   getHistoryOpinion: getHistoryOpinion,
-  getApproveInfo: getApproveInfo
+  getApproveInfo: getApproveInfo,
+  getApprovePeoples: getApprovePeoples
 }

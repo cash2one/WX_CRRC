@@ -1,0 +1,52 @@
+.s-container{
+  background-color: #EEEEEE;
+  align-items: center;
+  height: 110rpx;
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  z-index: 2;
+}
+.s-panel{
+  display: flex;
+  flex: 1;
+  align-items: center;
+  background-color: white;
+  padding: 15rpx;
+  margin: 15rpx;
+  border-radius: 15rpx;
+}
+.s-icon{
+  margin-right: 15rpx;
+}
+.s-input{
+  flex: 1;
+}
+.people-list{
+  margin-top: 110rpx;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 150rpx;
+}
+.people-item{
+  display: flex;
+  padding: 40rpx;
+  border-bottom: 1px solid #EEEEEE;
+}
+.people-name{
+  flex: 1;
+}
+.btn{
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 20rpx;
+  z-index: 2;
+  background-color: white;
+}
+.btn button{
+  background-color: #C70019;
+  color: white;
+}
