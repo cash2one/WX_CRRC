@@ -1,0 +1,18 @@
+<view class="container">
+  <view class="oa-container">
+    <view class="title">退回环节<text>*</text></view>
+    <picker bindchange="thhjChange" value="{{thhj_index}}" range="{{thhj}}" range-key="unitname">
+      <view class="picker">
+        <text>{{thhj[thhj_index].unitname}}</text>
+        <image src="images/arrow-down.png"></image>
+      </view>
+    </picker>
+    <view class="title">处理人<text>*</text></view>
+    <input disabled='true' placeholder='请填写处理人' value="{{reject_user}}"></input>
+    <view class="title">退回意见<text>*</text></view>
+    <textarea bindinput='getOpinion' maxlength="-1" placeholder='请填写退回意见'></textarea>
+  </view>
+  <view class="btn">
+    <button bindtap="btnClick" disabled="{{btnStatus}}">提交</button>
+  </view>
+</view>

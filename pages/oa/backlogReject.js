@@ -8,7 +8,11 @@ var bu_code = ''
 var unit_list = []
 Page({
   data: {
-    thhj: []
+    thhj_index: 0,
+    thhj: [],
+    reject_user: '',
+    reject_opinion: '',
+    btnStatus: 'disabled'
   },
   onLoad: function (options) {
     user_code = wx.getStorageSync('userinfo').username
@@ -37,8 +41,8 @@ Page({
         var thhj = [];
         if (unit_list.length) {
           if (unit_list.length > 1){
-            thhj.push({ "unitindex": "-1", "unitname": "请选择退回环节", "unituser": ''})
-            for (var i in splist) {
+            thhj.push({ "unitindex": "-1", "unitname": "请选择退回环节", "unituser": ""})
+            for (var i in unit_list) {
               thhj.push({ "unitindex": unit_list[i].unitindex, "unitname": unit_list[i].unitname, "unituser": unit_list[i].unituser})
             }
             that.setData({
@@ -53,11 +57,59 @@ Page({
           that.thhjChange(0)
         }
       }else{
-        wx.showToast({
-          title: '当前环节无法退回',
-          image: 'images/error.png'
+        wx.showModal({
+          title: '温馨提示',
+          content: '当前环节无法退回',
+          showCancel: false,
+          confirmColor: '#C70019',
+          success: function (res) {
+            if (res.confirm) {
+              console.log('用户点击确定')
+            }
+          }
         })
       }
     })
+  },
+  thhjChange: function(e){
+    if (typeof e == 'object') {
+      var index = e.detail.value
+    } else {
+      var index = e
+    }
+    this.setData({
+      thhj_index: index,
+      reject_user: this.data.thhj[index].unituser
+    })
+    if (this.data.thhj[index].unitindex != '-1' && app.isDefine(this.data.reject_opinion)){
+      this.setData({
+        btnStatus: ''
+      })
+    }else{
+      this.setData({
+        btnStatus: 'disabled'
+      })
+    }
+  },
+  getOpinion: function(e){
+    if (app.isDefine(e.detail.value) && this.data.thhj[this.data.thhj_index].unitindex != '-1'){
+      this.setData({
+        btnStatus: ''
+      })
+    }else{
+      this.setData({
+        btnStatus: 'disabled'
+      })
+    }
+    this.setData({
+      reject_opinion: e.detail.value
+    })
+  },
+  checkInput: function(e){
+    if (e.detail.value != ''){
+      this.setData({
+        btnStatus
+      })
+    }
   }
 })
