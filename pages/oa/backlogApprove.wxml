@@ -1,5 +1,14 @@
 <view class="container">
   <view class="oa-container">
+    <view hidden="{{isCanOpinion == 'false'}}" class="title">审批意见<text>*</text></view>
+    <radio-group hidden="{{isCanOpinion == 'false'}}" class="radio-group" bindchange="radioChange">
+      <view class="radio">
+        <label wx:for="{{opinions}}" wx:key="unique">
+          <radio value="{{item.value}}" checked="{{item.checked}}" color="#C70019" />{{item.name}}
+        </label>
+      </view>
+      <input hidden="{{opinion_default == true}}" bindinput="getOpinionText" class="opinion-input" placeholder="请填写审批意见" />
+    </radio-group>
     <view class="title">审批环节<text>*</text></view>
     <picker bindchange="sphjChange" value="{{sphj_index}}" range="{{sphj}}" range-key="name">
       <view class="picker">
@@ -26,7 +35,7 @@
       <block wx:for="{{person_list}}" wx:key="unique">
         <view class="person-item">
           <view class="item-container">
-            <image hidden="{{isDefault == true}}" class="remove" src="images/icon-remove.png"></image>
+            <image bindtap="removePeople" data-fullname="{{person_list[index].fullname}}" hidden="{{isDefault == true}}" class="remove" src="images/icon-remove.png"></image>
             <image class="people" src="images/icon-user.png"></image>
           </view>
           <view>{{person_list[index].name}}</view>
@@ -38,5 +47,8 @@
         </view>
       </view>
     </view>
+  </view>
+  <view class="btn">
+    <button bindtap="btnClick" disabled="{{btnStatus}}">提交</button>
   </view>
 </view>

@@ -219,6 +219,85 @@ function getApprovePeoples(user_id, fw_id, bu_code,  spfw_value, spfw_type, spfw
     }
   })
 }
+//提交审批意见
+function saveBacklogOpinion(user_id, fw_id, bu_code, opinion, callBack) {
+  wx.request({
+    method: 'POST',
+    url: oaUrl + 'oa_manager_opinion',
+    data: {
+      user_id: user_id,
+      fw_id: fw_id,
+      bu_code: bu_code,
+      opinion: opinion
+    },
+    header: {
+      'content-type': 'application/x-www-form-urlencoded'
+    },
+    success: function (res) {
+      var list = JSON.parse(res.data.list)
+      callBack(list)
+    },
+    fail: function (e) {
+      wx.showToast({
+        title: '网络异常',
+        image: 'images/error.png'
+      })
+    }
+  })
+}
+//提交发送
+function backlogApprove(user_id, fw_id, bu_code, sphj_id, spfs_name, spry_name, callBack) {
+  wx.request({
+    method: 'POST',
+    url: oaUrl + 'oa_manager_approve',
+    data: {
+      user_id: user_id,
+      fw_id: fw_id,
+      bu_code: bu_code,
+      sphj_id: sphj_id,
+      spfs_name: spfs_name,
+      spry_name: spry_name
+    },
+    header: {
+      'content-type': 'application/x-www-form-urlencoded'
+    },
+    success: function (res) {
+      var list = JSON.parse(res.data.list)
+      callBack(list)
+    },
+    fail: function (e) {
+      wx.showToast({
+        title: '网络异常',
+        image: 'images/error.png'
+      })
+    }
+  })
+}
+//获取退回环节信息
+function getRejectInfo(user_id, fw_id, bu_code, callBack) {
+  wx.request({
+    method: 'GET',
+    url: oaUrl + 'oa_manager_rejectinfo',
+    data: {
+      user_id: user_id,
+      fw_id: fw_id,
+      bu_code: bu_code
+    },
+    header: {
+      'content-type': 'application/json'
+    },
+    success: function (res) {
+      var list = JSON.parse(res.data.list)
+      callBack(list)
+    },
+    fail: function (e) {
+      wx.showToast({
+        title: '网络异常',
+        image: 'images/error.png'
+      })
+    }
+  })
+}
 module.exports = {
   getBacklogCount: getBacklogCount,
   getToReadCount: getToReadCount,
@@ -228,5 +307,8 @@ module.exports = {
   getBacklogDetail: getBacklogDetail,
   getHistoryOpinion: getHistoryOpinion,
   getApproveInfo: getApproveInfo,
-  getApprovePeoples: getApprovePeoples
+  getApprovePeoples: getApprovePeoples,
+  saveBacklogOpinion: saveBacklogOpinion,
+  backlogApprove: backlogApprove,
+  getRejectInfo: getRejectInfo
 }

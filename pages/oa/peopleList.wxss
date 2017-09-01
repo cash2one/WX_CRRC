@@ -50,3 +50,12 @@
   background-color: #C70019;
   color: white;
 }
+.totst{
+  font-size: 25rpx;
+  margin-top: 140rpx;
+  color: #848484;
+  text-align: center;
+}
+.totst view{
+  margin-bottom: 20rpx;
+}

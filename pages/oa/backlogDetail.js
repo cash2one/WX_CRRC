@@ -277,6 +277,11 @@ Page({
       return
     }
   },
+  rejectBtn_click: function(){
+    wx.navigateTo({
+      url: './backlogReject?fw_id=' + fw_id + '&bu_code=' + bu_code
+    })
+  },
   appendContent: function(contentType, id, key, value){
     switch (contentType){
       case 'text':
