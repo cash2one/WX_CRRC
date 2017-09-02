@@ -30,6 +30,8 @@ Page({
   
   },
   onUnload: function () {
+    fw_id = ''
+    bu_code = ''
     unit_list = []
   },
   getRejectInfo: function(){
@@ -64,7 +66,9 @@ Page({
           confirmColor: '#C70019',
           success: function (res) {
             if (res.confirm) {
-              console.log('用户点击确定')
+              wx.navigateBack({
+                delta: 1
+              })
             }
           }
         })
@@ -105,11 +109,32 @@ Page({
       reject_opinion: e.detail.value
     })
   },
-  checkInput: function(e){
-    if (e.detail.value != ''){
-      this.setData({
-        btnStatus
-      })
-    }
+  btnClick: function(){
+    var that = this
+    var thhj_id = that.data.thhj[that.data.thhj_index].unitindex
+    var reject_user = that.data.thhj[that.data.thhj_index].unituser
+    var thyj = that.data.reject_opinion
+    wx.showLoading({
+      title: '提交中',
+    })
+    oa.backlogReject(user_code, fw_id, bu_code, thhj_id, reject_user, thyj, function(data){
+      if (data.status == 0) {
+        wx.showToast({
+          title: '退回成功',
+        })
+        setTimeout(function () {
+          var prePage = getCurrentPages()[0]
+          prePage.onPullDownRefresh()
+          wx.navigateBack({
+            delta: 2
+          })
+        }, 1000);
+      }else{
+        wx.showToast({
+          title: data.msg,
+          image: 'images/error.png'
+        })
+      }
+    })
   }
 })

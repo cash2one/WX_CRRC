@@ -14,8 +14,8 @@
     "pages/main/notice/detail",
     "pages/main/me/me",
     "pages/main/password/password",
-    "pages/oa/backlogDetail"
-    
+    "pages/oa/backlogDetail",
+    "pages/oa/readDetail"
   ],
   "window": {
     "backgroundTextStyle": "light",

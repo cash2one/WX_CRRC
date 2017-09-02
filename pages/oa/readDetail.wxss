@@ -1,0 +1,58 @@
+.content{
+  margin-bottom: 142rpx;
+}
+.d-item{
+  padding: 10rpx;
+}
+.d-item input{
+  margin-top: 20rpx;
+  border-bottom: 1px solid #EEEEEE;
+  color: #848484;
+}
+.f-item{
+  display: flex;
+  flex-direction: column;
+  margin-top: 20rpx;
+  border: 1px solid #EEEEEE;
+  
+  border-radius: 10rpx;
+}
+.f-item view{
+  padding: 20rpx 0;
+  margin: 0 20rpx;
+  border-bottom: 1px solid #EEEEEE;
+  color: #2088E7;
+}
+.f-item view:last-child{
+  border-bottom: none;
+}
+/*底部按钮-开始*/
+.footer{
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: white;
+  display: flex;
+  border-top: 1px solid #EEEEEE;
+  align-content: center;
+  justify-content: space-between;
+  z-index: 99;
+}
+.footer button{
+  flex: 1;
+  margin: 15rpx;
+}
+.footer button:nth-child(1){
+  border: 1px solid #0AAB5D;
+  color: #0AAB5D;
+}
+.footer button:nth-child(2){
+  border: 1px solid #C70019;
+  color: #C70019;
+}
+.footer button:nth-child(3){
+  border: 1px solid #2088E7;
+  color: #2088E7;
+}
+/*底部按钮-结束*/

@@ -298,6 +298,63 @@ function getRejectInfo(user_id, fw_id, bu_code, callBack) {
     }
   })
 }
+//退回
+function backlogReject(user_id, fw_id, bu_code, sphj_id, spry_name, spyj, callBack) {
+  wx.request({
+    method: 'POST',
+    url: oaUrl + 'oa_manager_reject',
+    data: {
+      user_id: user_id,
+      fw_id: fw_id,
+      bu_code: bu_code,
+      sphj_id: sphj_id,
+      spry_name: spry_name,
+      spyj: spyj
+    },
+    header: {
+      'content-type': 'application/x-www-form-urlencoded'
+    },
+    success: function (res) {
+      var list = JSON.parse(res.data.list)
+      callBack(list)
+    },
+    fail: function (e) {
+      wx.showToast({
+        title: '网络异常',
+        image: 'images/error.png'
+      })
+    }
+  })
+}
+function getReadDetail(user_id, bu_code, unid, read_unid, callBack) {
+  wx.request({
+    method: 'GET',
+    url: oaUrl + 'oa_toread_detail',
+    data: {
+      user_id: user_id,
+      bu_code: bu_code,
+      unid: unid,
+      read_unid: read_unid
+    },
+    header: {
+      'content-type': 'application/json'
+    },
+    success: function (res) {
+      if (res.data.list.indexOf("status") != -1) {
+      var list = JSON.parse(res.data.list)
+        callBack(list)
+      }else{
+        callBack({ "msg":"此业务暂时未在移动端实现!"})
+      }
+    },
+    fail: function (e) {
+      wx.showToast({
+        title: '网络异常',
+        image: 'images/error.png'
+      })
+    }
+  })
+}
 module.exports = {
   getBacklogCount: getBacklogCount,
   getToReadCount: getToReadCount,
@@ -310,5 +367,7 @@ module.exports = {
   getApprovePeoples: getApprovePeoples,
   saveBacklogOpinion: saveBacklogOpinion,
   backlogApprove: backlogApprove,
-  getRejectInfo: getRejectInfo
+  getRejectInfo: getRejectInfo,
+  backlogReject: backlogReject,
+  getReadDetail: getReadDetail
 }

@@ -40,6 +40,7 @@
 .d-item input{
   margin-top: 20rpx;
   border-bottom: 1px solid #EEEEEE;
+  color: #848484;
 }
 .f-item{
   display: flex;

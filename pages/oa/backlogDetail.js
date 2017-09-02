@@ -306,10 +306,17 @@ Page({
     var fj_list = that.data.fileList
     var fj_name = fj_list[index].fj_name
     var fj_url = fj_list[index].fj_url
-    var fileType = fj_name.substring(fj_name.indexOf('.')+1, fj_name.length);
-    var docurl = app.oaUrl + 'filedown?user_id=' + user_code + '&bu_code=' + bu_code + '&fw_id=' + fw_id + '&attachment_name=' + fj_name + '&file_name=' + fj_name;
+    var fileType = fj_name.substring(fj_name.indexOf('.')+1, fj_name.length)
+    var bu_code = fj_url.substring(fj_url.indexOf('bu_code'), fj_url.indexOf('&fw_id'))
+    bu_code = bu_code.substring(bu_code.indexOf('=') + 1, bu_code.length)
+    var fw_id = fj_url.substring(fj_url.indexOf('fw_id'), fj_url.indexOf('&attachment_name'))
+    fw_id = fw_id.substring(fw_id.indexOf('=') + 1, fw_id.length);
+    var attachment_name = fj_url.substring(fj_url.indexOf('attachment_name'), fj_url.length)
+    attachment_name = attachment_name.substring(attachment_name.indexOf('=') + 1, attachment_name.length)
+    var timestamp = new Date().getTime()
+    var file_name = timestamp + '.' + fileType
+    var docurl = app.oaUrl + 'filedown?user_id=' + user_code + '&bu_code=' + bu_code + '&fw_id=' + fw_id + '&attachment_name=' + attachment_name + '&file_name=' + file_name;
     docurl = encodeURI(docurl);
-    console.log(docurl)
     if (fileType == 'jpg' || fileType == 'png' || fileType == 'bmp' || fileType == 'jpeg' || fileType == 'gif') {
       wx.previewImage({
         urls: [

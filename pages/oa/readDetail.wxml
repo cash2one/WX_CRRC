@@ -1,0 +1,26 @@
+<view class="container">
+  <view class="content">
+    <view class="detail">
+      <!-- 内容-开始 -->
+      <block wx:for="{{contents}}" wx:key="unique">
+        <view class="d-item">
+          <text>{{item.key}}</text>
+          <input disabled="true" value="{{item.value}}" />
+        </view>
+      </block>
+      
+      <view hidden="{{!fileList.length}}" class="d-item">
+        <text>附件</text>
+        <view class="f-item">
+          <block wx:for="{{fileList}}" wx:key="unique">
+            <view bindtap="openFile" data-index="{{index}}">{{item.fj_name}}</view>
+          </block>
+        </view>
+      </view>
+      <!-- 附件列表-结束 -->
+    </view>
+  </view>
+  <view class="footer">
+    <button bindtap="distributeBrn_click" class="distributeBrn">分发</button>
+  </view>
+</view>
