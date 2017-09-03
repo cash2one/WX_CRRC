@@ -123,7 +123,7 @@ Page({
           title: '退回成功',
         })
         setTimeout(function () {
-          var prePage = getCurrentPages()[0]
+          var prePage = getCurrentPages()[1]
           prePage.onPullDownRefresh()
           wx.navigateBack({
             delta: 2

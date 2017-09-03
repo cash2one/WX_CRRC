@@ -20,7 +20,7 @@
       <!-- 附件列表-结束 -->
     </view>
   </view>
-  <view class="footer">
-    <button bindtap="distributeBrn_click" class="distributeBrn">分发</button>
+  <view hidden="{{sphj_isdistribution == '0'}}" class="footer">
+    <button bindtap="distributeBrn_click" class="distributeBrn">传阅</button>
   </view>
 </view>

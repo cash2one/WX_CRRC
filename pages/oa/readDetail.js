@@ -9,8 +9,9 @@ var bu_code = ''
 var contents = []
 Page({
   data: {
-    sphj_isdistribution: true,
-    sphj_isdistributionopinion: true,
+    fw_id: '',
+    sphj_isdistribution: '0',
+    sphj_isdistributionopinion: '0',
     contents: [],
     fileList: []
   },
@@ -26,6 +27,8 @@ Page({
     read_unid = ''
     bu_code = ''
     contents = []
+    var prePage = getCurrentPages()[1]
+    prePage.onPullDownRefresh()
   },
   getDetail: function(){
     var that = this
@@ -47,6 +50,7 @@ Page({
         return
       }
       that.setData({
+        fw_id: data.fw_id,
         sphj_isdistribution: data.sphj_isdistribution,
         sphj_isdistributionopinion: data.sphj_isdistributionopinion
       })
@@ -184,5 +188,10 @@ Page({
         }
       })
     }
+  },
+  distributeBrn_click: function(){
+    wx.navigateTo({
+      url: './readDistribute?fw_id=' + this.data.fw_id + '&bu_code=' + bu_code + '&sphj_isdistributionopinion=' + this.data.sphj_isdistributionopinion + '&text_type=传阅'
+    })
   }
 })

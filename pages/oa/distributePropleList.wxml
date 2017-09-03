@@ -1,0 +1,32 @@
+<view class="container">
+  <view class="s-container">
+    <view class="s-panel">
+      <icon type="search" class="s-icon" />
+      <input bindinput="getSearchValue" class="s-input" value="{{spfw_key}}" placeholder="请输入姓名、工号进行搜索" confirm-type="search" bindconfirm="getDistributePeoples" />
+      <icon bindtap="clearSearchValue" hidden="{{spfw_key == ''}}" type="clear" />
+    </view>
+  </view>
+  <view wx:if="{{spry_list.length && hasNot == false}}" class="people-list">
+    <checkbox-group bindchange="checkboxChange">
+      <label wx:for="{{spry_list}}" wx:key="unique">
+        <view class="people-item">
+        <view class='people-info'>
+          <view class="people-name">{{item.spry_name}}</view>
+          <view class="people-dept">{{item.spry_dep}}</view>
+        </view>
+        <checkbox class="checkbox" value="{{item.spry_name}}" checked="{{item.checked}}" color="#C70019" />
+        </view>
+      </label>
+    </checkbox-group>
+  </view>
+  <view wx:if="{{!spry_list.length && hasNot == false}}" class="totst">
+    <view>温馨提示：</view>
+    <view>因人员信息过多，请通过姓名、工号进行搜索</view>
+  </view>
+  <view wx:if="{{!spry_list.length && hasNot == true}}" class="totst">
+    <view>系统内无该员工信息</view>
+  </view>
+  <view class="btn">
+    <button bindtap="confirm" disabled="{{btnStatus}}">确定</button>
+  </view>
+</view>

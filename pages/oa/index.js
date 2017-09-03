@@ -43,7 +43,6 @@ Page({
     ]
   },
   onLoad: function (options) {
-    //console.log(getCurrentPages())
     user_code = wx.getStorageSync('userinfo').username
     this.getBadges()
     this.changeItem(0)
@@ -66,7 +65,6 @@ Page({
     readedList = []
     flag = -1
     var indexPage = getCurrentPages()[0]
-    //indexPage.getNews()
     indexPage.getBacklogCount()
   },
   changeItem: function (e) {
@@ -186,11 +184,6 @@ Page({
             })
           }
         }
-      } else {
-        wx.showToast({
-          title: data.msg,
-          image: 'images/error.png'
-        })
       }
     })
   },
@@ -241,10 +234,19 @@ Page({
     readedList = []
     var index = this.data.swiperCurrent
     if(index == 0){
+      this.setData({
+        backlogList: []
+      })
       this.getBacklogList()
     }else if(index == 1){
+      this.setData({
+        toreadList: []
+      })
       this.getToReadList()
     }else{
+      this.setData({
+        readedList: []
+      })
       this.getReadedList()
     }
   },

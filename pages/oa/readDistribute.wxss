@@ -1,0 +1,91 @@
+.radio-group{
+  display: flex;
+  flex-direction: column;
+  border-bottom: 1px solid #EEEEEE;
+  margin-bottom: 20rpx;
+  font-size: 35rpx;
+}
+.radio{
+  display: flex;
+  justify-content: space-between;
+  padding: 20rpx;
+  
+}
+.opinion-input{
+  border: 1px solid #DFDFDF;
+  padding: 20rpx;
+  margin-bottom: 20rpx;
+  border-radius: 15rpx;
+}
+.oa-container{
+  display: flex;
+  flex-direction: column;
+  padding: 20rpx;
+  margin-bottom: 150rpx;
+}
+.title{
+  font-size: 30rpx;
+}
+.title text{
+  color: #C70019;
+}
+.picker{
+  display: flex;
+  border-bottom: 1px solid #DFDFDF;
+  padding: 20rpx;
+  margin-bottom: 20rpx;
+}
+.picker text{
+  flex: 1;
+  color: #848484;
+}
+.picker image{
+  width: 50rpx;
+  height: 50rpx;
+}
+.person-item{
+  position: relative;
+  float: left;
+  width: 20%;
+  height: 130rpx;
+  padding: 15rpx;
+  overflow: hidden;
+  margin-bottom: 15rpx;
+}
+.item-container{
+  display: block;
+  text-align: center
+}
+.person-item .remove{
+  background-color: white;
+  position: absolute;
+  z-index: 2;
+  width: 30rpx;
+  height: 30rpx;
+  right: 22rpx;
+  top: 4rpx;
+}
+.person-item .people{
+  width: 100rpx;
+  height: 100rpx;
+  border: 1px solid #848484;
+  border-radius: 10rpx;
+}
+.person-item{
+  color: #848484;
+  font-size: 25rpx;
+  text-align: center;
+}
+.btn{
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 20rpx;
+  z-index: 2;
+  background-color: white;
+}
+.btn button{
+  background-color: #C70019;
+  color: white;
+}

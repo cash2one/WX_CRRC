@@ -42,17 +42,7 @@
 .footer button{
   flex: 1;
   margin: 15rpx;
-}
-.footer button:nth-child(1){
-  border: 1px solid #0AAB5D;
-  color: #0AAB5D;
-}
-.footer button:nth-child(2){
   border: 1px solid #C70019;
   color: #C70019;
-}
-.footer button:nth-child(3){
-  border: 1px solid #2088E7;
-  color: #2088E7;
 }
 /*底部按钮-结束*/

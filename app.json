@@ -1,9 +1,9 @@
 {
   "pages": [
+    "pages/main/login/login",
     "pages/oa/index",
     "pages/oa/backlogReject",
     "pages/oa/backlogApprove",
-    "pages/main/login/login",
     "pages/oa/peopleList",
     "pages/main/password/help",
     "pages/main/index/index",
@@ -15,7 +15,9 @@
     "pages/main/me/me",
     "pages/main/password/password",
     "pages/oa/backlogDetail",
-    "pages/oa/readDetail"
+    "pages/oa/readDetail",
+    "pages/oa/readDistribute",
+    "pages/oa/distributePropleList"
   ],
   "window": {
     "backgroundTextStyle": "light",

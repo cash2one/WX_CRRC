@@ -17,7 +17,8 @@ Page({
     switchCurrent: 0,
     isCanApprove: '',
     isCanOpinion: '',
-    isCanDistribution: '',
+    sphj_isdistribution: '0',
+    sphj_isdistributionopinion: '0',
     contents: [],
     fileList: [],
     scrollLength: [],
@@ -88,16 +89,11 @@ Page({
           isCanOpinion: true
         })
       }
-      //是否可以进行分发，1为可以分发；0为不能分发
-      if (data.sphj_isdistribution == '0') {
-        that.setData({
-          isCanDistribution: false
-        })
-      }else{
-        that.setData({
-          isCanDistribution: true
-        })
-      }
+      //是否可以进行分发和填写分发意见，1为可以分发；0为不能分发
+      that.setData({
+        sphj_isdistribution: data.sphj_isdistribution,
+        sphj_isdistributionopinion: data.sphj_isdistributionopinion
+      })
       //是否属于管理流程，0为管理流程；1为普通流程
       if (data.isImplemented == '0'){
         //流程名称
@@ -280,6 +276,11 @@ Page({
   rejectBtn_click: function(){
     wx.navigateTo({
       url: './backlogReject?fw_id=' + fw_id + '&bu_code=' + bu_code
+    })
+  },
+  distributeBrn_click: function(){
+    wx.navigateTo({
+      url: './readDistribute?fw_id=' + fw_id + '&bu_code=' + bu_code + '&sphj_isdistributionopinion=' + this.data.sphj_isdistributionopinion + '&text_type=分发'
     })
   },
   appendContent: function(contentType, id, key, value){

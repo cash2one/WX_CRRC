@@ -39,21 +39,13 @@ Page({
     })
     this.getApproveInfo()
   },
-  onReady: function () {
-
-  },
-  onShow: function () {
-
-  },
-  onHide: function () {
-
-  },
   onUnload: function () {
     fw_id = ''
     bu_code = ''
     splist = []
     ryfw_type = []
     ryfw_id = ''
+    wx.removeStorageSync('person_list')
   },
   getApproveInfo: function () {
     var that = this
@@ -395,7 +387,7 @@ Page({
           title: '提交成功',
         })
         setTimeout(function () {
-          var prePage = getCurrentPages()[0]
+          var prePage = getCurrentPages()[1]
           prePage.onPullDownRefresh()
           wx.navigateBack({
             delta: 2

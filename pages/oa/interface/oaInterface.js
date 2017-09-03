@@ -326,6 +326,7 @@ function backlogReject(user_id, fw_id, bu_code, sphj_id, spry_name, spyj, callBa
     }
   })
 }
+//获取阅读详情
 function getReadDetail(user_id, bu_code, unid, read_unid, callBack) {
   wx.request({
     method: 'GET',
@@ -355,6 +356,82 @@ function getReadDetail(user_id, bu_code, unid, read_unid, callBack) {
     }
   })
 }
+//搜索分发、传阅人员
+function getDistributePeoples(user_id, userName, callBack) {
+  wx.request({
+    method: 'POST',
+    url: oaUrl + 'oa_user_search',
+    data: {
+      user_id: user_id,
+      userName: userName
+    },
+    header: {
+      'content-type': 'application/x-www-form-urlencoded'
+    },
+    success: function (res) {
+      var list = JSON.parse(res.data.list)
+      callBack(list)
+    },
+    fail: function (e) {
+      wx.showToast({
+        title: '网络异常',
+        image: 'images/error.png'
+      })
+    }
+  })
+}
+//提交分发、传阅意见
+function saveDispenseOpinion(user_id, fw_id, bu_code, opinion, callBack) {
+  wx.request({
+    method: 'POST',
+    url: oaUrl + 'oa_dispense_opinion',
+    data: {
+      user_id: user_id,
+      fw_id: fw_id,
+      bu_code: bu_code,
+      opinion: opinion
+    },
+    header: {
+      'content-type': 'application/x-www-form-urlencoded'
+    },
+    success: function (res) {
+      var list = JSON.parse(res.data.list)
+      callBack(list)
+    },
+    fail: function (e) {
+      wx.showToast({
+        title: '网络异常',
+        image: 'images/error.png'
+      })
+    }
+  })
+}
+//提交分发、传阅
+function dispenseApprove (user_id, fw_id, bu_code, persons, callBack) {
+  wx.request({
+    method: 'POST',
+    url: oaUrl + 'oa_dispense',
+    data: {
+      user_id: user_id,
+      fw_id: fw_id,
+      bu_code: bu_code,
+      persons: persons
+    },
+    header: {
+      'content-type': 'application/x-www-form-urlencoded'
+    },
+    success: function (res) {
+      var list = JSON.parse(res.data.list)
+      callBack(list)
+    },
+    fail: function (e) {
+      wx.showToast({
+        title: '网络异常',
+        image: 'images/error.png'
+      })
+    }
+  })
+}
 module.exports = {
   getBacklogCount: getBacklogCount,
   getToReadCount: getToReadCount,
@@ -369,5 +446,8 @@ module.exports = {
   backlogApprove: backlogApprove,
   getRejectInfo: getRejectInfo,
   backlogReject: backlogReject,
-  getReadDetail: getReadDetail
+  getReadDetail: getReadDetail,
+  getDistributePeoples: getDistributePeoples,
+  saveDispenseOpinion: saveDispenseOpinion,
+  dispenseApprove: dispenseApprove
 }

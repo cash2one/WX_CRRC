@@ -20,16 +20,18 @@
 
   <view hidden="{{swiperCurrent != 1}}" class="list">
     <block wx:for="{{toreadList}}" wx:key="unique">
-      <view class="item">
-        <view class="m-panel">
-          <view class="title">{{toreadList[index].fw_flowname}}</view>
-          <view class="desc">{{toreadList[index].title}}</view>
+      <navigator url="./readDetail?bu_code={{item.buCode}}&unid={{item.unid}}&read_unid={{item.readUnid}}" hover-class="navigator-hover">
+        <view class="item">
+          <view class="m-panel">
+            <view class="title">{{item.fw_flowname}}</view>
+            <view class="desc">{{item.title}}</view>
+          </view>
+          <view class="s-panel">
+            <view class="date">{{item.time}}</view>
+          </view>
+          <image class="icon-arrow" src="images/arrow.png"></image>
         </view>
-        <view class="s-panel">
-          <view class="date">{{toreadList[index].time}}</view>
-        </view>
-        <image class="icon-arrow" src="images/arrow.png"></image>
-      </view>
+      </navigator>
     </block>
     <view bindtap="getNextToReadedList" class="more" hidden="{{toreadCount == 0 || toreadCount < 10}}">{{toreadMoreText}}</view>
   </view>

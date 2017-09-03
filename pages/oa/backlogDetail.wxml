@@ -79,7 +79,7 @@
   <view class="footer">
     <button bindtap="approveBtn_click" class="approveBtn">发送</button>
     <button bindtap="rejectBtn_click" class="rejectBtn">退回</button>
-    <button bindtap="distributeBrn_click" hidden="{{isCanDistribution == false}}" class="distributeBrn">分发</button>
+    <button bindtap="distributeBrn_click" hidden="{{sphj_isdistribution == '0'}}" class="distributeBrn">分发</button>
   </view>
   <!--底部按钮-结束-->
 </view>

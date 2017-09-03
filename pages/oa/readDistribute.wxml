@@ -1,0 +1,33 @@
+<view class="container">
+  <view class="oa-container">
+    <view hidden="{{sphj_isdistributionopinion == '0'}}" class="title">{{text_type}}意见<text>*</text></view>
+    <radio-group hidden="{{sphj_isdistributionopinion == '0'}}" class="radio-group" bindchange="radioChange">
+      <view class="radio">
+        <label wx:for="{{opinions}}" wx:key="unique">
+          <radio value="{{item.value}}" checked="{{item.checked}}" color="#C70019" />{{item.name}}
+        </label>
+      </view>
+      <input hidden="{{opinion_default == true}}" bindinput="getOpinionText" class="opinion-input" placeholder="请填写审批意见" />
+    </radio-group>
+    <view class="title">{{text_type}}人员 (注：仅填写{{text_type}}意见时，可不添加人员)</view>
+    <view class="person-container">
+      <block wx:for="{{person_list}}" wx:key="unique">
+        <view class="person-item">
+          <view class="item-container">
+            <image bindtap="removePeople" data-fullname="{{person_list[index].fullname}}"  class="remove" src="images/icon-remove.png"></image>
+            <image class="people" src="images/icon-user.png"></image>
+          </view>
+          <view>{{person_list[index].name}}</view>
+        </view>
+      </block>
+      <view class="person-item">
+        <view bindtap="addNewPerson" class="item-container">
+          <image class="people" src="images/icon-add-grey.png"></image>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class="btn">
+    <button bindtap="btnClick">提交</button>
+  </view>
+</view>
