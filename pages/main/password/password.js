@@ -9,6 +9,7 @@ var password = ''
 var confirmPassword = ''
 Page({
   data: {
+    domains: '',
     hasCode: true,
     vcText: '获取验证码',
     user_code: '',
@@ -17,6 +18,9 @@ Page({
   },
   onLoad: function (options) {
     var domains = options.domains
+    this.setData({
+      domains: domains
+    })
     user_code = wx.getStorageSync('userinfo').username
     if (getApp().isDefine(user_code)){
       this.setData({
@@ -35,6 +39,8 @@ Page({
     isClicked = false
     countdown = 60
     phone = ''
+    password = ''
+    confirmPassword = ''
   },
   getUserCode: function(e){
     user_code = e.detail.value
@@ -124,7 +130,7 @@ Page({
       },
       success: function (res) {
         that.setData({
-          sendCode: res.data.number
+          sendCode: res.data.number.toString()
         })
       },
       fail: function (e) {
@@ -167,28 +173,54 @@ Page({
     }
     if (password != confirmPassword){
       wx.showToast({
-        title: '两次密码输入不一致',
+        title: '密码输入不一致',
         image: '../../../images/error.png'
       })
       return
     }
+    if (password.length < 8 || confirmPassword.length < 8) {
+      wx.showToast({
+        title: '密码长度不能少于8位',
+        image: '../../../images/error.png'
+      })
+      return
+    }else{
+      var hasLetters = /^[a-zA-Z]/.test(password);
+      if (!hasLetters){
+        wx.showToast({
+          title: '密码强度不够',
+          image: '../../../images/error.png'
+        })
+      }
+    }
+    if (this.data.sendCode != vcode){
+      wx.showToast({
+        title: '验证码错误',
+        image: '../../../images/error.png'
+      })
+      return
+    }
+    this.resetPasswrod()
+  },
+  resetPasswrod: function(){
+    var that = this
     wx.request({
-      url: requestUrl + 'index/checkMSG',
+      url: requestUrl + 'index/resetPwd',
       method: 'GET',
       data: {
-        phone: phone,
-        sixnum: vcode
+        strUserId: user_code,
+        strNewPwd: confirmPassword,
+        strDomain: that.data.domains
       },
       header: {
         'content-type': 'application/json'
       },
       success: function (res) {
-        
         console.log(res.data)
       },
       fail: function (e) {
         wx.showToast({
-          title: '检验验证码失败',
+          title: '修改密码失败',
           image: '../../../images/error.png'
         })
       }
