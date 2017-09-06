@@ -8,10 +8,15 @@ Page({
   onLoad:function(options){
     var SDKVersion = wx.getSystemInfoSync().SDKVersion
     SDKVersion = SDKVersion.replace(/\./g,'')
-    if (SDKVersion < 150){
+    if (SDKVersion < 152){
       wx.showModal({
         title: '温馨提示',
-        content: '您的微信版本过低，为确保您的正常使用，请您升级最新版本。'
+        content: '您的微信版本过低，为确保您的正常使用，请您升级最新版本。',
+        showCancel: false,
+        confirmColor: '#C70019',
+        success: function (res) {
+
+        }
       })
       return
     }else{
@@ -22,16 +27,51 @@ Page({
         var password = userinfo.password
         this.login(username, password, function (data) {
           if (data == true) {
-            setTimeout(function () {
-              wx.hideLoading()
-              wx.switchTab({
-                url: '../index/index'
-              })
-            }, 1000)
+            if (getApp().isDefine(wx.getStorageSync("needFingerPrint"))){
+              var isNeedFingerPrint = wx.getStorageSync("needFingerPrint")
+              if (isNeedFingerPrint){
+                wx.startSoterAuthentication({
+                  requestAuthModes: ['fingerPrint'],
+                  challenge: 'CRRC',
+                  authContent: '指纹验证',
+                  success(res) {
+                    setTimeout(function () {
+                      wx.hideLoading()
+                      wx.switchTab({
+                        url: '../index/index'
+                      })
+                    }, 1000)
+                  },
+                  fail(res) {
+                    wx.hideLoading()
+                    return
+                  }
+                })
+              }else{
+                setTimeout(function () {
+                  wx.hideLoading()
+                  wx.switchTab({
+                    url: '../index/index'
+                  })
+                }, 1000)
+              }
+            }else{
+              setTimeout(function () {
+                wx.hideLoading()
+                wx.switchTab({
+                  url: '../index/index'
+                })
+              }, 1000)
+            }
           }else{
-            wx.showToast({
-              title: '您的密码已过期，请重新登录',
-              image: '../../../images/error.png'
+            wx.showModal({
+              title: '温馨提示',
+              content: '您的密码已过期，请重新登录',
+              showCancel: false,
+              confirmColor: '#C70019',
+              success: function (res) {
+
+              }
             })
           }
         })

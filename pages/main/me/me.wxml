@@ -11,11 +11,13 @@
     <view class="dept">{{myInfo.UNIT_NAME}}</view>
   </view>
   <view class="content">
+    <navigator url="../spread/spread" hover-class="navigator-hover">
     <view class="item">
       <image class="item-icon" src="../../../images/qr.png"></image>
       <text class="item-title">小程序推广</text>
       <image class="item-icon" src="../../../images/arrow.png"></image>
     </view>
+    </navigator>
     <navigator url="../password/help" hover-class="navigator-hover">
     <view class="item">
       <image class="item-icon" src="../../../images/pwd.png"></image>
@@ -23,10 +25,10 @@
       <image class="item-icon" src="../../../images/arrow.png"></image>
     </view>
     </navigator>
-    <view bindtap="test" class="item">
+    <view wx:if="{{isCanFingerPrint}}" class="item">
       <image class="item-icon" src="../../../images/finger.png"></image>
       <text class="item-title">指纹登录</text>
-      <switch bindchange="openFinger" color="#C70019"/>
+      <switch bindchange="openFinger" color="#C70019" checked="{{needFingerPrint}}"/>
     </view>
   </view>
 </view>

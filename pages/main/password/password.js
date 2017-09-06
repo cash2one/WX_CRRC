@@ -203,6 +203,10 @@ Page({
     this.resetPasswrod()
   },
   resetPasswrod: function(){
+    wx.showLoading({
+      title: '请稍后',
+      mask: true
+    })
     var that = this
     wx.request({
       url: requestUrl + 'index/resetPwd',
@@ -216,7 +220,23 @@ Page({
         'content-type': 'application/json'
       },
       success: function (res) {
-        console.log(res.data)
+        if (getApp().isDefine(res.data.ResetUserPasswordResult)){
+          wx.showToast({
+            title: '修改密码失败',
+            image: '../../../images/error.png'
+          })
+        }else{
+          wx.showToast({
+            title: '修改成功'
+          })
+          setTimeout(function () {
+            wx.removeStorageSync('userinfo')
+            wx.reLaunch({
+              url: '../login/login'
+            })
+          }, 1000);
+          
+        }
       },
       fail: function (e) {
         wx.showToast({

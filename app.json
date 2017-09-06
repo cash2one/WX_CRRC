@@ -1,10 +1,6 @@
 {
   "pages": [
     "pages/main/login/login",
-    "pages/oa/index",
-    "pages/oa/backlogReject",
-    "pages/oa/backlogApprove",
-    "pages/oa/peopleList",
     "pages/main/password/help",
     "pages/main/index/index",
     "pages/main/contact/contact",
@@ -14,7 +10,12 @@
     "pages/main/notice/detail",
     "pages/main/me/me",
     "pages/main/password/password",
+    "pages/main/spread/spread",
+    "pages/oa/index",
     "pages/oa/backlogDetail",
+    "pages/oa/backlogApprove",
+    "pages/oa/backlogReject",
+    "pages/oa/peopleList",
     "pages/oa/readDetail",
     "pages/oa/readDistribute",
     "pages/oa/distributePropleList"

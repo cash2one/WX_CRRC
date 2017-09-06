@@ -1,0 +1,9 @@
+<view class="container">
+  <view class="title">如何使用小程序？</view>
+  <text>1.打开“微信”——“发现”——“小程序”，在搜索框中输入“中车株洲所”。</text>
+  <text>2.扫描下方“小程序码”</text>
+  <view class="qr">
+    <image src="http://www.tec.crrczic.cc/portals/0/images/crrczic_app/wxcrrc.jpg"></image>
+  </view>
+
+</view>

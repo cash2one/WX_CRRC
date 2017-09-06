@@ -3,10 +3,16 @@ var requestUrl = getApp().globalUrl
 var user_code = ''
 Page({
   data:{
-    myInfo: {}
+    myInfo: {},
+    isCanFingerPrint: false,
+    needFingerPrint: false
   },
   onLoad:function(options){
     // 页面初始化 options为页面跳转所带来的参数
+    this.setData({
+      needFingerPrint: wx.getStorageSync("needFingerPrint")
+    })
+    this.checkFingerPrint()
     this.getMyInfo()
   },
   onReady:function(){
@@ -53,21 +59,45 @@ Page({
       url: '../login/login'
     })
   },
-  //指纹识别
-  test: function(){
-    wx.startSoterAuthentication({
-      requestAuthModes: ['fingerPrint'],
-      challenge: '123456',
-      authContent: '指纹验证',
-      success(res) {
-        console.log(res)
-      },
-      fail(res){
-        console.log(res)
-        if(res.errCode == 90009){
-          console.log('请输入密码')
+  checkFingerPrint: function(){
+    var that = this
+    if (wx.checkIsSupportSoterAuthentication) {
+      wx.checkIsSupportSoterAuthentication({
+        success(res) {
+          var supportMode = res.supportMode
+          if (supportMode[0] = 'fingerPrint'){
+            that.setData({
+              isCanFingerPrint: true
+            })
+          }else{
+            that.setData({
+              isCanFingerPrint: false
+            })
+          }
+        },
+        fail(res) {
+          that.setData({
+            isCanFingerPrint: false
+          })
         }
-      }
-    })
+      })
+    }else{
+      that.setData({
+        isCanFingerPrint: false
+      })
+    }
+  },
+  openFinger: function(e){
+    var value = e.detail.value
+    if (value){
+      this.setData({
+        needFingerPrint: true
+      })
+    }else{
+      this.setData({
+        needFingerPrint: false
+      })
+    }
+    wx.setStorageSync("needFingerPrint", this.data.needFingerPrint)
   }
 })
