@@ -65,6 +65,10 @@ Page({
       wx.navigateTo({
         url: '../../oa/index'
       })
+    }else if(flag == 3){
+      wx.navigateTo({
+        url: '../../tz/index'
+      })
     }else{
       wx.showToast({
         title: '正在建设中...',
