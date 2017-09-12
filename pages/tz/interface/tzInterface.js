@@ -79,11 +79,29 @@ function getMyApplyList(user_code, page_num, page_sum, callBack) {
     }
   })
 }
-//获取立项调整单据详情
+//获取立项申请单详情
 function getLxtzDetail(record_id, callBack) {
   wx.request({
     method: 'GET',
     url: tzUrl + 'tz_lxtz_detail',
+    data: {
+      record_id: record_id
+
+    },
+    header: {
+      'content-type': 'application/json'
+    },
+    success: function (res) {
+      var list = JSON.parse(res.data.list)
+      callBack(list)
+    }
+  })
+}
+//获取投资业务申请单详情
+function getYwsqDetail(record_id, callBack) {
+  wx.request({
+    method: 'GET',
+    url: tzUrl + 'tz_ywsq_detail',
     data: {
       record_id: record_id
 
@@ -102,5 +120,6 @@ module.exports = {
   getMyApplyCount: getMyApplyCount,
   getBacklogList: getBacklogList,
   getMyApplyList: getMyApplyList,
-  getLxtzDetail: getLxtzDetail
+  getLxtzDetail: getLxtzDetail,
+  getYwsqDetail: getYwsqDetail
 }

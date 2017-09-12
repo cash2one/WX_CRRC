@@ -15,10 +15,20 @@
       <!-- 内容-开始 -->
       <block wx:for="{{contents}}" wx:key="unique">
         <view class="d-item">
-          <text>{{contents[index].key}}</text>
-          <input disabled="true" value="{{contents[index].value}}" />
+          <text>{{item.key}}</text>
+          <input disabled="true" value="{{item.value}}" />
         </view>
       </block>
+      <!-- 附件列表-开始 -->
+      <view hidden="{{!fileList.length}}" class="d-item">
+        <text>附件</text>
+        <view class="f-item">
+          <block wx:for="{{fileList}}" wx:key="unique">
+            <view bindtap="openFile" data-index="{{index}}">{{item.FILENAME}}</view>
+          </block>
+        </view>
+      </view>
+      <!-- 附件列表-结束 -->
     </view>
 
     <view hidden="{{switchCurrent != 1}}" class="opinion">
@@ -26,28 +36,21 @@
         <view class="o-item">
           <image src="images/icon-circle-green.png"></image>
           <view class="o-item-container">
-            <text>处理环节：{{opinionContents[index].sphj}}</text>
-            <text>处理人员：{{opinionContents[index].spr}}</text>
-            <text>处理时间：{{opinionContents[index].sprq}}</text>
-            <text>处理意见：{{opinionContents[index].spyj}}</text>
+            <text>处理人员：{{item.approve_node}}</text>
+            <text>处理流程：{{item.approve_action}}</text>
+            <text>处理时间：{{item.approve_date}}</text>
+            <text>处理意见：{{item.approve_memo}}</text>
           </view>
           <text class="o-item-status-ok">已处理</text>
         </view>
       </block>
-      <view class="o-item">
-          <image src="images/icon-circle-red.png"></image>
-          <view class="o-item-container">
-            <text>处理环节：{{currentUnit}}</text>
-          </view>
-          <text class="o-item-status-not">待处理</text>
-        </view>
     </view>
   </view>
 
   <!--底部按钮-开始-->
   <view class="footer">
-    <button bindtap="approveBtn_click" class="approveBtn">发送</button>
-    <button bindtap="rejectBtn_click" class="rejectBtn">退回</button>
+    <button bindtap="approveBtn_click" class="approveBtn" hidden="{{!isCanApprove}}">同意</button>
+    <button bindtap="rejectBtn_click" class="rejectBtn">拒绝</button>
     <button bindtap="distributeBrn_click" class="distributeBrn">转交</button>
   </view>
   <!--底部按钮-结束-->
