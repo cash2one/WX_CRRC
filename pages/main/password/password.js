@@ -220,12 +220,8 @@ Page({
         'content-type': 'application/json'
       },
       success: function (res) {
-        if (getApp().isDefine(res.data.ResetUserPasswordResult)){
-          wx.showToast({
-            title: '修改密码失败',
-            image: '../../../images/error.png'
-          })
-        }else{
+        var result = res.data.ResetUserPasswordResult
+        if (result.indexOf("成功") != -1){
           wx.showToast({
             title: '修改成功'
           })
@@ -235,12 +231,17 @@ Page({
               url: '../login/login'
             })
           }, 1000);
-          
+        }else{
+          wx.showToast({
+            title: '修改失败',
+            image: '../../../images/error.png'
+          })
         }
       },
       fail: function (e) {
+        console.log("Error:"+e)
         wx.showToast({
-          title: '修改密码失败',
+          title: '修改失败',
           image: '../../../images/error.png'
         })
       }
