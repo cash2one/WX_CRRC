@@ -55,6 +55,7 @@
   border-bottom: 1px solid #EEEEEE;
 }
 .m-panel{
+  margin-right: 20rpx;
   flex: 1;
 }
 .s-panel{

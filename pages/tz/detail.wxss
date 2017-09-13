@@ -37,10 +37,11 @@
 .d-item{
   padding: 10rpx;
 }
-.d-item input{
+.d-item view{
   margin-top: 20rpx;
   border-bottom: 1px solid #EEEEEE;
   color: #848484;
+  padding-bottom:10rpx; 
 }
 .f-item{
   display: flex;

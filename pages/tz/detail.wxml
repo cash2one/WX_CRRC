@@ -16,7 +16,7 @@
       <block wx:for="{{contents}}" wx:key="unique">
         <view class="d-item">
           <text>{{item.key}}</text>
-          <input disabled="true" value="{{item.value}}" />
+          <view>{{item.value}}</view>
         </view>
       </block>
       <!-- 附件列表-开始 -->
@@ -24,7 +24,7 @@
         <text>附件</text>
         <view class="f-item">
           <block wx:for="{{fileList}}" wx:key="unique">
-            <view bindtap="openFile" data-index="{{index}}">{{item.FILENAME}}</view>
+            <view bindtap="openFile" data-fileid="{{item.FILEID}}" data-filename="{{item.FILENAME}}">{{item.FILENAME}}</view>
           </block>
         </view>
       </view>
