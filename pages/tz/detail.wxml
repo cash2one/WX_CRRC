@@ -48,10 +48,42 @@
   </view>
 
   <!--底部按钮-开始-->
-  <view class="footer">
-    <button bindtap="approveBtn_click" class="approveBtn" hidden="{{!isCanApprove}}">同意</button>
-    <button bindtap="rejectBtn_click" class="rejectBtn">拒绝</button>
-    <button bindtap="distributeBrn_click" class="distributeBrn">转交</button>
+  <view hidden="{{opened == 'myapply'}}" class="footer">
+    <button bindtap="btn_click" data-type="approve" class="approveBtn" hidden="{{!isCanApprove}}">同意</button>
+    <button bindtap="btn_click" data-type="reject" class="rejectBtn">拒绝</button>
+    <button bindtap="btn_click" data-type="transfer" class="distributeBrn">转交</button>
   </view>
   <!--底部按钮-结束-->
+  <view hidden="{{hideMask == true}}" class="mask-panel">
+    <view class="background_panel" bindtap="hideMask"></view>
+    <view wx:if="{{isApprove}}" class="approve_panel">
+      <view class="content">
+        <icon bindtap="hideMask" type="clear" />
+        <view>处理意见</view>
+        <textarea placeholder="请填写处理意见" value="同意" />
+        <button>提交</button>
+      </view>
+    </view>
+    <view wx:if="{{isReject}}" class="approve_panel">
+      <view class="content">
+        <icon bindtap="hideMask" type="clear" />
+        <view>处理意见</view>
+        <textarea placeholder="请填写处理意见" value="拒绝" />
+        <button>提交</button>
+      </view>
+    </view>
+    <view wx:if="{{isTransfer}}" class="approve_panel">
+      <view class="content">
+        <icon bindtap="hideMask" type="clear" />
+        <view>转交人</view>
+        <view class="people">
+          <image src="images/icon-add-grey.png"></image>
+          <text></text>
+        </view>
+        <view>转交意见</view>
+        <textarea placeholder="请填写处理意见" value="请处理" />
+        <button>提交</button>
+      </view>
+    </view>
+  </view>
 </view>

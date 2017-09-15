@@ -5,6 +5,11 @@ var category = ''
 var contents = []
 Page({
   data: {
+    hideMask: true,
+    isApprove: false,
+    isReject: false,
+    isTransfer: false,
+    opened: '',
     switchTitle: [
       '详细信息',
       '审批进度'
@@ -18,6 +23,9 @@ Page({
   onLoad: function (options) {
     record_id = options.instance_record_id
     category = options.workflow_category
+    this.setData({
+      opened: options.opened
+    })
     this.changeItem(0)
   },
   onUnload: function () {
@@ -678,5 +686,39 @@ Page({
         }
       })
     }
+  },
+  btn_click: function(e){
+    this.setData({
+      hideMask: false
+    })
+    var btnType = e.target.dataset.type
+    switch (btnType){
+      case 'approve':
+        this.setData({
+          isApprove: true,
+          isReject: false,
+          isTransfer: false
+        })
+        break
+      case 'reject':
+        this.setData({
+          isApprove: false,
+          isReject: true,
+          isTransfer: false
+        })
+        break
+      case 'transfer':
+        this.setData({
+          isApprove: false,
+          isReject: false,
+          isTransfer: true
+        })
+        break
+    }
+  },
+  hideMask: function(){
+    this.setData({
+      hideMask: true
+    })
   }
 })

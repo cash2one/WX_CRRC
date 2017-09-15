@@ -142,3 +142,64 @@
   color: #2088E7;
 }
 /*底部按钮-结束*/
+.background_panel{
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  background-color: black;
+  opacity: 0.5;
+}
+.approve_panel{
+  position: fixed;
+  top: 20%;
+  left: 10%;
+  background-color: white;
+  width: 80%;
+  z-index: 101;
+  border-radius: 20rpx;
+}
+.approve_panel .content{
+  margin: 20rpx;
+  position: relative;
+}
+.content icon{
+  position: absolute;
+  top: -10rpx;
+  right: -10rpx;
+}
+.content .people{
+  width: 80rpx;
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  justify-content: center;
+}
+.content .people image{
+  width: 80rpx;
+  height: 80rpx;
+  border: 1px solid #848484;
+  border-radius: 10rpx;
+}
+.content .people text{
+  font-size: 30rpx;
+  color: #848484;
+  text-align: center;
+}
+.content view{
+  margin: 20rpx 0;
+}
+.content textarea{
+  width: 96%;
+  padding: 10rpx;
+  border: 1px solid #DFDFDF;
+  border-radius: 10rpx;
+
+}
+.content button{
+  background-color: #C70019;
+  margin-top: 40rpx;
+  color: white;
+}

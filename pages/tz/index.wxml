@@ -1,7 +1,7 @@
 <view class="container">
   <view hidden="{{swiperCurrent != 0}}" class="list">
     <block wx:for="{{backlogList}}" wx:key="unique">
-      <navigator url="./detail?instance_record_id={{item.instance_record_id}}&workflow_category={{item.workflow_category}}" hover-class="navigator-hover">
+      <navigator url="./detail?instance_record_id={{item.instance_record_id}}&workflow_category={{item.workflow_category}}&opened=backlog" hover-class="navigator-hover">
       <view class="item">
         <view class="m-panel">
           <view class="title">{{item.workflow_category_name}}</view>
@@ -20,7 +20,7 @@
 
   <view hidden="{{swiperCurrent != 1}}" class="list">
     <block wx:for="{{myApplyList}}" wx:key="unique">
-      <navigator url="./detail?instance_record_id={{item.instance_record_id}}&workflow_category={{item.workflow_category}}" hover-class="navigator-hover">
+      <navigator url="./detail?instance_record_id={{item.instance_record_id}}&workflow_category={{item.workflow_category}}&opened=myapply" hover-class="navigator-hover">
         <view class="item">
           <view class="m-panel">
             <view class="title">{{item.workflow_category_name}}</view>
