@@ -9,7 +9,8 @@ Page({
     slider: [],
     swiperCurrent: 0,
     news_text: [],
-    oaCount: ''
+    oaCount: '',
+    tzCount: ''
   },
   onLoad: function () {
     imgs = []
@@ -78,6 +79,7 @@ Page({
   },
   getBacklogCount: function(){
     this.getOaCount()
+    this.getTzCount()
     wx.stopPullDownRefresh()
   },
   getOaCount: function(){
@@ -100,6 +102,34 @@ Page({
         }else{
           that.setData({
             oaCount: count
+          })
+        }
+      }
+    })
+  },
+  getTzCount: function(){
+    var that = this
+    wx.request({
+      url: requestUrl + 'tz/tz_backlog',
+      method: 'GET',
+      data: {
+        user_code: user_code,
+        page_num: 0,
+        page_sum: 0
+      },
+      header: {
+        'content-type': 'application/json'
+      },
+      success: function (res) {
+        var list = JSON.parse(res.data.list)
+        var count = list.total_count
+        if(count == 0){
+          that.setData({
+            tzCount: ''
+          })
+        }else{
+          that.setData({
+            tzCount: count
           })
         }
       }

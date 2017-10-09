@@ -161,45 +161,60 @@
   z-index: 101;
   border-radius: 20rpx;
 }
-.approve_panel .content{
+.approve_panel .operation{
   margin: 20rpx;
   position: relative;
 }
-.content icon{
+.operation icon{
   position: absolute;
   top: -10rpx;
   right: -10rpx;
 }
-.content .people{
-  width: 80rpx;
-  display: flex;
-  flex-direction: column;
-  align-content: center;
-  justify-content: center;
-}
-.content .people image{
-  width: 80rpx;
-  height: 80rpx;
-  border: 1px solid #848484;
-  border-radius: 10rpx;
-}
-.content .people text{
-  font-size: 30rpx;
-  color: #848484;
-  text-align: center;
-}
-.content view{
+.operation view{
   margin: 20rpx 0;
 }
-.content textarea{
+.operation input{
+  padding: 10rpx;
+  border: 1px solid #DFDFDF;
+  border-radius: 10rpx;
+}
+.operation textarea{
   width: 96%;
   padding: 10rpx;
   border: 1px solid #DFDFDF;
   border-radius: 10rpx;
-
 }
-.content button{
+.operation button{
   background-color: #C70019;
   margin-top: 40rpx;
   color: white;
+}
+
+.person-item{
+  position: relative;
+  width: 20%;
+  padding: 15rpx;
+  overflow: hidden;
+  color: #848484;
+  font-size: 25rpx;
+  text-align: center;
+}
+.item-container{
+  display: block;
+  text-align: center
+}
+.person-item .remove{
+  background-color: white;
+  position: absolute;
+  z-index: 2;
+  width: 30rpx;
+  height: 30rpx;
+  right: 12rpx;
+  top: 20rpx;
+}
+.person-item .people{
+  width: 100rpx;
+  height: 100rpx;
+  border: 1px solid #848484;
+  border-radius: 10rpx;
 }

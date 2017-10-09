@@ -36,7 +36,7 @@
         <view catchtap="openWidget" data-flag="3" class="app-item">
           <image class="app-icon" src="../../../images/tz.png"></image>
           <text class="app-text">投资管理</text>
-          <view class="app-badge"></view>
+          <view class="app-badge">{{tzCount}}</view>
         </view>
         <view catchtap="openWidget" data-flag="4" class="app-item">
           <image class="app-icon" src="../../../images/yx.png"></image>

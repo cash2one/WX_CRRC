@@ -33,7 +33,6 @@ Page({
   },
   onLoad: function (options) {
     user_code = wx.getStorageSync('userinfo').username
-    //user_code = '20065524'
     this.getBadges()
     this.changeItem(0)
   },
@@ -62,10 +61,12 @@ Page({
     })
     switch (index) {
       case 0:
+        backlogPageNum = 1
         backlogList = []
         this.getBacklogList()
         break
       case 1:
+        myApplyPageNum = 1
         myApplyList = []
         this.getMyApplyList()
         break

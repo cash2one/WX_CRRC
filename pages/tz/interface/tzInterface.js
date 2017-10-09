@@ -295,6 +295,179 @@ function getNdyssqDetail(record_id, callBack) {
     }
   })
 }
+//获取生成工作令号所需信息
+function orderNumInit(callBack) {
+  wx.request({
+    method: 'GET',
+    url: tzUrl + 'tz_tzgzlh_init',
+    data: {},
+    header: {
+      'content-type': 'application/json'
+    },
+    success: function (res) {
+      var list = JSON.parse(res.data.list)
+      callBack(list)
+    }
+  })
+}
+//根据单位编号获得立项部门
+function getDept(company_code, company_short_name, callBack) {
+  wx.request({
+    method: 'POST',
+    url: tzUrl + 'tz_tzgzlh_getdept',
+    data: {
+      company_code: company_code,
+      company_short_name: company_short_name
+    },
+    header: {
+      'content-type': 'application/x-www-form-urlencoded'
+    },
+    success: function (res) {
+      var list = JSON.parse(res.data.list)
+      callBack(list)
+    }
+  })
+}
+//生成投资工作令号
+function getOrderNum(code_seg1, code_seg2, code_seg3, code_seg4, code_seg5, code_seg7, user_id, callBack) {
+  wx.request({
+    method: 'POST',
+    url: tzUrl + 'tz_tzgzlh_getcode',
+    data: {
+      code_seg1: code_seg1,
+      code_seg2: code_seg2,
+      code_seg3: code_seg3,
+      code_seg4: code_seg4,
+      code_seg5: code_seg5,
+      code_seg7: code_seg7,
+      user_id: user_id
+    },
+    header: {
+      'content-type': 'application/x-www-form-urlencoded'
+    },
+    success: function (res) {
+      var list = JSON.parse(res.data.list)
+      callBack(list)
+    }
+  })
+}
+//保存工作令号
+function saveOrderNum(document_header_id, ivt_project_code, user_id, callBack) {
+  wx.request({
+    method: 'GET',
+    url: tzUrl + 'tz_tzgzlh_save',
+    data: {
+      document_header_id: document_header_id,
+      ivt_project_code: ivt_project_code,
+      user_id: user_id
+    },
+    header: {
+      'content-type': 'application/json'
+    },
+    success: function (res) {
+      var list = JSON.parse(res.data.list)
+      callBack(list)
+    }
+  })
+}
+//同意
+function approve(user_code, record_id, approve_desc, callBack) {
+  wx.request({
+    method: 'POST',
+    url: tzUrl + 'tz_approve',
+    data: {
+      user_code: user_code,
+      record_id: record_id,
+      approve_desc: approve_desc
+    },
+    header: {
+      'content-type': 'application/x-www-form-urlencoded'
+    },
+    success: function (res) {
+      var list = JSON.parse(res.data.list)
+      callBack(list)
+    },
+    fail: function (e) {
+      wx.showToast({
+        title: '网络异常',
+        image: 'images/error.png'
+      })
+    }
+  })
+}
+//拒绝
+function reject(user_code, record_id, approve_desc, callBack) {
+  wx.request({
+    method: 'POST',
+    url: tzUrl + 'tz_reject',
+    data: {
+      user_code: user_code,
+      record_id: record_id,
+      approve_desc: approve_desc
+    },
+    header: {
+      'content-type': 'application/x-www-form-urlencoded'
+    },
+    success: function (res) {
+      var list = JSON.parse(res.data.list)
+      callBack(list)
+    },
+    fail: function (e) {
+      wx.showToast({
+        title: '网络异常',
+        image: 'images/error.png'
+      })
+    }
+  })
+}
+//搜索转交人
+function getPeople(user_name, callBack) {
+  wx.request({
+    method: 'POST',
+    url: tzUrl + 'tz_userlist',
+    data: {
+      user_name: user_name
+    },
+    header: {
+      'content-type': 'application/x-www-form-urlencoded'
+    },
+    success: function (res) {
+      var list = JSON.parse(res.data.list)
+      callBack(list)
+    },
+    fail: function (e) {
+      wx.showToast({
+        title: '网络异常',
+        image: 'images/error.png'
+      })
+    }
+  })
+}
+//转交
+function transfer(record_id, assign_to, approve_desc, callBack) {
+  wx.request({
+    method: 'POST',
+    url: tzUrl + 'tz_assign',
+    data: {
+      record_id: record_id,
+      assign_to: assign_to,
+      approve_desc: approve_desc
+    },
+    header: {
+      'content-type': 'application/x-www-form-urlencoded'
+    },
+    success: function (res) {
+      var list = JSON.parse(res.data.list)
+      callBack(list)
+    },
+    fail: function (e) {
+      wx.showToast({
+        title: '网络异常',
+        image: 'images/error.png'
+      })
+    }
+  })
+}
 module.exports = {
   getBacklogCount: getBacklogCount,
   getMyApplyCount: getMyApplyCount,
@@ -311,5 +484,13 @@ module.exports = {
   getKtDetail: getKtDetail,
   getSgtsjDetail: getSgtsjDetail,
   getYdzjjhDetail: getYdzjjhDetail,
-  getNdyssqDetail: getNdyssqDetail
+  getNdyssqDetail: getNdyssqDetail,
+  orderNumInit: orderNumInit,
+  getDept: getDept,
+  getOrderNum: getOrderNum,
+  saveOrderNum: saveOrderNum,
+  approve: approve,
+  reject: reject,
+  getPeople: getPeople,
+  transfer: transfer
 }

@@ -1,10 +1,14 @@
 var app = getApp()
 var tz = require('interface/tzInterface.js')
+var user_code = ''
 var record_id = ''
+var document_header_id = ''
 var category = ''
 var contents = []
 Page({
   data: {
+    nodeCode:'',
+    orderNum: '',
     hideMask: true,
     isApprove: false,
     isReject: false,
@@ -18,9 +22,14 @@ Page({
     contents: [],
     fileList: [],
     opinionContents: [],
-    isCanApprove: true
+    isCanApprove: true,
+    approveOpinion: '同意',
+    rejectOpinion: '拒绝',
+    transferOpinion: '请处理',
+    people: null
   },
   onLoad: function (options) {
+    user_code = wx.getStorageSync('userinfo').username
     record_id = options.instance_record_id
     category = options.workflow_category
     this.setData({
@@ -30,6 +39,7 @@ Page({
   },
   onUnload: function () {
     record_id = ''
+    document_header_id = ''
     category = ''
     contents = []
   },
@@ -105,6 +115,10 @@ Page({
       var head = data.head
       //当前环节是否能在移动端审批
       var node_code = head[0].node_code
+      document_header_id = head[0].document_header_id
+      that.setData({
+        nodeCode: node_code
+      })
       if (node_code == 'PROCESSES') {
         that.setData({
           isCanApprove: false
@@ -719,6 +733,133 @@ Page({
   hideMask: function(){
     this.setData({
       hideMask: true
+    })
+  },
+  getApproveOpinion: function(e){
+    var approveOpinion = e.detail.value
+    this.setData({
+      approveOpinion: approveOpinion
+    })
+  },
+  getRejectOpinion: function(e){
+    var rejectOpinion = e.detail.value
+    this.setData({
+      rejectOpinion: rejectOpinion
+    })
+  },
+  getTransferOpinion: function(e){
+    var transferOpinion = e.detail.value
+    this.setData({
+      transferOpinion: transferOpinion
+    })
+  },
+  generateOrderNum: function(){
+    wx.navigateTo({
+      url: './orderNum?document_header_id=' + document_header_id
+    })
+  },
+  getOrderNum: function(){
+    var orderNum = wx.getStorageSync("orderNum")
+    this.setData({
+      orderNum: orderNum
+    })
+    wx.removeStorageSync('orderNum')
+  },
+  approve: function(){
+    wx.showLoading({
+      title: '提交中',
+      mask: true
+    })
+    tz.approve(user_code, record_id, this.data.approveOpinion, function(data){
+      if(data.status == 0){
+        wx.showToast({
+          title: '提交成功',
+        })
+        setTimeout(function () {
+          var prePage = getCurrentPages()[1]
+          prePage.onPullDownRefresh()
+          wx.navigateBack({
+            delta: 1
+          })
+        }, 1000);
+      } else {
+        wx.showToast({
+          title: '提交失败',
+          image: 'images/error.png'
+        })
+      }
+    })
+  },
+  reject: function(){
+    wx.showLoading({
+      title: '提交中',
+      mask: true
+    })
+    tz.reject(user_code, record_id, this.data.rejectOpinion, function(data){
+      if(data.status == 0){
+        wx.showToast({
+          title: '提交成功',
+        })
+        setTimeout(function () {
+          var prePage = getCurrentPages()[1]
+          prePage.onPullDownRefresh()
+          wx.navigateBack({
+            delta: 1
+          })
+        }, 1000);
+      } else {
+        wx.showToast({
+          title: '提交失败',
+          image: 'images/error.png'
+        })
+      }
+    })
+  },
+  transfer: function(){
+    wx.showLoading({
+      title: '提交中',
+      mask: true
+    })
+    tz.transfer(record_id, this.data.people.user_code, this.data.transferOpinion, function(data){
+      if(data.status == 0){
+        wx.showToast({
+          title: '提交成功',
+        })
+        setTimeout(function () {
+          var prePage = getCurrentPages()[1]
+          prePage.onPullDownRefresh()
+          wx.navigateBack({
+            delta: 1
+          })
+        }, 1000);
+      } else {
+        wx.showToast({
+          title: '提交失败',
+          image: 'images/error.png'
+        })
+      }
+    })
+  },
+  addNewPerson: function () {
+    wx.navigateTo({
+      url: './peopleList'
+    })
+  },
+  getCheckedPerson: function(){
+    var peopleObj = {}
+    var people = wx.getStorageSync('people')
+    var user_name = people.substring(0, people.indexOf('-'))
+    var user_code = people.substring(people.indexOf('-')+ 1, people.length)
+    peopleObj.user_name = user_name
+    peopleObj.user_code = user_code
+    this.setData({
+      people: peopleObj
+    })
+  },
+  removePeople: function(){
+    wx.removeStorageSync('people')
+    this.setData({
+      people: null
     })
   }
 })

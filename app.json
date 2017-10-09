@@ -1,6 +1,5 @@
 {
   "pages": [
-    "pages/tz/index",
     "pages/main/login/login",
     "pages/main/password/help",
     "pages/main/index/index",
@@ -20,7 +19,10 @@
     "pages/oa/readDetail",
     "pages/oa/readDistribute",
     "pages/oa/distributePropleList",
-    "pages/tz/detail"
+    "pages/tz/index",
+    "pages/tz/detail",
+    "pages/tz/orderNum",
+    "pages/tz/peopleList"
   ],
   "window": {
     "backgroundTextStyle": "light",

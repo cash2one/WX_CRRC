@@ -57,32 +57,48 @@
   <view hidden="{{hideMask == true}}" class="mask-panel">
     <view class="background_panel" bindtap="hideMask"></view>
     <view wx:if="{{isApprove}}" class="approve_panel">
-      <view class="content">
+      <view class="operation">
         <icon bindtap="hideMask" type="clear" />
+        <view wx:if="{{nodeCode == 'PROJECT'}}">
+          <view class="classname">投资工作令号</view>
+          <input bindtap="generateOrderNum" placeholder="点击生成投资工作令号" disabled="true" value="{{orderNum}}" />
+        </view>
         <view>处理意见</view>
-        <textarea placeholder="请填写处理意见" value="同意" />
-        <button>提交</button>
+        <textarea bindblur="getApproveOpinion" placeholder="请填写处理意见" value="同意" />
+        <button bindtap="approve">提交</button>
       </view>
     </view>
     <view wx:if="{{isReject}}" class="approve_panel">
-      <view class="content">
+      <view class="operation">
         <icon bindtap="hideMask" type="clear" />
         <view>处理意见</view>
-        <textarea placeholder="请填写处理意见" value="拒绝" />
-        <button>提交</button>
+        <textarea bindblur="getRejectOpinion" placeholder="请填写处理意见" value="拒绝" />
+        <button bindtap="reject">提交</button>
       </view>
     </view>
     <view wx:if="{{isTransfer}}" class="approve_panel">
-      <view class="content">
+      <view class="operation">
         <icon bindtap="hideMask" type="clear" />
         <view>转交人</view>
-        <view class="people">
+        <!-- <view class="people">
           <image src="images/icon-add-grey.png"></image>
           <text></text>
+        </view> -->
+        <view hidden="{{people == null}}" class="person-item" style="margin: -20rpx 0;">
+          <view class="item-container">
+            <image bindtap="removePeople" class="remove" src="images/icon-remove.png"></image>
+            <image class="people" src="images/icon-user.png"></image>
+          </view>
+          <view>{{people.user_name}}</view>
+        </view>
+        <view hidden="{{people != null}}" class="person-item" style="margin: -20rpx 0;">
+          <view bindtap="addNewPerson" class="item-container">
+            <image class="people" src="images/icon-add-grey.png"></image>
+          </view>
         </view>
         <view>转交意见</view>
-        <textarea placeholder="请填写处理意见" value="请处理" />
-        <button>提交</button>
+        <textarea bindblur="getTransferOpinion" placeholder="请填写处理意见" value="请处理" />
+        <button bindtap="transfer">提交</button>
       </view>
     </view>
   </view>

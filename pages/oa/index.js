@@ -84,14 +84,17 @@ Page({
     
     switch (index) {
       case 0:
+        backlogPageNum = 1
         backlogList = []
         this.getBacklogList()
         break
       case 1:
+        toReadPageNum = 1
         toreadList = []
         this.getToReadList()
         break
       case 2:
+        readedPageNum = 1
         readedList = []
         this.getReadedList()
         break

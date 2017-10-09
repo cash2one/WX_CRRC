@@ -1,0 +1,44 @@
+<view class="container">
+  <view class="oa-container">
+    <view class="title">工作属性<text>*</text></view>
+    <input value="{{job_attributes}}" disabled="true" />
+    <view class="title">单位编号<text>*</text></view>
+    <picker bindchange="unitNumberChange" value="{{unit_number_index}}" range="{{unit_number}}" range-key="code_value_name">
+      <view class="picker">
+        <text>{{unit_number[unit_number_index].code_value_name}}</text>
+        <image src="images/arrow-down.png"></image>
+      </view>
+    </picker>
+    <view class="title">立项部门<text>*</text></view>
+    <picker bindchange="projectDeptChange" value="{{project_dept_index}}" range="{{project_dept}}" range-key="code_value_name">
+      <view class="picker">
+        <text>{{project_dept[project_dept_index].code_value_name}}</text>
+        <image src="images/arrow-down.png"></image>
+      </view>
+    </picker>
+    <view class="title">投资类别<text>*</text></view>
+    <picker bindchange="investmentCategoryChange" value="{{investment_category_index}}" range="{{investment_category}}" range-key="code_value_name">
+      <view class="picker">
+        <text>{{investment_category[investment_category_index].code_value_name}}</text>
+        <image src="images/arrow-down.png"></image>
+      </view>
+    </picker>
+    <view class="title">立项年度<text>*</text></view>
+    <picker bindchange="projectYearChange" value="{{project_year_index}}" range="{{project_year}}" range-key="code_value_name">
+      <view class="picker">
+        <text>{{project_year[project_year_index].code_value_name}}</text>
+        <image src="images/arrow-down.png"></image>
+      </view>
+    </picker>
+    <view class="title">统计分类<text>*</text></view>
+    <picker bindchange="statisticalClassificationChange" value="{{statistical_classification_index}}" range="{{statistical_classification}}" range-key="code_value_name">
+      <view class="picker">
+        <text>{{statistical_classification[statistical_classification_index].code_value_name}}</text>
+        <image src="images/arrow-down.png"></image>
+      </view>
+    </picker>
+  </view>
+  <view class="btn">
+    <button bindtap="btnClick" disabled="{{btnStatus}}">保存</button>
+  </view>
+</view>
