@@ -10,7 +10,8 @@ Page({
     swiperCurrent: 0,
     news_text: [],
     oaCount: '',
-    tzCount: ''
+    tzCount: '',
+    fkCount: ''
   },
   onLoad: function () {
     imgs = []
@@ -66,6 +67,10 @@ Page({
       wx.navigateTo({
         url: '../../oa/index'
       })
+    }else if(flag == 2){
+      wx.navigateTo({
+        url: '../../fk/index'
+      })
     }else if(flag == 3){
       wx.navigateTo({
         url: '../../tz/index'
@@ -80,6 +85,7 @@ Page({
   getBacklogCount: function(){
     this.getOaCount()
     this.getTzCount()
+    this.getFkCount()
     wx.stopPullDownRefresh()
   },
   getOaCount: function(){
@@ -130,6 +136,34 @@ Page({
         }else{
           that.setData({
             tzCount: count
+          })
+        }
+      }
+    })
+  },
+  getFkCount: function(){
+    var that = this
+    wx.request({
+      url: requestUrl + 'fk/fklist',
+      method: 'GET',
+      data: {
+        user_code: user_code,
+        page_num: 0,
+        page_sum: 0
+      },
+      header: {
+        'content-type': 'application/json'
+      },
+      success: function (res) {
+        var list = JSON.parse(res.data.list)
+        var count = list.total_count
+        if(count == 0){
+          that.setData({
+            fkCount: ''
+          })
+        }else{
+          that.setData({
+            fkCount: count
           })
         }
       }

@@ -31,7 +31,7 @@
         <view catchtap="openWidget" data-flag="2" class="app-item">
           <image class="app-icon" src="../../../images/fk.png"></image>
           <text class="app-text">费控系统</text>
-          <view class="app-badge"></view>
+          <view class="app-badge">{{fkCount}}</view>
         </view>
         <view catchtap="openWidget" data-flag="3" class="app-item">
           <image class="app-icon" src="../../../images/tz.png"></image>

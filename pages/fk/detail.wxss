@@ -1,0 +1,220 @@
+/*顶部选项卡-开始*/
+.header{
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  left: 0;
+  right: 0;
+  background-color: white;
+  z-index: 99;
+}
+.switch-tab{
+  display: flex;
+  justify-content: center;
+}
+.switch-item{
+  width: 50%;
+  display: flex;
+  justify-content: center;
+  padding: 20rpx 0;
+}
+.switch-item.active{
+  color: #C70019;
+  border-bottom: 2px solid #C70019;
+}
+.switch-label{
+  background-color: #DFDFDF;
+  height: 20rpx;
+  width: 100%;
+}
+/*顶部选项卡-结束*/
+
+/*内容-开始*/
+.content{
+  margin-top: 120rpx;
+  margin-bottom: 142rpx;
+}
+.d-item{
+  padding: 10rpx;
+}
+.d-item view{
+  margin-top: 20rpx;
+  border-bottom: 1px solid #EEEEEE;
+  color: #848484;
+  padding-bottom:10rpx; 
+}
+.f-item{
+  display: flex;
+  flex-direction: column;
+  margin-top: 20rpx;
+  border: 1px solid #EEEEEE;
+  
+  border-radius: 10rpx;
+}
+.f-item view{
+  padding: 20rpx 0;
+  margin: 0 20rpx;
+  border-bottom: 1px solid #EEEEEE;
+  color: #2088E7;
+}
+.f-item view:last-child{
+  border-bottom: none;
+}
+.scroll-title{
+  color: #C70019;
+  font-size: 28rpx;
+  padding: 20rpx;
+  background-color: #EEEEEE;
+}
+.scroll-container{
+    width: 100%;
+}
+.scroll-wapper{
+  display: flex;
+}
+.scroll-item{
+  width: 92%;
+  flex: none;
+  border: 1px solid #EEEEEE;
+  border-radius: 20rpx;
+  padding: 2%;
+  margin: 2%;
+}
+.opinion{
+  border-left: 1px solid #DFDFDF;
+  margin: 30rpx;
+}
+.o-item{
+  display: flex;
+  margin-bottom: 20rpx;
+}
+.o-item image{
+  width: 30rpx;
+  height: 30rpx;
+  background-color: white;
+  margin-left: -15rpx;
+}
+.o-item-container{
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  color: #848484;
+  margin-left: 20rpx;
+  font-size: 30rpx;
+}
+.o-item-status-ok{
+  font-size: 30rpx;
+  color: #0AAB5D;
+}
+.o-item-status-not{
+  font-size: 30rpx;
+  color: #C70019;
+}
+/*内容-结束*/
+
+/*底部按钮-开始*/
+.footer{
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: white;
+  display: flex;
+  border-top: 1px solid #EEEEEE;
+  align-content: center;
+  justify-content: space-between;
+  z-index: 99;
+}
+.footer button{
+  flex: 1;
+  margin: 15rpx;
+}
+.footer button:nth-child(1){
+  border: 1px solid #0AAB5D;
+  color: #0AAB5D;
+}
+.footer button:nth-child(2){
+  border: 1px solid #C70019;
+  color: #C70019;
+}
+.footer button:nth-child(3){
+  border: 1px solid #2088E7;
+  color: #2088E7;
+}
+/*底部按钮-结束*/
+.background_panel{
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  background-color: black;
+  opacity: 0.5;
+}
+.approve_panel{
+  position: fixed;
+  top: 20%;
+  left: 10%;
+  background-color: white;
+  width: 80%;
+  z-index: 101;
+  border-radius: 20rpx;
+}
+.approve_panel .operation{
+  margin: 20rpx;
+  position: relative;
+}
+.operation icon{
+  position: absolute;
+  top: -10rpx;
+  right: -10rpx;
+}
+.operation view{
+  margin: 20rpx 0;
+}
+.operation input{
+  padding: 10rpx;
+  border: 1px solid #DFDFDF;
+  border-radius: 10rpx;
+}
+.operation textarea{
+  width: 96%;
+  padding: 10rpx;
+  border: 1px solid #DFDFDF;
+  border-radius: 10rpx;
+}
+.operation button{
+  background-color: #C70019;
+  margin-top: 40rpx;
+  color: white;
+}
+
+.person-item{
+  position: relative;
+  width: 20%;
+  padding: 15rpx;
+  overflow: hidden;
+  color: #848484;
+  font-size: 25rpx;
+  text-align: center;
+}
+.item-container{
+  display: block;
+  text-align: center
+}
+.person-item .remove{
+  background-color: white;
+  position: absolute;
+  z-index: 2;
+  width: 30rpx;
+  height: 30rpx;
+  right: 12rpx;
+  top: 20rpx;
+}
+.person-item .people{
+  width: 100rpx;
+  height: 100rpx;
+  border: 1px solid #848484;
+  border-radius: 10rpx;
+}

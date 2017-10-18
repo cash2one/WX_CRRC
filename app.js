@@ -42,5 +42,6 @@ App({
   globalUrl: 'https://appagent2.csrzic.com/10000000/public/',
   oaUrl: 'https://appagent2.csrzic.com/10000000/public/oaNew/',
   slptUrl: 'https://appagent2.csrzic.com/10000000/public/slpt/',
+  fkUrl: 'https://appagent2.csrzic.com/10000000/public/fk/',
   tzUrl: 'https://appagent2.csrzic.com/10000000/public/tz/',
 })
