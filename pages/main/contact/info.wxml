@@ -10,19 +10,19 @@
     </view>
     <view class="info-item">
       <text class="info-title">移动电话</text>
-      <view class="info-content">
+      <view catchtap="call" data-num="{{mobile}}" class="info-content">
         <view class="call">
           <text class="tel">{{mobile}}</text>
-          <image bindtap="call" data-num="{{mobile}}" class="icon-call" src="../../../images/call.png"></image>
+          <image class="icon-call" src="../../../images/call.png"></image>
         </view>
       </view>
     </view>
     <view wx:if="{{workTel != ''}}" class="info-item">
       <text class="info-title">工作电话</text>
-      <view class="info-content">
+      <view catchtap="call" data-num="{{workTel}}" class="info-content">
         <view class="call">
           <text class="tel">{{workTel}}</text>
-          <image bindtap="call" data-num="{{workTel}}" class="icon-call" src="../../../images/call.png"></image>
+          <image class="icon-call" src="../../../images/call.png"></image>
         </view>
       </view>
     </view>

@@ -12,7 +12,7 @@ Page({
     this.setData({
       needFingerPrint: wx.getStorageSync("needFingerPrint")
     })
-    this.checkFingerPrint()
+    //this.checkFingerPrint()
     this.getMyInfo()
   },
   onReady:function(){
@@ -59,6 +59,7 @@ Page({
       url: '../login/login'
     })
   },
+  /*
   checkFingerPrint: function(){
     var that = this
     if (wx.checkIsSupportSoterAuthentication) {
@@ -100,4 +101,5 @@ Page({
     }
     wx.setStorageSync("needFingerPrint", this.data.needFingerPrint)
   }
+  */
 })

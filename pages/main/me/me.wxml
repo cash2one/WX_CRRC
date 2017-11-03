@@ -25,10 +25,10 @@
       <image class="item-icon" src="../../../images/arrow.png"></image>
     </view>
     </navigator>
-    <view wx:if="{{isCanFingerPrint}}" class="item">
+    <!-- <view wx:if="{{isCanFingerPrint}}" class="item">
       <image class="item-icon" src="../../../images/finger.png"></image>
       <text class="item-title">指纹登录</text>
       <switch bindchange="openFinger" color="#C70019" checked="{{needFingerPrint}}"/>
-    </view>
+    </view> -->
   </view>
 </view>

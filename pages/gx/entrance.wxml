@@ -1,0 +1,10 @@
+<view class="container">
+  <view class="body">
+    <view class="title">请选择业务主体</view>
+    <view class="unit-item">
+      <block wx:for="{{unitList}}" wx:key="unique">
+        <button bindtap="toIndex" data-code="{{item.UNIT_CODE}}">{{item.UNIT_NAME}}</button>
+      </block>
+    </view>
+  </view>
+</view>

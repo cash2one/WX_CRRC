@@ -29,6 +29,69 @@
         </view>
       </view>
       <!-- 附件列表-结束 -->
+      <view hidden="{{!lineList.length}}" class="line-list">
+        <text>申请项目</text>
+        <block wx:if="{{lineType == 'EXP_REQUISITION'}}">
+          <block wx:for="{{lineList}}" wx:key="unique">
+            <view catchtap="btn_click" data-type="line" data-index="{{index}}" class="l-item">
+              <view class="desc">
+                <view class="name">{{item.expense_type_desc}}</view>
+                <view class="categray">{{item.exp_req_item_desc}}</view>
+              </view>
+              <view class="amount">¥{{item.requisition_functional_amount}}</view>
+              <image src="images/arrow.png"></image>
+            </view>
+          </block>
+        </block>
+        <block wx:if="{{lineType == 'TRAVEL_REPORT'}}">
+          <block wx:for="{{lineList}}" wx:key="unique">
+            <view catchtap="btn_click" data-type="line" data-index="{{index}}" class="l-item">
+              <view class="desc">
+                <view class="name">{{item.expense_type_desc}}<text wx:if="{{item.over_standard_flag == 'Y'}}" style="color: #C70019;">(超标)</text></view>
+                <view class="categray">{{item.exp_req_item_desc}}</view>
+              </view>
+              <view class="amount">¥{{item.report_functional_amount}}</view>
+              <image src="images/arrow.png"></image>
+            </view>
+          </block>
+        </block>
+        <block wx:if="{{lineType == 'EXP_REPORT'}}">
+          <block wx:for="{{lineList}}" wx:key="unique">
+            <view catchtap="btn_click" data-type="line" data-index="{{index}}" class="l-item">
+              <view class="desc">
+                <view class="name">{{item.expense_type_desc}}</view>
+                <view class="categray">{{item.exp_req_item_desc}}</view>
+              </view>
+              <view class="amount">¥{{item.report_amount}}</view>
+              <image src="images/arrow.png"></image>
+            </view>
+          </block>
+        </block>
+        <block wx:if="{{lineType == '414'}}">
+          <block wx:for="{{lineList}}" wx:key="unique">
+            <view catchtap="btn_click" data-type="line" data-index="{{index}}" class="l-item">
+              <view class="desc">
+                <view class="name">{{item.place_from_name}} - {{item.place_to_name}}</view>
+                <view class="categray">{{item.date_from}}</view>
+              </view>
+              <view class="amount">{{item.traveller_name}}</view>
+              <image src="images/arrow.png"></image>
+            </view>
+          </block>
+        </block>
+        <block wx:if="{{lineType == 'PAYMENT_REQUISITION'}}">
+          <block wx:for="{{lineList}}" wx:key="unique">
+            <view catchtap="btn_click" data-type="line" data-index="{{index}}" class="l-item">
+              <view class="desc">
+                <view class="name">{{item.csh_transaction_class_code}}</view>
+              </view>
+              <view class="amount">¥{{item.amount}}</view>
+              <image src="images/arrow.png"></image>
+            </view>
+          </block>
+        </block>
+      </view>
+
     </view>
 
     <view hidden="{{switchCurrent != 1}}" class="opinion">
@@ -61,16 +124,15 @@
     <button bindtap="btn_click" data-type="reject" class="rejectBtn">拒绝</button>
     <button bindtap="btn_click" data-type="transfer" class="distributeBrn">转交</button>
   </view>
+  <view hidden="{{opened == 'backlog'}}" class="footer">
+    <button wx:if="{{canBack == 'Y'}}" bindtap="backInstance" class="backBtn">收回</button>
+  </view>
   <!--底部按钮-结束-->
   <view hidden="{{hideMask == true}}" class="mask-panel">
     <view class="background_panel" bindtap="hideMask"></view>
     <view wx:if="{{isApprove}}" class="approve_panel">
       <view class="operation">
         <icon bindtap="hideMask" type="clear" />
-        <view wx:if="{{nodeCode == 'PROJECT'}}">
-          <view class="classname">投资工作令号</view>
-          <input bindtap="generateOrderNum" placeholder="点击生成投资工作令号" disabled="true" value="{{orderNum}}" />
-        </view>
         <view>处理意见</view>
         <textarea bindblur="getApproveOpinion" placeholder="请填写处理意见" value="同意" />
         <button bindtap="approve">提交</button>
@@ -109,5 +171,137 @@
         <button bindtap="transfer">提交</button>
       </view>
     </view>
+    <scroll-view wx:if="{{isLine}}" scroll-y class="line_panel">
+      <block wx:if="{{lineType == 'EXP_REQUISITION'}}">
+        <view class="d-item">
+          <text>行号</text>
+          <view>{{lineContents.line_number}}</view>
+        </view>
+        <view class="d-item">
+          <text>项目类型</text>
+          <view>{{lineContents.expense_type_desc}}</view>
+        </view>
+        <view class="d-item">
+          <text>费用项目</text>
+          <view>{{lineContents.exp_req_item_desc == '' ? '暂未开放' : lineContents.exp_req_item_desc}}</view>
+        </view>
+        <view class="d-item">
+          <text>申请金额</text>
+          <view>¥{{lineContents.requisition_amount}}</view>
+        </view>
+      </block>
+      <block wx:if="{{lineType == 'EXP_REPORT'}}">
+        <view class="d-item">
+          <text>行号</text>
+          <view>{{lineContents.line_number}}</view>
+        </view>
+        <view class="d-item">
+          <text>项目类型</text>
+          <view>{{lineContents.expense_type_desc}}</view>
+        </view>
+        <view class="d-item">
+          <text>费用项目</text>
+          <view>{{lineContents.exp_req_item_desc == '' ? '暂未开放' : lineContents.exp_req_item_desc}}</view>
+        </view>
+        <view class="d-item">
+          <text>报销金额</text>
+          <view>¥{{lineContents.report_amount}}</view>
+        </view>
+      </block>
+      <block wx:if="{{lineType == 'PAYMENT_REQUISITION'}}">
+        <view class="d-item">
+          <text>借款项目</text>
+          <view>{{lineContents.csh_transaction_class_code}}</view>
+        </view>
+        <view class="d-item">
+          <text>借款金额</text>
+          <view>¥{{lineContents.amount}}</view>
+        </view>
+        <view class="d-item">
+          <text>借支标准</text>
+          <view>¥{{lineContents.expense_standard == '' ? 0 : lineContents.expense_standard}}</view>
+        </view>
+        <view class="d-item">
+          <text>上年季平均报销额</text>
+          <view>¥{{lineContents.quarter_amount == '' ? 0 : lineContents.quarter_amount}}</view>
+        </view>
+      </block>
+      <block wx:if="{{lineType == '414'}}">
+        <view class="d-item">
+          <text>出发日期</text>
+          <view>{{lineContents.date_from}}</view>
+        </view>
+        <view class="d-item">
+          <text>出发地点</text>
+          <view>{{lineContents.place_from_name}}</view>
+        </view>
+        <view class="d-item">
+          <text>到达日期</text>
+          <view>{{lineContents.date_to}}</view>
+        </view>
+        <view class="d-item">
+          <text>到达地点</text>
+          <view>{{lineContents.place_to_name}}</view>
+        </view>
+        <view class="d-item">
+          <text>乘机人编号</text>
+          <view>{{lineContents.traveller_code}}</view>
+        </view>
+        <view class="d-item">
+          <text>乘机人姓名</text>
+          <view>{{lineContents.traveller_name}}</view>
+        </view>
+        <view class="d-item">
+          <text>手机</text>
+          <view>{{lineContents.mobile}}</view>
+        </view>
+        <view class="d-item">
+          <text>邮箱</text>
+          <view>{{lineContents.email}}</view>
+        </view>
+        <view class="d-item">
+          <text>说明</text>
+          <view>{{lineContents.description}}</view>
+        </view>
+      </block>
+      <block wx:if="{{lineType == 'TRAVEL_REPORT'}}">
+        <view class="d-item">
+          <text>行号</text>
+          <view>{{lineContents.line_number}}</view>
+        </view>
+        <view class="d-item">
+          <text>项目类型</text>
+          <view>{{lineContents.expense_type_desc}}</view>
+        </view>
+        <view class="d-item">
+          <text>费用项目</text>
+          <view>{{lineContents.exp_req_item_desc}}</view>
+        </view>
+        <view hidden="{{lineContents.type_code != 'STAY'}}" class="d-item">
+          <text>地点</text>
+          <view>{{lineContents.place}}</view>
+        </view>
+        <view hidden="{{lineContents.type_code == 'TRAVEL_LIST'}}" class="d-item">
+          <text>天数</text>
+          <view>{{lineContents.primary_quantity}}</view>
+        </view>
+        <view hidden="{{lineContents.type_code != 'TRAVEL_LIST'}}" class="d-item">
+          <text>交通工具</text>
+          <view>{{lineContents.transport_desc}}</view>
+        </view>
+        <view hidden="{{lineContents.type_code != 'TRAVEL_LIST'}}" class="d-item">
+          <text>出发地点/日期</text>
+          <view>{{lineContents.place_from + '/' + lineContents.date_from}}</view>
+        </view>
+        <view hidden="{{lineContents.type_code != 'TRAVEL_LIST'}}" class="d-item">
+          <text>到达地点/日期</text>
+          <view>{{lineContents.place_to + '/' + lineContents.date_to}}</view>
+        </view>
+        <view class="d-item">
+          <text>金额</text>
+          <view>¥{{lineContents.report_amount}}</view>
+        </view>
+      </block>
+    </scroll-view>
   </view>
 </view>

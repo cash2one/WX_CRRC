@@ -1,0 +1,26 @@
+.body{
+  background-image: url("http://www.tec.crrczic.cc/portals/0/images/crrczic_app/cwgx_index.png");
+  background-repeat:no-repeat;
+  background-size:100% 100%;
+  width: 750rpx;
+  height: 1205rpx;
+  position: relative;
+}
+.title{
+  color: #848484;
+  position: absolute;
+  top: 450rpx;
+  text-align: center;
+  width: 100%;
+}
+.unit-item{
+  position: absolute;
+  top: 520rpx;
+  width: 100%;
+}
+.unit-item button{
+  background-color: #C70019;
+  color: white;
+  margin: 40rpx;
+  border-radius: 40rpx;
+}

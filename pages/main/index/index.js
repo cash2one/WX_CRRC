@@ -11,7 +11,8 @@ Page({
     news_text: [],
     oaCount: '',
     tzCount: '',
-    fkCount: ''
+    fkCount: '',
+    gxCount: '',
   },
   onLoad: function () {
     imgs = []
@@ -66,6 +67,10 @@ Page({
     if(flag == 0){
       wx.navigateTo({
         url: '../../oa/index'
+      })
+    }else if(flag == 1){
+      wx.navigateTo({
+        url: '../../gx/entrance'
       })
     }else if(flag == 2){
       wx.navigateTo({

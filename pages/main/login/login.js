@@ -27,42 +27,42 @@ Page({
         var password = userinfo.password
         this.login(username, password, function (data) {
           if (data == true) {
-            if (getApp().isDefine(wx.getStorageSync("needFingerPrint"))){
-              var isNeedFingerPrint = wx.getStorageSync("needFingerPrint")
-              if (isNeedFingerPrint){
-                wx.startSoterAuthentication({
-                  requestAuthModes: ['fingerPrint'],
-                  challenge: 'CRRC',
-                  authContent: '指纹验证',
-                  success(res) {
-                    setTimeout(function () {
-                      wx.hideLoading()
-                      wx.switchTab({
-                        url: '../index/index'
-                      })
-                    }, 1000)
-                  },
-                  fail(res) {
-                    wx.hideLoading()
-                    return
-                  }
-                })
-              }else{
-                setTimeout(function () {
-                  wx.hideLoading()
-                  wx.switchTab({
-                    url: '../index/index'
-                  })
-                }, 1000)
-              }
-            }else{
+            // if (getApp().isDefine(wx.getStorageSync("needFingerPrint"))){
+            //   var isNeedFingerPrint = wx.getStorageSync("needFingerPrint")
+            //   if (isNeedFingerPrint){
+            //     wx.startSoterAuthentication({
+            //       requestAuthModes: ['fingerPrint'],
+            //       challenge: 'CRRC',
+            //       authContent: '指纹验证',
+            //       success(res) {
+            //         setTimeout(function () {
+            //           wx.hideLoading()
+            //           wx.switchTab({
+            //             url: '../index/index'
+            //           })
+            //         }, 1000)
+            //       },
+            //       fail(res) {
+            //         wx.hideLoading()
+            //         return
+            //       }
+            //     })
+            //   }else{
+            //     setTimeout(function () {
+            //       wx.hideLoading()
+            //       wx.switchTab({
+            //         url: '../index/index'
+            //       })
+            //     }, 1000)
+            //   }
+            // }else{
               setTimeout(function () {
                 wx.hideLoading()
                 wx.switchTab({
                   url: '../index/index'
                 })
               }, 1000)
-            }
+            //}
           }else{
             wx.showModal({
               title: '温馨提示',

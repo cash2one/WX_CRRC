@@ -22,7 +22,7 @@ Page({
     })
   },
   call: function(e){
-    var num = e.target.dataset.num;
+    var num = e.currentTarget.dataset.num;
     wx.makePhoneCall({
       phoneNumber: num
     })

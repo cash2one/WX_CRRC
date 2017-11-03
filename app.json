@@ -1,6 +1,6 @@
 {
   "pages": [
-    "pages/fk/index",
+    "pages/gx/index",
     "pages/main/login/login",
     "pages/main/password/help",
     "pages/main/index/index",
@@ -25,7 +25,11 @@
     "pages/tz/orderNum",
     "pages/tz/peopleList",
     "pages/fk/index",
-    "pages/fk/detail"
+    "pages/fk/detail",
+    "pages/fk/peopleList",
+    "pages/gx/index",
+    "pages/gx/entrance",
+    "pages/gx/detail"
   ],
   "window": {
     "backgroundTextStyle": "light",

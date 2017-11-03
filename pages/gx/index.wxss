@@ -1,0 +1,86 @@
+/*TabBar样式  -  开始*/
+.tz-tabbar{
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: space-between;
+  border-top: 1px solid #DEDEDE;
+  padding: 20rpx 40rpx 10rpx 40rpx;
+  height: 100rpx;
+  background-color: white;
+}
+.t-item{
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.t-icon{
+  width: 50rpx;
+  height: 50rpx;
+}
+.t-text{
+  
+  color: #848484;
+}
+.t-text.active{
+  color: #C70019;
+}
+.t-badge{
+  background-color: #C70019;
+  width: 40rpx;
+  height: 40rpx;
+  color: white;
+  text-align: center;
+  font-size: 25rpx;
+  border-radius: 20rpx;
+  line-height: 40rpx;
+  position: absolute;
+  top: -10rpx;
+  right: -10rpx;
+}
+/*TabBar样式  -  结束*/
+
+/*列表样式  -  开始*/
+.list{
+  margin-bottom: 128rpx;
+}
+.item{
+  display: flex;
+  padding: 40rpx 30rpx;
+  align-items: center;
+  border-bottom: 1px solid #EEEEEE;
+}
+.m-panel{
+  margin-right: 20rpx;
+  flex: 1;
+}
+.s-panel{
+  text-align: center;
+}
+.desc{
+  width: 400rpx;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  outline: 0;
+}
+.desc, .date{
+  font-size: 25rpx;
+  color: #848484;
+}
+.icon-arrow{
+  width: 40rpx;
+  height: 40rpx;
+  margin-left: 30rpx;
+}
+.more{
+  text-align: center;
+  margin: 20rpx 0;
+  color: #848484;
+  
+}
+/*列表样式  -  结束*/

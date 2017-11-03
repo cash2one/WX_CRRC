@@ -2,16 +2,19 @@ var app = getApp()
 var fk = require('interface/fkInterface.js')
 var user_code = ''
 var record_id = ''
+var instance_id = ''
 var document_header_id = ''
 var category = ''
 var contents = []
+var lineContents = []
+var line_index = 0
 Page({
   data: {
-    orderNum: '',
     hideMask: true,
     isApprove: false,
     isReject: false,
     isTransfer: false,
+    isLine: false,
     opened: '',
     switchTitle: [
       '详细信息',
@@ -19,16 +22,24 @@ Page({
     ],
     switchCurrent: 0,
     contents: [],
-    fileList: [],
+    lineContents: [],
+    lineType: '',
+    lineList: [],
     opinionContents: [],
     approveOpinion: '同意',
     rejectOpinion: '拒绝',
     transferOpinion: '请处理',
+    canBack: 'Y',
     people: null
   },
   onLoad: function (options) {
     user_code = wx.getStorageSync('userinfo').username
     record_id = options.instance_record_id
+    instance_id = options.instance_id
+    var opened = options.opened
+    if (opened == 'myapply'){
+      this.canBack()
+    }
     category = options.workflow_category
     this.setData({
       opened: options.opened
@@ -37,9 +48,11 @@ Page({
   },
   onUnload: function () {
     record_id = ''
+    instance_id = ''
     document_header_id = ''
     category = ''
     contents = []
+    lineContents = []
   },
   changeItem: function (e) {
     if (typeof e == 'object') {
@@ -58,18 +71,33 @@ Page({
   getBacklogDetail: function () {
     switch (category) {
       case 'TRAVEL_REPORT':
+        this.setData({
+          lineType: 'TRAVEL_REPORT'
+        })
         this.getTravelDetail()
         break
       case 'PAYMENT_REQUISITION':
+        this.setData({
+          lineType: 'PAYMENT_REQUISITION'
+        })
         this.getLoanDetail()
         break
       case 'EXP_REQUISITION':
+        this.setData({
+          lineType: 'EXP_REQUISITION'
+        })
         this.getApplicationDetail()
         break
       case 'EXP_REPORT':
+        this.setData({
+          lineType: 'EXP_REPORT'
+        })
         this.getReimbursementDetail()
         break
       case '414':
+        this.setData({
+          lineType: '414'
+        })
         this.getBookingDetail()
         break
       default:
@@ -117,8 +145,10 @@ Page({
       if (app.isDefine(head[0].description)) {
         that.appendContent('说明', head[0].description)
       }
+
       that.setData({
         contents: contents,
+        lineList: data.line_list,
         opinionContents: data.approve_history_list
       })
     })
@@ -156,6 +186,7 @@ Page({
       }
       that.setData({
         contents: contents,
+        lineList: data.line_list,
         opinionContents: data.approve_history_list
       })
     })
@@ -188,8 +219,12 @@ Page({
       if (app.isDefine(head[0].description)) {
         that.appendContent('说明', head[0].description)
       }
+      if (app.isDefine(head[0].line_number)) {
+        that.appendLineContent('说明', head[0].line_number)
+      }
       that.setData({
         contents: contents,
+        lineList: data.line_list,
         opinionContents: data.approve_history_list
       })
     })
@@ -224,6 +259,7 @@ Page({
       }
       that.setData({
         contents: contents,
+        lineList: data.line_list,
         opinionContents: data.approve_history_list
       })
     })
@@ -255,296 +291,16 @@ Page({
       }
       that.setData({
         contents: contents,
+        lineList: data.line_list,
         opinionContents: data.approve_history_list
       })
     })
   },
-  getFpjsDetail: function () {
+  canBack: function(){
     var that = this
-    fk.getFpjsDetail(record_id, function (data) {
-      var head = data.head
-      if (app.isDefine(head[0].exp_report_number)) {
-        that.appendContent('单据编号', head[0].exp_report_number)
-      }
-      if (app.isDefine(head[0].exp_report_type_name)) {
-        that.appendContent('单据类型', head[0].exp_report_type_name)
-      }
-      if (app.isDefine(head[0].name)) {
-        that.appendContent('申请人', head[0].name)
-      }
-      if (app.isDefine(head[0].unit_name)) {
-        that.appendContent('申请人部门', head[0].unit_name)
-      }
+    fk.canBack(user_code, instance_id, function(data){
       that.setData({
-        contents: contents,
-        opinionContents: data.approve_history_list
-      })
-      var fileList = JSON.parse(head[0].att_list)
-      if (fileList.length) {
-        that.setData({
-          fileList: fileList
-        })
-      }
-    })
-  },
-  getGhxkzDetail: function () {
-    var that = this
-    fk.getGhxkzDetail(record_id, function (data) {
-      var head = data.head
-      if (app.isDefine(head[0].land_use_number)) {
-        that.appendContent('单据编号', head[0].land_use_number)
-      }
-      if (app.isDefine(head[0].document_type)) {
-        that.appendContent('单据类型', head[0].document_type)
-      }
-      if (app.isDefine(head[0].employee_name)) {
-        that.appendContent('创建人', head[0].employee_name)
-      }
-      if (app.isDefine(head[0].project_name)) {
-        that.appendContent('项目名称', head[0].project_name)
-      }
-      if (app.isDefine(head[0].ivt_project_code)) {
-        that.appendContent('投资工作令号', head[0].ivt_project_code)
-      }
-      if (app.isDefine(head[0].company_name)) {
-        that.appendContent('项目承担单位', head[0].company_name)
-      }
-      if (app.isDefine(head[0].land_perrimition_number)) {
-        that.appendContent('规划许可证号', head[0].land_perrimition_number)
-      }
-      if (app.isDefine(head[0].perrimition_operator_name)) {
-        that.appendContent('经办人', head[0].perrimition_operator_name)
-      }
-      if (app.isDefine(head[0].perrimition_date)) {
-        that.appendContent('办理日期', head[0].perrimition_date)
-      }
-      if (app.isDefine(head[0].landright_number)) {
-        that.appendContent('土地权证号', head[0].landright_number)
-      }
-      if (app.isDefine(head[0].landright_operator_name)) {
-        that.appendContent('经办人', head[0].landright_operator_name)
-      }
-      if (app.isDefine(head[0].landright_date)) {
-        that.appendContent('办理日期', head[0].landright_date)
-      }
-      if (app.isDefine(head[0].landright_company_name)) {
-        that.appendContent('所属单位', head[0].landright_company_name)
-      }
-      if (app.isDefine(head[0].land_location)) {
-        that.appendContent('土地坐落', head[0].land_location)
-      }
-      if (app.isDefine(head[0].land_use_code)) {
-        that.appendContent('土地使用用途', head[0].land_use_code)
-      }
-      if (app.isDefine(head[0].land_acquisition_code)) {
-        that.appendContent('土地获取方式', head[0].land_acquisition_code)
-      }
-      if (app.isDefine(head[0].land_use_area)) {
-        that.appendContent('土地使用面积', head[0].land_use_area)
-      }
-      if (app.isDefine(head[0].useful_life)) {
-        that.appendContent('使用年限', head[0].useful_life)
-      }
-      that.setData({
-        contents: contents,
-        opinionContents: data.approve_history_list
-      })
-      var fileList1 = JSON.parse(head[0].att_list1)
-      var fileList2 = JSON.parse(head[0].att_list2)
-      var fileList = []
-      if (fileList1.length) {
-        for (var i in fileList1) {
-          fileList.push(fileList1[i])
-        }
-      }
-      if (fileList2.length) {
-        for (var i in fileList2) {
-          fileList.push(fileList2[i])
-        }
-      }
-      if (fileList.length) {
-        that.setData({
-          fileList: fileList
-        })
-      }
-    })
-  },
-  getStsypjDetail: function () {
-    var that = this
-    fk.getStsypjDetail(record_id, function (data) {
-      var head = data.head
-      if (app.isDefine(head[0].three_simultaneous_number)) {
-        that.appendContent('单据编号', head[0].three_simultaneous_number)
-      }
-      if (app.isDefine(head[0].document_type)) {
-        that.appendContent('单据类型', head[0].document_type)
-      }
-      if (app.isDefine(head[0].employee_name)) {
-        that.appendContent('创建人', head[0].employee_name)
-      }
-      if (app.isDefine(head[0].position_name)) {
-        that.appendContent('岗位', head[0].position_name)
-      }
-      if (app.isDefine(head[0].project_name)) {
-        that.appendContent('项目名称', head[0].project_name)
-      }
-      if (app.isDefine(head[0].ivt_project_code)) {
-        that.appendContent('投资工作令号', head[0].ivt_project_code)
-      }
-      if (app.isDefine(head[0].company_name)) {
-        that.appendContent('项目承担单位', head[0].company_name)
-      }
-      that.setData({
-        contents: contents,
-        opinionContents: data.approve_history_list
-      })
-    })
-  },
-  getKtDetail: function () {
-    var that = this
-    fk.getKtDetail(record_id, function (data) {
-      var head = data.head
-      if (app.isDefine(head[0].exploration_number)) {
-        that.appendContent('单据编号', head[0].exploration_number)
-      }
-      if (app.isDefine(head[0].document_type)) {
-        that.appendContent('单据类型', head[0].document_type)
-      }
-      if (app.isDefine(head[0].document_number)) {
-        that.appendContent('勘探报告编号', head[0].document_number)
-      }
-      if (app.isDefine(head[0].employee_name)) {
-        that.appendContent('创建人', head[0].employee_name)
-      }
-      if (app.isDefine(head[0].position_name)) {
-        that.appendContent('岗位', head[0].position_name)
-      }
-      if (app.isDefine(head[0].project_name)) {
-        that.appendContent('项目名称', head[0].project_name)
-      }
-      if (app.isDefine(head[0].ivt_project_code)) {
-        that.appendContent('投资工作令号', head[0].ivt_project_code)
-      }
-      if (app.isDefine(head[0].company_name)) {
-        that.appendContent('项目承担单位', head[0].company_name)
-      }
-      if (app.isDefine(head[0].exploration_unit)) {
-        that.appendContent('勘探实施单位', head[0].exploration_unit)
-      }
-      if (app.isDefine(head[0].completetion_date)) {
-        that.appendContent('完成日期', head[0].completetion_date)
-      }
-      that.setData({
-        contents: contents,
-        opinionContents: data.approve_history_list
-      })
-      var fileList = JSON.parse(head[0].att_list)
-      if (fileList.length) {
-        that.setData({
-          fileList: fileList
-        })
-      }
-    })
-  },
-  getSgtsjDetail: function () {
-    var that = this
-    fk.getSgtsjDetail(record_id, function (data) {
-      var head = data.head
-      if (app.isDefine(head[0].design_number)) {
-        that.appendContent('单据编号', head[0].design_number)
-      }
-      if (app.isDefine(head[0].document_type)) {
-        that.appendContent('单据类型', head[0].document_type)
-      }
-      if (app.isDefine(head[0].name)) {
-        that.appendContent('创建人', head[0].name)
-      }
-      if (app.isDefine(head[0].position_name)) {
-        that.appendContent('岗位', head[0].position_name)
-      }
-      if (app.isDefine(head[0].project_name)) {
-        that.appendContent('项目名称', head[0].project_name)
-      }
-      if (app.isDefine(head[0].ivt_project_code)) {
-        that.appendContent('投资工作令号', head[0].ivt_project_code)
-      }
-      if (app.isDefine(head[0].company_name)) {
-        that.appendContent('项目承担单位', head[0].company_name)
-      }
-      if (app.isDefine(head[0].construction_design_company)) {
-        that.appendContent('设计单位', head[0].construction_design_company)
-      }
-      if (app.isDefine(head[0].completetion_date)) {
-        that.appendContent('完成日期', head[0].completetion_date)
-      }
-      that.setData({
-        contents: contents,
-        opinionContents: data.approve_history_list
-      })
-      var fileList = JSON.parse(head[0].att_list)
-      if (fileList.length) {
-        that.setData({
-          fileList: fileList
-        })
-      }
-    })
-  },
-  getYdzjjhDetail: function () {
-    var that = this
-    fk.getYdzjjhDetail(record_id, function (data) {
-      var head = data.head
-      if (app.isDefine(head[0].exp_requisition_number)) {
-        that.appendContent('单据编号', head[0].exp_requisition_number)
-      }
-      if (app.isDefine(head[0].bgt_req_type_name)) {
-        that.appendContent('单据类型', head[0].bgt_req_type_name)
-      }
-      if (app.isDefine(head[0].name)) {
-        that.appendContent('申请人', head[0].name)
-      }
-      if (app.isDefine(head[0].requisition_date)) {
-        that.appendContent('申请日期', head[0].requisition_date)
-      }
-      if (app.isDefine(head[0].currency_code)) {
-        that.appendContent('币种', head[0].currency_code)
-      }
-      if (app.isDefine(head[0].exchange_rate)) {
-        that.appendContent('汇率', head[0].exchange_rate)
-      }
-      that.setData({
-        contents: contents,
-        opinionContents: data.approve_history_list
-      })
-      var fileList = JSON.parse(head[0].att_list)
-      if (fileList.length) {
-        that.setData({
-          fileList: fileList
-        })
-      }
-    })
-  },
-  getNdyssqDetail: function () {
-    var that = this
-    fk.getNdyssqDetail(record_id, function (data) {
-      var head = data.head
-      if (app.isDefine(head[0].bgt_requisition_number)) {
-        that.appendContent('单据编号', head[0].bgt_requisition_number)
-      }
-      if (app.isDefine(head[0].bgt_req_type_name)) {
-        that.appendContent('单据类型', head[0].bgt_req_type_name)
-      }
-      if (app.isDefine(head[0].name)) {
-        that.appendContent('申请人', head[0].name)
-      }
-      if (app.isDefine(head[0].unit_name)) {
-        that.appendContent('申请部门', head[0].unit_name)
-      }
-      if (app.isDefine(head[0].year_total_amount)) {
-        that.appendContent('年度付款总额', head[0].year_total_amount)
-      }
-      that.setData({
-        contents: contents,
-        opinionContents: data.approve_history_list
+        canBack: data
       })
     })
   },
@@ -554,77 +310,55 @@ Page({
     obj.value = value
     contents.push(obj)
   },
-  openFile: function (e) {
-    var that = this
-    var fileid = e.target.dataset.fileid
-    var filename = e.target.dataset.filename
-    var fileType = filename.substring(filename.indexOf('.') + 1, filename.length)
-    var docurl = app.tzUrl + 'tz_filedown?attach_id=' + fileid + '&file_name=' + filename;
-    docurl = encodeURI(docurl);
-    if (fileType == 'jpg' || fileType == 'png' || fileType == 'bmp' || fileType == 'jpeg' || fileType == 'gif') {
-      wx.previewImage({
-        urls: [
-          docurl
-        ]
-      })
-    } else {
-      wx.showLoading({
-        title: '正在打开',
-        mask: true
-      })
-      wx.downloadFile({
-        url: docurl,
-        success: function (res) {
-          var filePath = res.tempFilePath
-          wx.openDocument({
-            filePath: filePath,
-            fileType: fileType,
-            success: function (res) {
-              wx.hideLoading()
-              console.log('打开文档成功')
-            },
-            fail: function (res) {
-              wx.showToast({
-                title: '无法打开该类型文件',
-                image: '../../../images/error.png'
-              })
-            }
-          })
-        },
-        fail: function (res) {
-          wx.showToast({
-            title: '打开失败',
-            image: '../../../images/error.png'
-          })
-        }
-      })
-    }
+  appendLineKey: function (key) {
+    var obj = {}
+    obj.key = key
+    line_key.push(obj)
   },
   btn_click: function (e) {
+    line_index = 0
+    lineContents = []
     this.setData({
-      hideMask: false
+      hideMask: false,
+      lineContents:[]
     })
-    var btnType = e.target.dataset.type
+    var btnType = e.currentTarget.dataset.type
     switch (btnType) {
       case 'approve':
         this.setData({
           isApprove: true,
           isReject: false,
-          isTransfer: false
+          isTransfer: false,
+          isLine: false
         })
         break
       case 'reject':
         this.setData({
           isApprove: false,
           isReject: true,
-          isTransfer: false
+          isTransfer: false,
+          isLine: false
         })
         break
       case 'transfer':
         this.setData({
           isApprove: false,
           isReject: false,
-          isTransfer: true
+          isTransfer: true,
+          isLine: false
+        })
+        break
+      case 'line':
+        this.setData({
+          isApprove: false,
+          isReject: false,
+          isTransfer: false,
+          isLine: true
+        })
+        line_index = e.currentTarget.dataset.index
+        lineContents = this.data.lineList[line_index]
+        this.setData({
+          lineContents: lineContents
         })
         break
     }
@@ -651,18 +385,6 @@ Page({
     this.setData({
       transferOpinion: transferOpinion
     })
-  },
-  generateOrderNum: function () {
-    wx.navigateTo({
-      url: './orderNum?document_header_id=' + document_header_id
-    })
-  },
-  getOrderNum: function () {
-    var orderNum = wx.getStorageSync("orderNum")
-    this.setData({
-      orderNum: orderNum
-    })
-    wx.removeStorageSync('orderNum')
   },
   approve: function () {
     wx.showLoading({
@@ -736,6 +458,42 @@ Page({
           title: '提交失败',
           image: 'images/error.png'
         })
+      }
+    })
+  },
+  backInstance: function () {
+    wx.showModal({
+      title: '提示',
+      content: '确定要收回该单据吗？',
+      confirmColor: '#C70019',
+      success: function (res) {
+        if (res.confirm) {
+          wx.showLoading({
+            title: '请稍后',
+            mask: true
+          })
+          fk.backInstance(user_code, instance_id, function (data) {
+            if (data == 'Y') {
+              wx.showToast({
+                title: '回收成功',
+              })
+              setTimeout(function () {
+                var prePage = getCurrentPages()[1]
+                prePage.onPullDownRefresh()
+                wx.navigateBack({
+                  delta: 1
+                })
+              }, 1000);
+            } else {
+              wx.showToast({
+                title: '回收失败',
+                image: 'images/error.png'
+              })
+            }
+          })
+        } else if (res.cancel) {
+          return
+        }
       }
     })
   },

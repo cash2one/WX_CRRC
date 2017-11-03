@@ -26,7 +26,7 @@
         <view catchtap="openWidget" data-flag="1" class="app-item">
           <image class="app-icon" src="../../../images/cw.png"></image>
           <text class="app-text">财务共享</text>
-          <view class="app-badge"></view>
+          <view class="app-badge">{{gxCount}}</view>
         </view>
         <view catchtap="openWidget" data-flag="2" class="app-item">
           <image class="app-icon" src="../../../images/fk.png"></image>
