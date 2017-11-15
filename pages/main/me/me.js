@@ -31,18 +31,20 @@ Page({
     user_code = wx.getStorageSync('userinfo').username
     var that = this
     wx.request({
-      url: requestUrl + 'fsms/getUserInfo',
+      url: requestUrl + 'hr/service',
       method: 'GET',
       data: {
-        USER_CODE: user_code
+        methodName: 'GetUserInfo',
+        parameter: '',
+        UserId: user_code
       },
       header: {
         'content-type': 'application/json'
       },
       success: function (res) {
-        var infoObj = res.data.LINES
+        var obj = JSON.parse(res.data.GetDataInfoByJsonStrResult)
         that.setData({
-          myInfo: infoObj[0]
+          myInfo: obj
         })
       },
       fail: function (e) {

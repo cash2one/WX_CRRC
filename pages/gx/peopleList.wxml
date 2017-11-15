@@ -1,0 +1,28 @@
+<view class="container">
+  <view class="s-container">
+    <view class="s-panel">
+      <icon type="search" class="s-icon" />
+      <input bindinput="getSearchValue" class="s-input" value="{{user_name}}" placeholder="请输入员工姓名搜索" confirm-type="search" bindconfirm="getPeople" />
+      <icon bindtap="clearSearchValue" hidden="{{user_name == ''}}" type="clear" />
+    </view>
+  </view>
+  <view wx:if="{{people.length && hasNot == false}}" class="people-list">
+    <radio-group bindchange="radioChange">
+      <label wx:for="{{people}}" wx:key="unique">
+        <view class="people-item">
+          <view class="people">
+            <view class="people-name">{{item.EMPLOYEE_NAME}}<text class="people-code">({{item.EMPLOYEE_NUM}})</text></view>
+            <view class="unit-name">{{item.DEPT_NAME}}</view>
+          </view>
+          <radio class="radio" value="{{item.EMPLOYEE_NAME +'-'+ item.EMPLOYEE_NUM}}" color="#C70019" />
+        </view>
+      </label>
+    </radio-group>
+  </view>
+  <view wx:if="{{hasNot == true}}" class="totst">
+    <view>系统内无该员工信息</view>
+  </view>
+  <view class="btn">
+    <button bindtap="confirm" disabled="{{btnStatus}}">确定</button>
+  </view>
+</view>

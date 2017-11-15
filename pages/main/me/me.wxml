@@ -6,9 +6,9 @@
   </view>
   
   <view class="header">
-    <image class="logo" src="../../../images/logo.png"></image>
-    <view class="name">{{myInfo.USER_NAME}}</view>
-    <view class="dept">{{myInfo.UNIT_NAME}}</view>
+    <image class="logo" src="{{'data:image/png;base64,'+ myInfo.photo}}"></image>
+    <view class="name">{{myInfo.empname}}</view>
+    <view class="dept">{{myInfo.deptname}}</view>
   </view>
   <view class="content">
     <navigator url="../spread/spread" hover-class="navigator-hover">

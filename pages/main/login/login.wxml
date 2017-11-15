@@ -1,7 +1,7 @@
 <!--pages/login/login.wxml-->
 <view class="login-container">
   <view class="logo-container">
-    <image src="http://www.tec.crrczic.cc/portals/0/images/crrczic_app/logo.png" class="logo" mode="aspectFill"></image>
+    <image src="http://www.tec.crrczic.cc/portals/0/images/crrczic_app/csrzic_logo.png" class="logo" mode="widthFix"></image>
   </view>
     <view class="user-container">
         <image src="../../../images/userid.png" class="p-icon"></image>

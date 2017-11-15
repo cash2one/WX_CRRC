@@ -1,4 +1,5 @@
 // pages/login/login.js
+var base64 = require('../../../utils/util.js')
 var requestUrl = getApp().globalUrl
 Page({
   data:{
@@ -6,6 +7,12 @@ Page({
     password: ''
   },
   onLoad:function(options){
+    // var str = base64.encode("admin:admin");
+    // console.log(str);
+    // //解密
+    // str = base64.decode(str);
+    // console.log(str);  
+
     var SDKVersion = wx.getSystemInfoSync().SDKVersion
     SDKVersion = SDKVersion.replace(/\./g,'')
     if (SDKVersion < 152){
@@ -115,7 +122,7 @@ Page({
     })
     this.login(username, password, function(data){
       if (data == true) {
-        wx.setStorageSync("userinfo", { "username": username, "password": password })
+        wx.setStorageSync("userinfo", { "username": this.data.username, "password": this.data.password })
         wx.showToast({
           title: '登录成功',
           icon: 'success'
@@ -138,8 +145,7 @@ Page({
       url: requestUrl + 'ldap/login',
       method: 'POST',
       data: {
-        username: username,
-        password: password
+        info: base64.encode('username=' + username + '&password=' + password)
       },
       header: {
         'content-type': 'application/x-www-form-urlencoded'

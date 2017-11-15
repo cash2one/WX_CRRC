@@ -20,20 +20,27 @@
         </view>
       </block>
     </view>
-
+    <view hidden="{{switchCurrent != 0 || !lines.length}}" class="line-list">
+      <text>费用明细</text>
+      <block wx:for="{{lines}}" wx:key="unique">
+        <view catchtap="btn_click" data-type="line" data-index="{{index}}" class="l-item">
+          <view class="desc">费用明细{{index+1}}</view>
+          <image src="images/arrow.png"></image>
+        </view>
+      </block>
+    </view>
     <view hidden="{{switchCurrent != 1}}" class="opinion">
       <block wx:if="{{opinionContents.length}}">
-        <block wx:for="{{opinionContents}}" wx:key="unique">
-          <view class="o-item">
-            <image src="images/icon-circle-green.png"></image>
-            <view class="o-item-container">
-              <text>处理人员：{{item.approve_node}}</text>
-              <text>处理流程：{{item.approve_action}}</text>
-              <text>处理时间：{{item.approve_date}}</text>
-              <text>处理意见：{{item.approve_memo}}</text>
+        <block wx:for="{{opinionContents}}" wx:key="i" wx:for-index="i">
+            <view class="o-item">
+              <image src="images/icon-circle-green.png"></image>
+              <view class="o-item-container">
+                <block wx:for="{{opinionContents[i]}}" wx:key="j" wx:for-index="j">
+                  <text>{{opinionContents[i][j].TITLE}}：{{opinionContents[i][j].VALUE}}</text>
+                </block>
+              </view>
+              <text class="o-item-status-ok">已处理</text>
             </view>
-            <text class="o-item-status-ok">已处理</text>
-          </view>
         </block>
       </block>
       <block wx:else>
@@ -98,5 +105,13 @@
         <button bindtap="transfer">提交</button>
       </view>
     </view>
+    <scroll-view wx:if="{{isLine}}" scroll-y class="line_panel">
+      <block wx:for="{{lineContents}}">
+        <view class="d-item">
+          <text>{{item.TITLE}}</text>
+          <view>{{item.VALUE}}</view>
+        </view>
+      </block>
+    </scroll-view>
   </view>
 </view>

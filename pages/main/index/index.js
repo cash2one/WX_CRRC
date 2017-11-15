@@ -4,6 +4,7 @@ var requestUrl = getApp().globalUrl
 var user_code = ''
 var imgs = []
 var titles = []
+var gxCount = ''
 Page({
   data: {
     slider: [],
@@ -91,6 +92,7 @@ Page({
     this.getOaCount()
     this.getTzCount()
     this.getFkCount()
+    this.getGxCount()
     wx.stopPullDownRefresh()
   },
   getOaCount: function(){
@@ -171,6 +173,59 @@ Page({
             fkCount: count
           })
         }
+      }
+    })
+  },
+  getGxCount: function(){
+    var that = this
+    wx.request({
+      url: requestUrl + 'fsms/getTodoList',
+      method: 'GET',
+      data: {
+        USER_CODE: user_code,
+        CURRENT_PAGE: 1,
+        PAGE_SIZE: 1,
+        TYPE: 'A',
+        UNIT_CODE: '01000000'
+      },
+      header: {
+        'content-type': 'application/json'
+      },
+      success: function (res) {
+        var header1 = res.data.MSG_HEADER
+        var total_record1 = header1.TOTAL_RECORD
+        if (total_record1 == 0){
+          gxCount = ''
+        }else{
+          gxCount = total_record1
+        }
+        wx.request({
+          url: requestUrl + 'fsms/getTodoList',
+          method: 'GET',
+          data: {
+            USER_CODE: user_code,
+            CURRENT_PAGE: 1,
+            PAGE_SIZE: 1,
+            TYPE: 'A',
+            UNIT_CODE: '02000000'
+          },
+          header: {
+            'content-type': 'application/json'
+          },
+          success: function (res) {
+            var header2 = res.data.MSG_HEADER
+            var total_record2 = header2.TOTAL_RECORD
+            if (total_record2 == 0) {
+              that.setData({
+                gxCount: gxCount
+              })
+            } else {
+              that.setData({
+                gxCount: gxCount + total_record2
+              })
+            }
+          }
+        })
       }
     })
   }

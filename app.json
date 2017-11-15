@@ -1,6 +1,5 @@
 {
   "pages": [
-    "pages/gx/index",
     "pages/main/login/login",
     "pages/main/password/help",
     "pages/main/index/index",
@@ -29,7 +28,8 @@
     "pages/fk/peopleList",
     "pages/gx/index",
     "pages/gx/entrance",
-    "pages/gx/detail"
+    "pages/gx/detail",
+    "pages/gx/peopleList"
   ],
   "window": {
     "backgroundTextStyle": "light",

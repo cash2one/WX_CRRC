@@ -151,8 +151,10 @@ Page({
       } else {
         ryfw.push({ "id": spbmids[0], "name": spbmmcs[0], "type": "D" })
         this.setData({
-          ryfw: ryfw
+          ryfw: ryfw,
+          hasDefault: false
         })
+        this.ryfwChange(0)
       }
     }
     //人员范围只有群组选项
@@ -170,8 +172,10 @@ Page({
       } else {
         ryfw.push({ "id": spqzids[0], "name": spqzmcs[0], "type": "G" })
         this.setData({
-          ryfw: ryfw
+          ryfw: ryfw,
+          hasDefault: false
         })
+        this.ryfwChange(0)
       }
     }
     //人员范围有部门和群组选项

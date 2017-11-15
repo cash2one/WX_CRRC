@@ -33,7 +33,6 @@ Page({
     ]
   },
   onLoad: function (options) {
-    wx.setStorageSync('unit_code','01000000')
     unit_code = wx.getStorageSync('unit_code')
     user_code = wx.getStorageSync('userinfo').username
     this.getBadges()

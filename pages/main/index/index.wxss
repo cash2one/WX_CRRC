@@ -3,7 +3,7 @@
   position: relative;
 }
 .swiper-container .swiper{
-  height: 300rpx;
+  height: 400rpx;
 }
 .swiper-container .swiper .img{
   width: 100%;
@@ -16,15 +16,14 @@
   bottom: 0;
   opacity: 0.8;
   display: flex;
-  justify-content: center;
   background-color: #525252;
   color: #FFFFFF;
   font-size: 30rpx;
-  padding: 5rpx 0;
+  padding: 5rpx 10rpx;
   text-overflow: ellipsis;
   overflow: hidden;
-  white-space: nowrap;
-  outline: 0;
+  white-space: nowrap !important;
+  outline: 0 !important;
 }
 .swiper-container .dots{
   position: absolute;
@@ -69,6 +68,9 @@
 }
 .app-item:nth-child(3n-1){
   border-left: 1rpx solid #DFDFDF;
+  border-right: 1rpx solid #DFDFDF;
+}
+.app-item:last-child{
   border-right: 1rpx solid #DFDFDF;
 }
 .app-text{

@@ -9,14 +9,8 @@
 }
 .logo-container{
   width: 100%;
-  background-color: #C70019;
   text-align: center;
-  margin-bottom: 100rpx;
-}
-.logo{
-    width: 420rpx;
-    height: 98rpx;
-    margin: 120rpx 0;
+  margin: 140rpx;
 }
 .user-container{
     display: flex;

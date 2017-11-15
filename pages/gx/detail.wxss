@@ -43,6 +43,29 @@
   color: #848484;
   padding-bottom:10rpx; 
 }
+.line-list{
+  padding: 10rpx;
+}
+.l-item{
+  margin-top: 20rpx;
+  display: flex;
+  border-top: 1px solid #EEEEEE;
+  border-bottom: 1px solid #EEEEEE;
+  align-items: center;
+  padding: 10rpx;
+  height: 80rpx;
+}
+.l-item .desc{
+  flex: 1;
+  color: #C70019;
+}
+.l-item image{
+  width: 50rpx;
+  height: 50rpx;
+}
+.line_panel .d-item{
+  padding: 10rpx 30rpx;
+}
 .scroll-title{
   color: #C70019;
   font-size: 28rpx;

@@ -1,4 +1,4 @@
-var gxUrl = 'https://appagent2.csrzic.com/10000000/public/fsmstest/'
+var gxUrl = 'https://appagent2.csrzic.com/10000000/public/fsms/'
 //获取 员工主体信息
 function getUnitByUserCode(user_code, callBack) {
   wx.request({
@@ -6,19 +6,17 @@ function getUnitByUserCode(user_code, callBack) {
     url: gxUrl + 'getUnitByUserCode',
     data: {
       USER_CODE: user_code
-
     },
     header: {
       'content-type': 'application/json'
     },
     success: function (res) {
-      var header = res.data.MSG_HEADER
+      var status = res.data.ERROR_FLAG
       var unit_list = res.data.UNIT_LINE_LIST
-      var status = header.ERROR_FLAG
       if (status == "Y") {
         callBack(unit_list)
       } else {
-        var error_msg = header.ERROR_MSG
+        var error_msg = res.data.ERROR_MSG
         wx.showToast({
           title: error_msg,
           image: 'images/error.png'

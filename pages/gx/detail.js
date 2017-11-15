@@ -4,12 +4,15 @@ var user_code = ''
 var unit_code = ''
 var boe_header_id = ''
 var detail_type = ''
+var lineContents = []
+var line_index = 0
 Page({
   data: {
     hideMask: true,
     isApprove: false,
     isReject: false,
     isTransfer: false,
+    isLine: false,
     opened: '',
     switchTitle: [
       '详细信息',
@@ -18,6 +21,7 @@ Page({
     switchCurrent: 0,
     header: [],
     lines: [],
+    lineContents: [],
     opinionContents: [],
     approveOpinion: '同意',
     rejectOpinion: '拒绝',
@@ -55,9 +59,7 @@ Page({
       lines: [],
       opinionContents: [],
     })
-    if (index == 0) {
-      this.getBacklogDetail()
-    }
+    this.getBacklogDetail()
   },
   getBacklogDetail: function () {
     switch (detail_type) {
@@ -100,7 +102,6 @@ Page({
       mask: true
     })
     gx.getBoeDetail(boe_header_id, unit_code, function (data) {
-      console.log(data)
       wx.hideLoading()
       that.setData({
         header: data.HEADER,
@@ -111,15 +112,19 @@ Page({
   },
   canBack: function () {
     var that = this
-    gx.canBack(user_code, function (data) {
+    gx.canBack(user_code, boe_header_id, unit_code, function (data) {
+      var error_falg = data.ERROR_FALG
       that.setData({
-        canBack: data
+        canBack: error_falg
       })
     })
   },
   btn_click: function (e) {
+    line_index = 0
+    lineContents = []
     this.setData({
       hideMask: false,
+      lineContents: []
     })
     var btnType = e.currentTarget.dataset.type
     switch (btnType) {
@@ -145,6 +150,19 @@ Page({
           isReject: false,
           isTransfer: true,
           isLine: false
+        })
+        break
+      case 'line':
+        this.setData({
+          isApprove: false,
+          isReject: false,
+          isTransfer: false,
+          isLine: true
+        })
+        line_index = e.currentTarget.dataset.index
+        lineContents = this.data.lines[line_index]
+        this.setData({
+          lineContents: lineContents
         })
         break
     }
@@ -177,10 +195,12 @@ Page({
       title: '提交中',
       mask: true
     })
-    gx.approve(user_code, boe_header_id, this.data.approveOpinion, function (data) {
-      if (data.status == 0) {
+    gx.approve(user_code, boe_header_id, 'A', this.data.approveOpinion, unit_code, function (data) {
+      var error_falg = data.ERROR_FALG
+      var error_msg = data.ERROR_MSG
+      if (error_falg == "Y") {
         wx.showToast({
-          title: '提交成功',
+          title: error_msg,
         })
         setTimeout(function () {
           var prePage = getCurrentPages()[1]
@@ -191,7 +211,7 @@ Page({
         }, 1000);
       } else {
         wx.showToast({
-          title: '提交失败',
+          title: error_msg,
           image: 'images/error.png'
         })
       }
@@ -202,10 +222,12 @@ Page({
       title: '提交中',
       mask: true
     })
-    gx.reject(user_code, boe_header_id, this.data.rejectOpinion, function (data) {
-      if (data.status == 0) {
+    gx.approve(user_code, boe_header_id, 'B', this.data.rejectOpinion, unit_code, function (data) {
+      var error_falg = data.ERROR_FALG
+      var error_msg = data.ERROR_MSG
+      if (error_falg == "Y") {
         wx.showToast({
-          title: '提交成功',
+          title: error_msg,
         })
         setTimeout(function () {
           var prePage = getCurrentPages()[1]
@@ -216,7 +238,7 @@ Page({
         }, 1000);
       } else {
         wx.showToast({
-          title: '提交失败',
+          title: error_msg,
           image: 'images/error.png'
         })
       }
@@ -227,10 +249,12 @@ Page({
       title: '提交中',
       mask: true
     })
-    gx.transfer(boe_header_id, this.data.people.user_code, this.data.transferOpinion, function (data) {
-      if (data.status == 0) {
+    gx.transfer(user_code, boe_header_id, this.data.people.user_code, this.data.transferOpinion, unit_code, function (data) {
+      var error_falg = data.ERROR_FALG
+      var error_msg = data.ERROR_MSG
+      if (error_falg == 'Y') {
         wx.showToast({
-          title: '提交成功',
+          title: '转交成功',
         })
         setTimeout(function () {
           var prePage = getCurrentPages()[1]
@@ -241,7 +265,7 @@ Page({
         }, 1000);
       } else {
         wx.showToast({
-          title: '提交失败',
+          title: '转交失败',
           image: 'images/error.png'
         })
       }
@@ -258,10 +282,13 @@ Page({
             title: '请稍后',
             mask: true
           })
-          gx.backInstance(user_code, function (data) {
-            if (data == 'Y') {
+          gx.back(user_code, boe_header_id, unit_code, function (data) {
+            var error_falg = data.ERROR_FALG
+            var error_msg = data.ERROR_MSG
+            if (error_falg == 'Y') {
               wx.showToast({
                 title: '回收成功',
+                icon: 'success'
               })
               setTimeout(function () {
                 var prePage = getCurrentPages()[1]
