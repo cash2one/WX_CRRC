@@ -67,6 +67,11 @@ Page({
       spry_list[i].checked = false
     }
     checked_list = e.detail.value
+    if (app.isDefine(wx.getStorageSync('person_list'))){
+      for (var i in JSON.parse(wx.getStorageSync('person_list'))){
+        checked_list.push(JSON.parse(wx.getStorageSync('person_list'))[i])
+      }
+    }
     if (!checked_list.length) {
       this.setData({
         btnStatus: 'disabled'

@@ -1,0 +1,51 @@
+<view class="container">
+  <view hidden="{{swiperCurrent != 0}}" class="list">
+    <view class='f-item'>
+      <image class='icon-folder' src='../images/folder.png'></image>
+      <text>收件箱</text>
+      <view>99</view>
+      <image class='icon-arrow' src='../images/arrow.png'></image>
+    </view>
+    <view class='f-item'>
+      <image class='icon-folder' src='../images/folder.png'></image>
+      <text>公司通知</text>
+      <view>5</view>
+      <image class='icon-arrow' src='../images/arrow.png'></image>
+    </view>
+    <view class='f-item'>
+      <image class='icon-folder' src='../images/folder.png'></image>
+      <text>重要邮件</text>
+      <view>20</view>
+      <image class='icon-arrow' src='../images/arrow.png'></image>
+    </view>
+  </view>
+
+  <view hidden="{{swiperCurrent != 1}}" class="list">
+    <view class='f-item'>
+      <image class='icon-folder' src='../images/folder.png'></image>
+      <text>已发送</text>
+      <image class='icon-arrow' src='../images/arrow.png'></image>
+    </view>
+    <view class='f-item'>
+      <image class='icon-folder' src='../images/folder.png'></image>
+      <text>已删除</text>
+      <image class='icon-arrow' src='../images/arrow.png'></image>
+    </view>
+    <view class='f-item'>
+      <image class='icon-folder' src='../images/folder.png'></image>
+      <text>草稿箱</text>
+      <image class='icon-arrow' src='../images/arrow.png'></image>
+    </view>
+  </view>
+
+  <!--自定义TabBar -->
+  <view class="tabbar">
+    <block wx:for="{{tabBar}}" wx:key="unique">
+      <view catchtap="changeItem" data-index="{{index}}" class="t-item">
+        <image class="t-icon" src="{{index == swiperCurrent ? tabBar[index].selectedIconPath : tabBar[index].iconPath}}"></image>
+        <view class="t-text{{index == swiperCurrent ? ' active' : ''}}">{{tabBar[index].text}}</view>
+      </view>
+    </block>
+    <image class='new' src='../images/new.png'></image>
+  </view>
+</view>

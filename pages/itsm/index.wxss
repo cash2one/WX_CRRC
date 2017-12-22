@@ -1,0 +1,47 @@
+/*列表样式  -  开始*/
+.list{
+  margin-bottom: 128rpx;
+}
+.item{
+  display: flex;
+  padding: 40rpx 30rpx;
+  align-items: center;
+  border-bottom: 1px solid #EEEEEE;
+}
+.m-panel{
+  margin-right: 20rpx;
+  flex: 1;
+}
+.s-panel{
+  text-align: center;
+}
+.desc{
+  width: 400rpx;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  outline: 0;
+}
+.desc, .date{
+  font-size: 25rpx;
+  color: #848484;
+}
+.icon-arrow{
+  width: 40rpx;
+  height: 40rpx;
+  margin-left: 30rpx;
+}
+.more{
+  text-align: center;
+  margin: 20rpx 0;
+  color: #848484;
+  
+}
+/*列表样式  -  结束*/
+.new{
+  position: fixed;
+  bottom: 150rpx;
+  right: 60rpx;
+  width: 110rpx;
+  height: 110rpx;
+}

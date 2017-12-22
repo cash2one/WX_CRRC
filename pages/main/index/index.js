@@ -81,6 +81,10 @@ Page({
       wx.navigateTo({
         url: '../../tz/index'
       })
+    } else if (flag == 4){
+      wx.navigateTo({
+        url: '../../itsm/index'
+      })
     }else{
       wx.showToast({
         title: '正在建设中...',

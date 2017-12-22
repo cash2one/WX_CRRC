@@ -2,6 +2,7 @@
 .unit-list{
   display: flex;
   flex-direction: column;
+  margin-top: 120rpx;
 }
 .unit-item{
   padding: 40rpx 30rpx;
@@ -11,6 +12,7 @@
 .people-list{
   display: flex;
   flex-direction: column;
+  margin-top: 120rpx;
 }
 .people-item{
   display: flex;
@@ -35,6 +37,10 @@
 .s-container{
   background-color: #EEEEEE;
   align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
 }
 .s-panel{
   display: flex;

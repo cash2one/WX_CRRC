@@ -25,6 +25,13 @@
       <image class="item-icon" src="../../../images/arrow.png"></image>
     </view>
     </navigator>
+    <!-- <navigator url="../tax/unitList" hover-class="navigator-hover">
+    <view class="item">
+      <image class="item-icon" src="../../../images/tax.png"></image>
+      <text class="item-title">税务信息</text>
+      <image class="item-icon" src="../../../images/arrow.png"></image>
+    </view>
+    </navigator> -->
     <!-- <view wx:if="{{isCanFingerPrint}}" class="item">
       <image class="item-icon" src="../../../images/finger.png"></image>
       <text class="item-title">指纹登录</text>

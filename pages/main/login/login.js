@@ -71,6 +71,7 @@ Page({
               }, 1000)
             //}
           }else{
+            wx.hideLoading()
             wx.showModal({
               title: '温馨提示',
               content: '您的密码已过期，请重新登录',
@@ -108,6 +109,7 @@ Page({
     })
   },
   loginBtnClick:function(){
+    var that = this
     var username = this.data.username
     var password = this.data.password
     if (username == '' || password == ''){
@@ -122,7 +124,7 @@ Page({
     })
     this.login(username, password, function(data){
       if (data == true) {
-        wx.setStorageSync("userinfo", { "username": this.data.username, "password": this.data.password })
+        wx.setStorageSync("userinfo", { "username": that.data.username, "password": that.data.password })
         wx.showToast({
           title: '登录成功',
           icon: 'success'

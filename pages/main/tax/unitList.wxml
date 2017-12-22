@@ -1,0 +1,17 @@
+<view class="container">
+  <view class="s-container">
+    <view class="s-panel">
+      <icon type="search" class="s-icon" />
+      <input bindinput="getSearchValue" class="s-input" value="{{user_name}}" placeholder="请输入员工姓名搜索" confirm-type="search" bindconfirm="getPeople" />
+      <icon bindtap="clearSearchValue" hidden="{{user_name == ''}}" type="clear" />
+    </view>
+  </view>
+  <view class="unit-list">
+    <block>
+      <view class="u-item">
+        <text>中车株洲电力机车研究所有限公司</text>
+        <image src="../../../images/arrow.png"></image>
+      </view>
+    </block>
+  </view>
+</view>

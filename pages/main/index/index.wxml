@@ -43,6 +43,11 @@
           <text class="app-text">内网邮箱</text>
           <view class="app-badge"></view>
         </view> -->
+        <view catchtap="openWidget" data-flag="4" class="app-item">
+          <image class="app-icon" src="../../../images/itsm.png"></image>
+          <text class="app-text">ITSM</text>
+          <view class="app-badge"></view>
+        </view>
     </view>
   </view>
 </view>

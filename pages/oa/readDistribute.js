@@ -115,7 +115,7 @@ Page({
   toDistribution: function(){
     var that = this
     var spry = JSON.parse(wx.getStorageSync("person_list"))
-    var spry_name = spry.join(":")
+    var spry_name = spry.join(";")
     oa.dispenseApprove(user_code, fw_id, bu_code, spry_name, function (data) {
       if (data.status == 0) {
         wx.showToast({

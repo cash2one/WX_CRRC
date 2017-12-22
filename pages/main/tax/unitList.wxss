@@ -1,0 +1,40 @@
+.s-container{
+  background-color: #EEEEEE;
+  align-items: center;
+  height: 110rpx;
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  z-index: 2;
+}
+.s-panel{
+  display: flex;
+  flex: 1;
+  align-items: center;
+  background-color: white;
+  padding: 15rpx;
+  margin: 15rpx;
+  border-radius: 15rpx;
+}
+.s-icon{
+  margin-right: 15rpx;
+}
+.s-input{
+  flex: 1;
+}
+.unit-list{
+  margin-top: 110rpx;
+}
+.u-item{
+  display: flex;
+  border-bottom: 1px solid #EEEEEE;
+  padding: 30rpx 20rpx;
+}
+.u-item text{
+  flex: 1;
+}
+.u-item image{
+  width: 50rpx;
+  height: 50rpx;
+}
