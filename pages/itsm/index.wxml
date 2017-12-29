@@ -8,7 +8,7 @@
         <view class="desc">{{item.Incident_Number}}</view>
       </view>
       <view class="s-panel">
-        <view class="drafter">{{item.FirstName}}</view>
+        <view class="drafter">待关注</view>
         <view class="date">{{item.SubmitDate}}</view>
       </view>
       <image class="icon-arrow" src="images/arrow.png"></image>

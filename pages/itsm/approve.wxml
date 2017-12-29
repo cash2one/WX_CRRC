@@ -2,7 +2,7 @@
   <view class="content">
     <view class="detail">
       <!-- 内容-开始 -->
-      <view class="d-item">
+      <!-- <view class="d-item">
         <view>姓名<text>*</text></view>
         <input disabled="true" value="李磊" />
       </view>
@@ -17,14 +17,23 @@
       <view class="d-item">
         <view>现场服务场所<text>*</text></view>
         <input disabled="true" value="信息中心" />
-      </view>
+      </view> -->
+      <!-- <view class="d-item">
+        <view class="title">影响度<text>*</text></view>
+        <picker bindchange="sphjChange" value="{{sphj_index}}" range="{{sphj}}" range-key="name">
+          <view class="picker">
+            <text>{{sphj[sphj_index].name}}</text>
+            <image src="images/arrow-down.png"></image>
+          </view>
+        </picker>
+      </view> -->
       <view class="d-item">
         <view>简要描述<text>*</text></view>
-        <input placeholder='申请开通无线网服务' value="" />
+        <input bindinput='getDesc' placeholder='请填写服务请求简要描述' />
       </view>
       <view class="d-item">
         <view>详细描述<text>*</text></view>
-        <textarea placeholder='申请开通无线网服务' value=""></textarea>
+        <textarea bindinput='getDetailDesc' placeholder='请填写服务请求详细描述'></textarea>
       </view>
       <!-- 内容-结束 -->
       <!-- 附件列表-开始 -->
@@ -42,7 +51,7 @@
 
   <!--底部按钮-开始-->
   <view class="btn">
-    <button bindtap="btnClick" disabled="{{btnStatus}}">提交</button>
+    <button bindtap="btnClick">提交</button>
   </view>
   <!--底部按钮-结束-->
 </view>

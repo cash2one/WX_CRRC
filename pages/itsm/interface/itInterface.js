@@ -39,7 +39,34 @@ function getList(user_name, password,user_code,methodName, callBack) {
     }
   })
 }
+//提交个人请求
+function approve(user_name, password, Login_ID, Description, Detailed_Decription, callBack) {
+  wx.request({
+    method: 'POST',
+    url: itsmUrl + 'approve',
+    data: {
+      user_name: user_name,
+      password: password,
+      Login_ID: Login_ID,
+      Description: Description,
+      Detailed_Decription: Detailed_Decription,
+      Service_Type: '1',
+      Impact: '4000',
+      Urgency: '2000',
+      Reported_Source: '4200',
+      z1D_Action: 'CREATE'
+    },
+    header: {
+      'content-type': 'application/x-www-form-urlencoded'
+    },
+    success: function (res) {
+      //console.log(res.data)
+      callBack(res.data.Incident_Number)
+    }
+  })
+}
 module.exports = {
   count: count,
-  getList: getList
+  getList: getList,
+  approve: approve
 }

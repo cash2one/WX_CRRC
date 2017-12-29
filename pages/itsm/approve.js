@@ -1,11 +1,13 @@
 // pages/itsm/approve.js
+var itsm = require('interface/itInterface.js')
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-  
+    btnStatus: true,
+    desc: ''
   },
 
   /**
@@ -14,53 +16,48 @@ Page({
   onLoad: function (options) {
   
   },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-  
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-  
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-  
-  },
-
   /**
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
   
   },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-  
+  getDesc: function(e){
+    this.setData({
+      desc: e.detail.value
+    })
   },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-  
+  getDetaukDesc: function(e){
+    this.setData({
+      detailDesc: e.detail.value
+    })
   },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-  
+  btnClick: function(){
+    if (this.data.desc == '' || this.data.detailDesc == ''){
+      wx.showToast({
+        title: '请填写描述信息',
+        image: '../../images/error.png'
+      })
+    }else{
+      wx.showLoading({
+        title: '提交中',
+        mask: true
+      })
+      var user_code = wx.getStorageSync('userinfo').username
+      var password = wx.getStorageSync('userinfo').password
+      itsm.approve(user_code, password, user_code, this.data.desc, this.data.detailDesc, function(data){
+        wx.showToast({
+          title: '提交成功',
+        })
+        setTimeout(function () {
+          var prePage = getCurrentPages()[1]
+          console.log(prePage)
+          prePage.onPullDownRefresh()
+          wx.navigateBack({
+            delta: 1
+          })
+        }, 1000);
+      })
+    }
   }
 })

@@ -20,6 +20,20 @@
   width: 98%;
   padding: 5rpx;
 }
+.picker{
+  display: flex;
+  border-bottom: 1px solid #DFDFDF;
+  padding: 20rpx;
+  margin-bottom: 20rpx;
+}
+.picker text{
+  flex: 1;
+  color: #848484;
+}
+.picker image{
+  width: 50rpx;
+  height: 50rpx;
+}
 .f-item{
   display: flex;
   flex-direction: column;
