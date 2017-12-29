@@ -1,43 +1,26 @@
 <view class="container">
-  <!-- <view class="list">
-    <block wx:for="{{backlogList}}" wx:key="unique">
-      <navigator url="./detail?boe_header_id={{item.BOE_HEADER_ID}}&detail_type={{item.DETAIL_TYPE}}&opened=backlog" hover-class="navigator-hover">
-      <view class="item">
-        <view class="m-panel">
-          <view class="title">{{item.BOE_TYPE_NAME}}</view>
-          <view class="desc">{{item.BOE_NUM}}</view>
-        </view>
-        <view class="s-panel">
-          <view class="drafter">{{item.EMPLOYEE_NAME}}</view>
-          <view class="date">{{item.SUBMIT_DATE}}</view>
-        </view>
-        <image class="icon-arrow" src="images/arrow.png"></image>
-      </view>
-      </navigator>
-    </block>
-    <view bindtap="getNextBacklogList" class="more" hidden="{{backlogCount == 0 || backlogCount < 10}}">{{backlogMoreText}}</view>
-  </view> -->
   <view class="list">
+  <block wx:for="{{myApproveList}}" wx:key="unique">
     <navigator url="./detail?boe_header_id={{item.BOE_HEADER_ID}}&detail_type={{item.DETAIL_TYPE}}&opened=backlog" hover-class="navigator-hover">
     <view class="item">
       <view class="m-panel">
-        <view class="title">申请开通无线网服务</view>
-        <view class="desc">INC000000182829</view>
+        <view class="title">{{item.Description}}</view>
+        <view class="desc">{{item.Incident_Number}}</view>
       </view>
       <view class="s-panel">
-        <view class="drafter">李磊</view>
-        <view class="date">2017-12-21</view>
+        <view class="drafter">{{item.FirstName}}</view>
+        <view class="date">{{item.SubmitDate}}</view>
       </view>
       <image class="icon-arrow" src="images/arrow.png"></image>
     </view>
     </navigator>
-    <view bindtap="getNextBacklogList" class="more" hidden="{{backlogCount == 0 || backlogCount < 10}}">{{backlogMoreText}}</view>
+  </block>
   </view>
 
-  <block wx:if="{{backlogCount == 0}}">
+  <block wx:if="{{myApproveCount == 0}}">
     <view class="prompt">
       <image src="../../images/empty.png"></image>
-      <text>没有任务，放松一下</text>
+      <text>您当前没有IT服务请求</text>
     </view>
   </block>
   <image class='new' bindtap='toApprove' src='images/new.png'></image>

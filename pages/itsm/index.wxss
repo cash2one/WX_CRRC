@@ -44,4 +44,5 @@
   right: 60rpx;
   width: 110rpx;
   height: 110rpx;
+  z-index: 99;
 }

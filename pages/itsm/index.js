@@ -1,71 +1,70 @@
 //引用接口文件
-//var itsm = require('interface/itsmInterface.js')
+var itsm = require('interface/itInterface.js')
 //定义相关全局变量
 var user_code = ''
-var backlogPageNum = 1
-var backlogList = []
-var flag = -1
+var password = ''
+var myApproveList = []
 Page({
   data: {
-    swiperCurrent: 0,
-    backlogList: [],
-    backlogCount: -1,
-    backlogMoreText: '加载更多'
+    myApproveList: [],
+    myApproveCount: 0
   },
   onLoad: function (options) {
     user_code = wx.getStorageSync('userinfo').username
-    //this.getBacklogList()
+    password = wx.getStorageSync('userinfo').password
+    this.getCount()
   },
   onUnload: function () {
-    backlogPageNum = 1
-    backlogList = []
-    flag = -1
+    myApproveList = []
     var indexPage = getCurrentPages()[0]
     indexPage.getBacklogCount()
   },
-  getBacklogList: function () {
+  getCount: function(){
     var that = this
     wx.showLoading({
       title: '加载中',
     })
-    itsm.getList(user_code, 'A', unit_code, backlogPageNum, 10, function (data) {
+    itsm.count(user_code, password, user_code, 'HelpDesk_QueryList_Service_Requester', function (data) {
+      wx.stopPullDownRefresh()
+      wx.hideLoading()
+      if (data > 0){
+        that.setData({
+          myApproveCount: data
+        })
+        that.getMyApproveList()
+      }else{
+        that.setData({
+          myApproveCount: 0
+        })
+      }
+    })
+  },
+  getMyApproveList: function () {
+    var that = this
+    itsm.getList(user_code, password, user_code,'HelpDesk_QueryList_Service_Requester', function (data) {
       wx.stopPullDownRefresh()
       that.setData({
-        backlogCount: data.length == 0 ? 0 : data.length
+        myApproveCount: data.length == 0 ? 0 : data.length
       })
       wx.hideLoading()
       if (data.length) {
         for (var i = 0; i < data.length; i++) {
-          backlogList.push(data[i])
+          data[i].SubmitDate = data[i].SubmitDate.substring(0,10)
+          myApproveList.push(data[i])
         }
         that.setData({
-          backlogList: backlogList,
-          backlogMoreText: '加载更多'
+          myApproveList: myApproveList,
         })
-      } else {
-        if (that.data.backlogCount > 0) {
-          that.setData({
-            backlogMoreText: '已加载至最后一页'
-          })
-        }
       }
     })
   },
   onPullDownRefresh: function () {
-    backlogPageNum = 1
-    backlogList = []
+    myApproveList = []
     this.setData({
-      backlogList: []
+      myApproveCount: 0,
+      myApproveList: []
     })
-    this.getBacklogList()
-  },
-  getNextBacklogList: function () {
-    if (this.data.backlogMoreText == '已加载至最后一页') {
-      return
-    } else {
-      backlogPageNum++
-      this.getBacklogList()
-    }
+    this.getCount()
   },
   toApprove: function(){
     wx.navigateTo({

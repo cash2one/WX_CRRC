@@ -14,6 +14,7 @@ Page({
     tzCount: '',
     fkCount: '',
     gxCount: '',
+    itsmCount: ''
   },
   onLoad: function () {
     imgs = []
@@ -97,6 +98,7 @@ Page({
     this.getTzCount()
     this.getFkCount()
     this.getGxCount()
+    //this.getItsmCount()
     wx.stopPullDownRefresh()
   },
   getOaCount: function(){
@@ -230,6 +232,35 @@ Page({
             }
           }
         })
+      }
+    })
+  },
+  getItsmCount: function () {
+    var password = wx.getStorageSync('userinfo').password
+    var that = this
+    wx.request({
+      url: requestUrl + 'itsm/count',
+      method: 'GET',
+      data: {
+        user_name: user_code,
+        password: password,
+        user_code: user_code,
+        methodName: 'HelpDesk_QueryList_Service_Requester'
+      },
+      header: {
+        'content-type': 'application/json'
+      },
+      success: function (res) {
+        var count = res.data.ListCount
+        if (count == 0) {
+          that.setData({
+            itsmCount: ''
+          })
+        } else {
+          that.setData({
+            itsmCount: count
+          })
+        }
       }
     })
   }

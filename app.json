@@ -1,9 +1,9 @@
 {
   "pages": [
-    "pages/email/index/index",
-    "pages/itsm/index",
-    "pages/main/index/index",
     "pages/main/login/login",
+    "pages/itsm/index",
+    "pages/email/index/index",
+    "pages/main/index/index",
     "pages/main/password/help",
     "pages/main/contact/contact",
     "pages/main/contact/detail",
