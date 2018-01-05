@@ -45,7 +45,7 @@
         </view> -->
         <view catchtap="openWidget" data-flag="4" class="app-item">
           <image class="app-icon" src="../../../images/itsm.png"></image>
-          <text class="app-text">IT服务平台</text>
+          <text class="app-text">IT服务</text>
           <view class="app-badge">{{itsmCount}}</view>
         </view>
     </view>
