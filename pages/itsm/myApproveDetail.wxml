@@ -1,0 +1,54 @@
+<view class="container">
+  <view class="content">
+    <view class="detail">
+      <view class="d-item">
+        <text>事件编号</text>
+        <view>{{content.Incident_Number}}</view>
+      </view>
+      <view class="d-item">
+        <text>摘要</text>
+        <view>{{content.Description}}</view>
+      </view>
+      <view class="d-item">
+        <text>详细信息</text>
+        <view>{{content.Detailed_Decription}}</view>
+      </view>
+      <view class="d-item">
+        <text>状态</text>
+        <view>待关注</view>
+      </view>
+      <view class="d-item">
+        <text>客户姓名</text>
+        <view>{{content.FirstName}}</view>
+      </view>
+      <view class="d-item">
+        <text>电话</text>
+        <view>{{content.CustomerPhoneNumber}}</view>
+      </view>
+      <view class="d-item">
+        <text>办公地址</text>
+        <view>{{content.CustomerOfficeLocation}}</view>
+      </view>
+      <view class="d-item">
+        <text>提交日期</text>
+        <view>{{content.SubmitDate}}</view>
+      </view>
+      <view class="d-item">
+        <text>处理组</text>
+        <view>{{content.AssignedGroup}}</view>
+      </view>
+      <view class="d-item">
+        <text>处理人</text>
+        <view>{{content.Assignee}}</view>
+      </view>
+      <view class="d-item">
+        <text>服务台热线组</text>
+        <view>{{content.OwnerGroup}}</view>
+      </view>
+      <view class="d-item">
+        <text>服务台人员</text>
+        <view>{{content.Owner}}</view>
+      </view>
+    </view>
+  </view>
+</view>

@@ -1,14 +1,14 @@
 <view class="container">
-  <view class="list">
-  <block wx:for="{{myApproveList}}" wx:key="unique">
-    <navigator url="./detail?boe_header_id={{item.BOE_HEADER_ID}}&detail_type={{item.DETAIL_TYPE}}&opened=backlog" hover-class="navigator-hover">
+  <view hidden="{{swiperCurrent != 0}}" class="list">
+  <block wx:if="{{myApproveCount > 0}}" wx:for="{{myApproveList}}" wx:key="unique">
+    <navigator url="./myApproveDetail?IncidentNumber={{item.Incident_Number}}&opened=myApprove" hover-class="navigator-hover">
     <view class="item">
       <view class="m-panel">
         <view class="title">{{item.Description}}</view>
         <view class="desc">{{item.Incident_Number}}</view>
       </view>
       <view class="s-panel">
-        <view class="drafter">待关注</view>
+        <view class="drafter">{{item.Assignee}}</view>
         <view class="date">{{item.SubmitDate}}</view>
       </view>
       <image class="icon-arrow" src="images/arrow.png"></image>
@@ -23,5 +23,16 @@
       <text>您当前没有IT服务请求</text>
     </view>
   </block>
-  <image class='new' bindtap='toApprove' src='images/new.png'></image>
+
+  <!--自定义TabBar -->
+  <view class="tabbar">
+    <block wx:for="{{tabBar}}" wx:key="unique">
+      <view catchtap="changeItem" data-index="{{index}}" class="t-item">
+        <image class="t-icon" src="{{index == swiperCurrent ? tabBar[index].selectedIconPath : tabBar[index].iconPath}}"></image>
+        <view class="t-text{{index == swiperCurrent ? ' active' : ''}}">{{tabBar[index].text}}</view>
+        <view hidden="{{tabBar[index].badge == ''}}" class="t-badge">{{tabBar[index].badge}}</view>
+      </view>
+    </block>
+    <image class='new' bindtap='toApprove' src='images/new.png'></image>
+  </view>
 </view>

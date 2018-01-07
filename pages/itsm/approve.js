@@ -51,7 +51,6 @@ Page({
         })
         setTimeout(function () {
           var prePage = getCurrentPages()[1]
-          console.log(prePage)
           prePage.onPullDownRefresh()
           wx.navigateBack({
             delta: 1

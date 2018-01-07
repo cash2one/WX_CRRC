@@ -39,6 +39,24 @@ function getList(user_name, password,user_code,methodName, callBack) {
     }
   })
 }
+//获取 个人请求详情
+function getDetail(user_name, password, IncidentNumber, callBack) {
+  wx.request({
+    method: 'GET',
+    url: itsmUrl + 'getDetail',
+    data: {
+      user_name: user_name,
+      password: password,
+      IncidentNumber: IncidentNumber
+    },
+    header: {
+      'content-type': 'application/json'
+    },
+    success: function (res) {
+      callBack(res.data)
+    }
+  })
+}
 //提交个人请求
 function approve(user_name, password, Login_ID, Description, Detailed_Decription, callBack) {
   wx.request({
@@ -68,5 +86,6 @@ function approve(user_name, password, Login_ID, Description, Detailed_Decription
 module.exports = {
   count: count,
   getList: getList,
+  getDetail: getDetail,
   approve: approve
 }

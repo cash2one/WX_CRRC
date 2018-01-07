@@ -33,7 +33,8 @@
     "pages/gx/detail",
     "pages/gx/peopleList",
     "pages/main/tax/unitList",
-    "pages/itsm/approve"
+    "pages/itsm/approve",
+    "pages/itsm/myApproveDetail"
   ],
   "window": {
     "backgroundTextStyle": "light",
