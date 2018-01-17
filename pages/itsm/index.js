@@ -31,8 +31,7 @@ Page({
   onLoad: function (options) {
     user_code = wx.getStorageSync('userinfo').username
     password = wx.getStorageSync('userinfo').password
-    this.getCount()
-    this.changeItem(0)
+    this.getCount(0)
   },
   onUnload: function () {
     backlogList = []
@@ -41,21 +40,29 @@ Page({
     var indexPage = getCurrentPages()[0]
     indexPage.getBacklogCount()
   },
-  getCount: function(){
+  getCount: function(index){
     var that = this
-    wx.showLoading({
-      title: '加载中',
-    })
     itsm.count(user_code, password, user_code, 'HelpDesk_QueryList_Service_Requester', function (data) {
       that.setData({
-        myApproveCount: data == 0 ? '' : data,
-        'tabBar[0].badge': data == 0 ? '' : data
+        myApproveCount: data == 0 ? '-1' : data,
+        //'tabBar[0].badge': data == 0 ? '' : data
       })
+      if (index == 0 && data > 0){
+        that.getMyApproveList()
+      }else{
+        wx.stopPullDownRefresh()
+      }
     })
-    itsm.count(user_code, password, user_code, 'Survey_QueryList_Service', function (data) {
+    itsm.mydCount(user_code, password, user_code, function (data) {
       that.setData({
+        backlogCount: data == 0 ? '-1' : data,
         'tabBar[1].badge': data == 0 ? '' : data
       })
+      if (index == 1 && data > 0) {
+        that.getBacklogList()
+      } else {
+        wx.stopPullDownRefresh()
+      }
     })
   },
   changeItem: function (e) {
@@ -75,21 +82,21 @@ Page({
     switch (index) {
       case 0:
         myApproveList = []
-        this.getMyApproveList()
+        this.getCount(0)
         break
       case 1:
         backlogList = []
-        this.getBacklogList()
+        this.getCount(1)
         break
     }
   },
   getMyApproveList: function () {
     var that = this
-    itsm.getList(user_code, password, user_code,'HelpDesk_QueryList_Service_Requester', function (data) {
+    wx.showLoading({
+      title: '加载中',
+    })
+    itsm.getList(user_code, password, user_code, function (data) {
       wx.stopPullDownRefresh()
-      that.setData({
-        myApproveCount: data.length == 0 ? 0 : data.length
-      })
       wx.hideLoading()
       if (data.length) {
         for (var i = 0; i < data.length; i++) {
@@ -102,23 +109,40 @@ Page({
       }
     })
   },
+  getBacklogList: function () {
+    var that = this
+    wx.showLoading({
+      title: '加载中',
+    })
+    itsm.getMydList(user_code, password, user_code, function (data) {
+      wx.stopPullDownRefresh()
+      wx.hideLoading()
+      if (data.length) {
+        for (var i = 0; i < data.length; i++) {
+          backlogList.push(data[i])
+        }
+        that.setData({
+          backlogList: backlogList,
+        })
+      }
+    })
+  },
   onPullDownRefresh: function () {
-    this.getCount()
     var index = this.data.swiperCurrent
     if (index == 0) {
+      myApproveList = []
       this.setData({
         myApproveCount: '',
         myApproveList: []
       })
-      this.getMyApproveList()
     } else if (index == 1) {
+      backlogList = []
       this.setData({
         backlogCount: '',
         backlogList: []
       })
-      this.getBacklogList()
     }
-    
+    this.getCount(index)
   },
   toApprove: function(){
     wx.navigateTo({

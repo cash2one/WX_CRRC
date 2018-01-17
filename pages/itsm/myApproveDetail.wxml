@@ -1,10 +1,10 @@
 <view class="container">
   <view class="content">
     <view class="detail">
-      <view class="d-item">
+      <!-- <view class="d-item">
         <text>事件编号</text>
         <view>{{content.Incident_Number}}</view>
-      </view>
+      </view> -->
       <view class="d-item">
         <text>摘要</text>
         <view>{{content.Description}}</view>
@@ -41,14 +41,14 @@
         <text>处理人</text>
         <view>{{content.Assignee}}</view>
       </view>
-      <view class="d-item">
+      <!-- <view class="d-item">
         <text>服务台热线组</text>
         <view>{{content.OwnerGroup}}</view>
       </view>
       <view class="d-item">
         <text>服务台人员</text>
         <view>{{content.Owner}}</view>
-      </view>
+      </view> -->
     </view>
   </view>
 </view>

@@ -1,26 +1,48 @@
 <view class="container">
   <view hidden="{{swiperCurrent != 0}}" class="list">
-  <block wx:if="{{myApproveCount > 0}}" wx:for="{{myApproveList}}" wx:key="unique">
-    <navigator url="./myApproveDetail?IncidentNumber={{item.Incident_Number}}&opened=myApprove" hover-class="navigator-hover">
-    <view class="item">
-      <view class="m-panel">
-        <view class="title">{{item.Description}}</view>
-        <view class="desc">{{item.Incident_Number}}</view>
+    <block wx:if="{{myApproveCount > 0}}" wx:for="{{myApproveList}}" wx:key="unique">
+      <navigator url="./myApproveDetail?IncidentNumber={{item.Incident_Number}}&opened=myApprove" hover-class="navigator-hover">
+      <view class="item">
+        <view class="m-panel">
+          <view class="title">{{item.Description}}</view>
+          <view class="desc">{{item.Incident_Number}}</view>
+        </view>
+        <view class="s-panel">
+          <view class="drafter">{{item.Assignee}}</view>
+          <view class="date">{{item.SubmitDate}}</view>
+        </view>
+        <image class="icon-arrow" src="images/arrow.png"></image>
       </view>
-      <view class="s-panel">
-        <view class="drafter">{{item.Assignee}}</view>
-        <view class="date">{{item.SubmitDate}}</view>
-      </view>
-      <image class="icon-arrow" src="images/arrow.png"></image>
-    </view>
-    </navigator>
-  </block>
+      </navigator>
+    </block>
   </view>
-
-  <block wx:if="{{myApproveCount == 0}}">
+  <view hidden="{{swiperCurrent != 1}}" class="list">
+    <block wx:if="{{backlogCount > 0}}" wx:for="{{backlogList}}" wx:key="unique">
+      <navigator url="./mydDetail?InstanceId={{item.InstanceId}}&opened=myd" hover-class="navigator-hover">
+      <view class="item">
+        <view class="m-panel">
+          <view class="title">{{item.description}}</view>
+          <view class="desc">{{item.requestId}}</view>
+        </view>
+        <!-- <view class="s-panel">
+          <view class="drafter">{{item.Assignee}}</view>
+          <view class="date">{{item.SubmitDate}}</view>
+        </view> -->
+        <image class="icon-arrow" src="images/arrow.png"></image>
+      </view>
+      </navigator>
+    </block>
+  </view>
+  <block wx:if="{{swiperCurrent == 0 && myApproveCount == -1}}">
     <view class="prompt">
       <image src="../../images/empty.png"></image>
       <text>您当前没有IT服务请求</text>
+    </view>
+  </block>
+  <block wx:if="{{swiperCurrent == 1 && backlogCount == -1}}">
+    <view class="prompt">
+      <image src="../../images/empty.png"></image>
+      <text>系统无满意度调查</text>
     </view>
   </block>
 

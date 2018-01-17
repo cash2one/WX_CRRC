@@ -38,15 +38,15 @@
           <text class="app-text">投资管理</text>
           <view class="app-badge">{{tzCount}}</view>
         </view>
-        <!-- <view catchtap="openWidget" data-flag="4" class="app-item">
-          <image class="app-icon" src="../../../images/yx.png"></image>
-          <text class="app-text">内网邮箱</text>
-          <view class="app-badge"></view>
-        </view> -->
         <view catchtap="openWidget" data-flag="4" class="app-item">
           <image class="app-icon" src="../../../images/itsm.png"></image>
           <text class="app-text">IT服务</text>
           <view class="app-badge">{{itsmCount}}</view>
+        </view>
+        <view catchtap="openWidget" data-flag="5" class="app-item">
+          <image class="app-icon" src="../../../images/yx.png"></image>
+          <text class="app-text">内网邮箱</text>
+          <view class="app-badge"></view>
         </view>
     </view>
   </view>

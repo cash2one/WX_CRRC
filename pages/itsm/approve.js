@@ -27,7 +27,7 @@ Page({
       desc: e.detail.value
     })
   },
-  getDetaukDesc: function(e){
+  getDetailDesc: function(e){
     this.setData({
       detailDesc: e.detail.value
     })

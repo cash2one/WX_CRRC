@@ -91,6 +91,9 @@ Page({
       that.setData({
         header: data.HEADER,
         lines: data.LINES,
+        hotel: data.HOTEL,
+        subsidy: data.SUBSIDY,
+        travel: data.TRAVEL,
         opinionContents: data.PROCESS_HISTORY
       })
     })
@@ -161,6 +164,45 @@ Page({
         })
         line_index = e.currentTarget.dataset.index
         lineContents = this.data.lines[line_index]
+        this.setData({
+          lineContents: lineContents
+        })
+        break
+      case 'travel':
+        this.setData({
+          isApprove: false,
+          isReject: false,
+          isTransfer: false,
+          isLine: true
+        })
+        line_index = e.currentTarget.dataset.index
+        lineContents = this.data.travel[line_index]
+        this.setData({
+          lineContents: lineContents
+        })
+        break
+      case 'hotel':
+        this.setData({
+          isApprove: false,
+          isReject: false,
+          isTransfer: false,
+          isLine: true
+        })
+        line_index = e.currentTarget.dataset.index
+        lineContents = this.data.hotel[line_index]
+        this.setData({
+          lineContents: lineContents
+        })
+        break
+      case 'subsidy':
+        this.setData({
+          isApprove: false,
+          isReject: false,
+          isTransfer: false,
+          isLine: true
+        })
+        line_index = e.currentTarget.dataset.index
+        lineContents = this.data.subsidy[line_index]
         this.setData({
           lineContents: lineContents
         })

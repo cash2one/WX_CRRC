@@ -88,7 +88,7 @@ Page({
       })
     }else{
       wx.showToast({
-        title: '正在建设中...',
+        title: '敬请期待',
         icon: 'loading'
       })
     }
@@ -98,7 +98,7 @@ Page({
     this.getTzCount()
     this.getFkCount()
     this.getGxCount()
-    //this.getItsmCount()
+    this.getItsmCount()
     wx.stopPullDownRefresh()
   },
   getOaCount: function(){
@@ -239,13 +239,12 @@ Page({
     var password = wx.getStorageSync('userinfo').password
     var that = this
     wx.request({
-      url: requestUrl + 'itsm/count',
+      url: requestUrl + 'it/mydCount',
       method: 'GET',
       data: {
         user_name: user_code,
         password: password,
-        user_code: user_code,
-        methodName: 'HelpDesk_QueryList_Service_Requester'
+        user_code: user_code
       },
       header: {
         'content-type': 'application/json'

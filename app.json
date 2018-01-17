@@ -1,7 +1,6 @@
 {
   "pages": [
     "pages/main/login/login",
-    "pages/itsm/index",
     "pages/email/index/index",
     "pages/main/index/index",
     "pages/main/password/help",
@@ -33,8 +32,10 @@
     "pages/gx/detail",
     "pages/gx/peopleList",
     "pages/main/tax/unitList",
+    "pages/itsm/index",
     "pages/itsm/approve",
-    "pages/itsm/myApproveDetail"
+    "pages/itsm/myApproveDetail",
+    "pages/itsm/mydDetail"
   ],
   "window": {
     "backgroundTextStyle": "light",

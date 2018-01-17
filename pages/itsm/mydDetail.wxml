@@ -1,0 +1,42 @@
+<view class="container">
+  <view class="content">
+    <view class="detail">
+      <!-- 内容-开始 -->
+      <!-- <view class="d-item">
+        <view>事件编号<text>*</text></view>
+        <input disabled="true" value="INC000000142639" />
+      </view> -->
+      <view class="d-item">
+        <view>满意度评分<text>*</text></view>
+        <radio-group class="radio-group" bindchange="radioChange1">
+          <view class="radio">
+            <label wx:for="{{pingfenArray}}" wx:key="unique">
+              <radio value="{{item.value}}" checked="{{item.checked}}" color="#C70019" />{{item.name}}
+            </label>
+          </view>
+        </radio-group>
+      </view>
+      <view class="d-item">
+        <view>是否同意关闭事件<text>*</text></view>
+        <radio-group class="radio-group" bindchange="radioChange2">
+          <view class="radio">
+            <label wx:for="{{isCloseArray}}" wx:key="unique">
+              <radio value="{{item.value}}" checked="{{item.checked}}" color="#C70019" />{{item.name}}
+            </label>
+          </view>
+        </radio-group>
+      </view>
+      <view class="d-item">
+        <view>满意度评价描述<text>(选填)</text></view>
+        <textarea bindinput='getDetailDesc' placeholder='请填写服务请求详细描述'></textarea>
+      </view>
+      <!-- 内容-结束 -->
+    </view>
+  </view>
+
+  <!--底部按钮-开始-->
+  <view class="btn">
+    <button bindtap="btnClick">提交</button>
+  </view>
+  <!--底部按钮-结束-->
+</view>

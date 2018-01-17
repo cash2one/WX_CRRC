@@ -29,6 +29,33 @@
         </view>
       </block>
     </view>
+    <view hidden="{{switchCurrent != 0 || !travel.length}}" class="line-list">
+      <text>行程信息</text>
+      <block wx:for="{{travel}}" wx:key="unique">
+        <view catchtap="btn_click" data-type="travel" data-index="{{index}}" class="l-item">
+          <view class="desc">费用明细{{index+1}}</view>
+          <image src="images/arrow.png"></image>
+        </view>
+      </block>
+    </view>
+    <view hidden="{{switchCurrent != 0 || !hotel.length}}" class="line-list">
+      <text>住宿信息</text>
+      <block wx:for="{{hotel}}" wx:key="unique">
+        <view catchtap="btn_click" data-type="hotel" data-index="{{index}}" class="l-item">
+          <view class="desc">费用明细{{index+1}}</view>
+          <image src="images/arrow.png"></image>
+        </view>
+      </block>
+    </view>
+    <view hidden="{{switchCurrent != 0 || !subsidy.length}}" class="line-list">
+      <text>补贴信息</text>
+      <block wx:for="{{subsidy}}" wx:key="unique">
+        <view catchtap="btn_click" data-type="subsidy" data-index="{{index}}" class="l-item">
+          <view class="desc">费用明细{{index+1}}</view>
+          <image src="images/arrow.png"></image>
+        </view>
+      </block>
+    </view>
     <view hidden="{{switchCurrent != 1}}" class="opinion">
       <block wx:if="{{opinionContents.length}}">
         <block wx:for="{{opinionContents}}" wx:key="i" wx:for-index="i">

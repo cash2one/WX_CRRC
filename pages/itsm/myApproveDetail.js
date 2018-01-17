@@ -13,7 +13,7 @@ Page({
     user_code = wx.getStorageSync('userinfo').username
     password = wx.getStorageSync('userinfo').password
     IncidentNumber = options.IncidentNumber
-    itsm.getDetail(user_code, password, 'INC000000142644', function (data) {
+    itsm.getDetail(user_code, password, IncidentNumber, function (data) {
       data.SubmitDate = data.SubmitDate.substring(0, 10)
       that.setData({
         content: data
