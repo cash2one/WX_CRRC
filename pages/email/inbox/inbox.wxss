@@ -1,0 +1,54 @@
+.e-item{
+  position: relative;
+  display: flex;
+  padding: 30rpx 20rpx;
+  align-items: center;
+  border-bottom: 1px solid #eee;
+}
+.e-item .not-read-flag{
+  width: 25rpx;
+  height: 25rpx;
+  background-color: #C70019;
+  border-radius: 17.5rpx;
+  margin-right: 17.5rpx;
+}
+.e-item .readed-flag{
+  width: 25rpx;
+  height: 25rpx;
+  background-color: white;
+  border-radius: 17.5rpx;
+  margin-right: 17.5rpx;
+}
+.e-item .e-content{
+  width: 70%; 
+}
+.e-item .e-header{
+  display: flex;
+  align-items: center;
+}
+.e-item .file-flag{
+  width: 35rpx;
+  height: 35rpx;
+  margin-left: 20rpx;
+}
+.e-item .e-sender, .e-title{
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap !important;
+  outline: 0 !important;
+}
+.e-item .e-title{
+  color: #848484;
+}
+.e-item .e-date{
+  font-size: 25rpx;
+  color: #848484;
+  margin-left: 10rpx;
+  position: absolute;
+  right: 25rpx;
+}
+.more{
+  text-align: center;
+  margin: 20rpx 0;
+  color: #C70019;
+}

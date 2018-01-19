@@ -87,9 +87,12 @@ Page({
         url: '../../itsm/index'
       })
     }else{
-      wx.showToast({
-        title: '敬请期待',
-        icon: 'loading'
+      // wx.showToast({
+      //   title: '敬请期待',
+      //   icon: 'loading'
+      // })
+      wx.navigateTo({
+        url: '../../email/index/index'
       })
     }
   },

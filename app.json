@@ -35,7 +35,8 @@
     "pages/itsm/index",
     "pages/itsm/approve",
     "pages/itsm/myApproveDetail",
-    "pages/itsm/mydDetail"
+    "pages/itsm/mydDetail",
+    "pages/email/inbox/inbox"
   ],
   "window": {
     "backgroundTextStyle": "light",

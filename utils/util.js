@@ -106,7 +106,6 @@ function _utf8_decode(utftext) {
   }
   return string;
 }
-
 module.exports = {
   encode: encode,
   decode: decode,
