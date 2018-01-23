@@ -66,12 +66,20 @@
   border-bottom: 1rpx solid #DFDFDF;
   border-right: none;
 }
+/*
 .app-item:nth-child(3n-1){
   border-left: 1rpx solid #DFDFDF;
   border-right: 1rpx solid #DFDFDF;
 }
 .app-item:last-child{
   border-right: 1rpx solid #DFDFDF;
+}
+*/
+.app-item{
+  border-right: 1rpx solid #DFDFDF;
+}
+.app-item:nth-child(3n){
+  border-right: 0rpx;
 }
 .app-text{
   margin-top: 20rpx;

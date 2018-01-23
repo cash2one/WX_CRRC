@@ -79,7 +79,10 @@ Page({
       article = article.replace(/<!\[if/g, "<!--[if")
       article = article.replace(/supportLists\]>/g, "supportLists]-->")
       article = article.replace(/<!\[endif\]>/g, "<!--[endif]-->")
-      article = article.replace(/-21.0pt/g, "0pt")
+      //article = article.replace(/-21.0pt/g, "0pt")
+      //article = article.replace(/-36.0pt/g, "0pt")
+      article = article.replace(/-[0-9]*.[0-9]*pt/g, "0pt")
+      //console.log(article)
       if (article.length >= 500000) {
         var tmp = article.substring(0, article.length / 4)
         article = article.substring(0, tmp.lastIndexOf('发件人')) + '<div style="color: #C70019; font-size: 12px; text-align: center;">温馨提示：因邮件内容过长，无法显示更多的历史内容！</div>'
