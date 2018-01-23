@@ -1,7 +1,7 @@
 {
   "pages": [
-    "pages/main/login/login",
     "pages/email/index/index",
+    "pages/main/login/login",
     "pages/main/index/index",
     "pages/main/password/help",
     "pages/main/contact/contact",
@@ -36,7 +36,8 @@
     "pages/itsm/approve",
     "pages/itsm/myApproveDetail",
     "pages/itsm/mydDetail",
-    "pages/email/inbox/inbox"
+    "pages/email/inbox/inbox",
+    "pages/email/inbox/detail"
   ],
   "window": {
     "backgroundTextStyle": "light",

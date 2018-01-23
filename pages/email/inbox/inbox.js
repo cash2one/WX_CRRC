@@ -6,10 +6,12 @@ var folderId = ''
 var pageIndex = 1
 var pageSize = 100
 var emailList = []
+var icons = []
 Page({
   data: {
     emailCont: 0,
     emailList: [],
+    icons: [],
     moreText: '加载更多',
   },
   onLoad: function (options) {
@@ -42,9 +44,11 @@ Page({
       if(data.length){
         for(var i = 0; i < data.length; i++){
           emailList.push(data[i])
+          icons.push(data[i].EmailFormName.substring(0,1))
         }
         that.setData({
           emailCont: data.length == 0 ? -1 : data.length,
+          icons: icons,
           emailList: emailList,
           moreText: '加载更多'
         })
@@ -63,10 +67,10 @@ Page({
   },
   onPullDownRefresh: function(){
     pageIndex = 1
+    icons = []
     emailList = []
     this.setData({
-      emailCont: 0,
-      emailList: []
+      emailCont: 0
     })
     this.getEmailList()
   },

@@ -51,8 +51,34 @@ function getEmailList(username, password, folderId, pageIndex, pageSize, callBac
     }
   })
 }
+//邮件详情
+function getEmailDetail(username, password, emailid, callBack) {
+  wx.request({
+    method: 'GET',
+    url: emailUrl + 'GetEmailDetailByIdHandler',
+    data: {
+      username: username,
+      pwd: password,
+      emailid: emailid
+    },
+    header: {
+      'content-type': 'application/json'
+    },
+    success: function (res) {
+      var list = res.data
+      callBack(list)
+    },
+    fail: function (e) {
+      wx.showToast({
+        title: '网络异常',
+        image: '../../../images/error.png'
+      })
+    }
+  })
+}
 
 module.exports = {
   getFolders: getFolders,
-  getEmailList: getEmailList
+  getEmailList: getEmailList,
+  getEmailDetail: getEmailDetail
 }

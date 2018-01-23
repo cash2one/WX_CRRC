@@ -2,7 +2,7 @@
   <!-- 如果存在子文件夹，则展示全部子文件夹 -->
   <view wx:if="{{swiperCurrent == 0 && hasFolders == true}}" class="list">
     <view bindtap='openInbox' data-folderid="" data-foldername="收件箱" class='f-item' hover-class="navigator-hover">
-      <image class='icon-folder' src='../images/folder.png'></image>
+      <image class='icon-folder' src='../images/inbox.png'></image>
       <text>收件箱</text>
       <view hidden='{{inboxCount <= 0}}'>{{inboxCount}}</view>
       <image class='icon-arrow' src='../images/arrow.png'></image>
@@ -19,7 +19,7 @@
   <!-- 如果不存在子文件夹，则直接展示收件箱邮件列表 -->
   <view wx:if="{{swiperCurrent == 0 && hasFolders == false}}" class='list'>
     <view bindtap='openInbox' data-folderid="" data-foldername="收件箱" class='f-item' hover-class="navigator-hover">
-      <image class='icon-folder' src='../images/folder.png'></image>
+      <image class='icon-folder' src='../images/inbox.png'></image>
       <text>收件箱</text>
       <view hidden='{{inboxCount <= 0}}'>{{inboxCount}}</view>
       <image class='icon-arrow' src='../images/arrow.png'></image>
@@ -28,17 +28,17 @@
 
   <view wx:if="{{swiperCurrent == 1}}" class="list">
     <view class='f-item'>
-      <image class='icon-folder' src='../images/folder.png'></image>
+      <image class='icon-folder' src='../images/send.png'></image>
       <text>已发送</text>
       <image class='icon-arrow' src='../images/arrow.png'></image>
     </view>
     <view class='f-item'>
-      <image class='icon-folder' src='../images/folder.png'></image>
+      <image class='icon-folder' src='../images/delete.png'></image>
       <text>已删除</text>
       <image class='icon-arrow' src='../images/arrow.png'></image>
     </view>
     <view class='f-item'>
-      <image class='icon-folder' src='../images/folder.png'></image>
+      <image class='icon-folder' src='../images/drafts.png'></image>
       <text>草稿箱</text>
       <image class='icon-arrow' src='../images/arrow.png'></image>
     </view>

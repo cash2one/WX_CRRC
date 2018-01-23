@@ -1,0 +1,58 @@
+<import src="../../../wxParse/wxParse.wxml"/>
+<view class='container'>
+  <view class='header'>
+    <view class='title'>
+      <text>{{title}}</text>
+    </view>
+    <view class='sender'>
+      <view style='flex: 1;'>
+        <text class='h-title'>发件人：</text><text>{{sender}}</text>
+      </view>
+      <text bindtap='showDesc' class='show'>{{showText}}</text>
+    </view>
+    <view hidden='{{isShowDesc}}' class='desc'>
+      <view class='addressees'>
+        <text class='h-title'>收件人：</text>
+        <block wx:for="{{addressees}}" wx:key="unique">
+          <text>{{item.Name}}</text><text wx:if="{{index < addressees.length-1}}">、</text>
+        </block>
+      </view>
+      <view wx:if='{{ccList.length}}' class='cc'>
+        <text class='h-title'>抄送：</text>
+        <block wx:for="{{ccList}}" wx:key="unique">
+          <text>{{item.Name}}</text><text wx:if="{{index < ccList.length-1}}">、</text>
+        </block>
+      </view>
+      <view class='time'>
+        <text class='h-title'>时间：</text><text>{{sendTime}}</text>
+      </view>
+    </view>
+    <view wx:if="{{hasFiles}}" class='files-container'>
+      <!-- <view class='show-panel'>
+        <text bindtap='showFiles' class='show-file'>{{showFiles}}</text>
+      </view> -->
+      <view class='files'>
+      <block wx:for="{{fileList}}" wx:key="unique">
+        <view class='f-item' data-index="{{index}}" bindtap='downloadFile'>
+          <image src='{{item.icon}}'></image>
+          <text>{{item.name}}</text>
+          <view class='f-size'>
+            <image src='../images/download.png'></image>
+            <text>{{item.size}}</text>
+          </view>
+        </view>
+      </block>
+      </view>
+    </view>
+  </view>
+  <!-- <view class='body'>
+    <rich-text nodes="{{text}}"></rich-text>
+  </view> -->
+  <view class='body'>
+    <template is="wxParse" data="{{wxParseData:article.nodes}}"/>
+  </view>
+  <view class='footer'>
+    <image id="operation" src='../images/operation.png'></image>
+    <image id="delete" src='../images/delete.png'></image>
+  </view>
+</view>

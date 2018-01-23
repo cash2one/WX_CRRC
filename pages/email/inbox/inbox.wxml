@@ -1,17 +1,24 @@
 <view class="container">
   <view class='list'>
     <block wx:if="{{emailList.length}}" wx:for="{{emailList}}" wx:key="unique">
-      <view class='e-item'>
-        <view class='{{item.IsRead ? "readed-flag" : "not-read-flag"}}'></view>
-        <view class='e-content'>
-          <view class='e-header'>
-            <view class='e-sender'>{{item.EmailFormName}}</view>
+      <navigator url='./detail?emailid={{item.EmailId}}'>
+        <view class='e-item'>
+          <view class='e-icon'>{{icons[index]}}</view>
+          <!-- <view class='{{item.IsRead ? "readed-flag" : "not-read-flag"}}'></view> -->
+          <view class='e-content'>
+            <view class='e-header'>
+              <view hidden="{{item.IsRead}}" class="not-read-flag"></view>
+              <view class='e-sender'>{{item.EmailFormName}}</view>
+              <!-- <image wx:if="{{item.IsHaveFuJian}}" class='file-flag' src='../images/file-flag.png'></image> -->
+            </view>
+            <view class='e-title'>{{item.EmailTitle}}</view>
+          </view>
+          <view class='e-date'>
+            <view class=''>{{item.PushTime}}</view>
             <image wx:if="{{item.IsHaveFuJian}}" class='file-flag' src='../images/file-flag.png'></image>
           </view>
-          <view class='e-title'>{{item.EmailTitle}}</view>
         </view>
-        <view class='e-date'>{{item.PushTime}}</view>
-      </view>
+      </navigator>
     </block>
     <view bindtap="getNextList" class="more" hidden="{{emailCont == -1 || emailCont < 100}}">{{moreText}}</view>
   </view>

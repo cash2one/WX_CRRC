@@ -47,4 +47,5 @@ App({
   slptUrl: 'https://appagent2.csrzic.com/10000000/public/slpt/',
   fkUrl: 'https://appagent2.csrzic.com/10000000/public/fk/',
   tzUrl: 'https://appagent2.csrzic.com/10000000/public/tz/',
+  emailUrl: 'https://appagent2.csrzic.com/10000000/public/email/',
 })

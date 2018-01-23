@@ -1,0 +1,75 @@
+@import "../../../wxParse/wxParse.wxss";
+.header{
+  display: flex;
+  flex-direction: column;
+  padding: 15rpx;
+  border-bottom: 1px solid #DEDEDE;
+}
+.title, .sender, .addressees, .cc, .time{
+  margin-bottom: 10rpx;
+}
+.sender{
+  display: flex;
+  justify-content: space-between;
+}
+.title, .h-title{
+  font-weight: bolder;
+}
+.show, .show-file{
+  color: #1296db;
+}
+.files-container{
+  border-top: 1px solid #EEEEEE;
+}
+.show-panel{
+  display: flex;
+  justify-content: flex-end;
+  padding: 10rpx 0;
+}
+.f-item{
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid #EEEEEE;
+  padding: 20rpx 15rpx;
+}
+.f-item:last-child{
+  border-bottom: 0px;
+}
+.f-item text{
+  flex: 1;
+  margin: 0 20rpx;
+}
+.f-item image{
+  width: 60rpx;
+  height: 60rpx;
+}
+.f-size{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.f-size text{
+  font-size: 20rpx;
+  color: #848484;
+}
+.body{
+  padding: 15rpx;
+  margin-bottom: 100rpx;
+}
+.footer{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 150rpx;
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 100rpx;
+  border-top: 1px solid #EEEEEE;
+  background-color: white;
+}
+.footer image{
+  width: 60rpx;
+  height: 60rpx;
+}
